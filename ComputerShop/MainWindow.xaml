@@ -24,7 +24,7 @@
             </Border>
             
             <StackPanel>
-                <TextBlock Text="Palfi Computer WareHous" FontSize="33" FontWeight="Light" Foreground="White" HorizontalAlignment="Center" FontFamily="Helvetica" Margin="5"/>
+                <TextBlock Text="Palfi Computer WareHouse" FontSize="33" FontWeight="Light" Foreground="White" HorizontalAlignment="Center" FontFamily="Helvetica" Margin="5"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center">
                 <Image Width="230" Source="C:\Users\antal\OneDrive\Desktop\TussentijdProjectPhotos\Logos\MainLogo.jpg"/>
