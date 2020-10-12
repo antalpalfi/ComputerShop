@@ -83,36 +83,49 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bestelling.cs">
-      <DependentUpon>Computer.tt</DependentUpon>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
     <Compile Include="BestellingProduct.cs">
-      <DependentUpon>Computer.tt</DependentUpon>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
     <Compile Include="Categorie.cs">
-      <DependentUpon>Computer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Computer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Computer.tt</DependentUpon>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
     <Compile Include="Klant.cs">
-      <DependentUpon>Computer.tt</DependentUpon>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
     <Compile Include="Leverancier.cs">
-      <DependentUpon>Computer.tt</DependentUpon>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyWareHousData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyWareHousData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyWareHousData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyWareHousData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyWareHousData.edmx</DependentUpon>
     </Compile>
     <Compile Include="Personeelslid.cs">
-      <DependentUpon>Computer.tt</DependentUpon>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>Computer.tt</DependentUpon>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>Computer.tt</DependentUpon>
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users_Password.cs">
+      <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
     <Page Include="Button.xaml">
       <SubType>Designer</SubType>
@@ -125,16 +138,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Computer.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Computer.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Computer.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Computer.edmx</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -163,12 +166,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Computer.edmx">
+    <EntityDeploy Include="MyWareHousData.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Computer.Designer.cs</LastGenOutput>
+      <LastGenOutput>MyWareHousData.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Computer.edmx.diagram">
-      <DependentUpon>Computer.edmx</DependentUpon>
+    <None Include="MyWareHousData.edmx.diagram">
+      <DependentUpon>MyWareHousData.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -180,19 +183,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Computer.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Computer.Context.cs</LastGenOutput>
-      <DependentUpon>Computer.edmx</DependentUpon>
-    </Content>
-    <Content Include="Computer.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Computer.edmx</DependentUpon>
-      <LastGenOutput>Computer.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="MyWareHousData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyWareHousData.edmx</DependentUpon>
+      <LastGenOutput>MyWareHousData.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MyWareHousData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyWareHousData.edmx</DependentUpon>
+      <LastGenOutput>MyWareHousData.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

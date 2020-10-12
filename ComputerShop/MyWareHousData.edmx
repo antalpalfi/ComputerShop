@@ -91,6 +91,15 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Users_Password">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_Bestelling_Klant">
           <End Role="Klant" Type="Self.Klant" Multiplicity="0..1" />
           <End Role="Bestelling" Type="Self.Bestelling" Multiplicity="*" />
@@ -184,6 +193,7 @@
           <EntitySet Name="Personeelslid" EntityType="Self.Personeelslid" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users_Password" EntityType="Self.Users_Password" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Bestelling_Klant" Association="Self.FK_Bestelling_Klant">
             <End Role="Klant" EntitySet="Klant" />
             <End Role="Bestelling" EntitySet="Bestelling" />
@@ -318,6 +328,15 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="Users_Password">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <Association Name="FK_Bestelling_Klant">
           <End Role="Klant" Type="Self.Klant" Multiplicity="0..1" />
           <End Role="Bestelling" Type="Self.Bestelling" Multiplicity="*" />
@@ -402,7 +421,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="IndividueelProjectEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="IndividueelProjectEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bestellings" EntityType="Self.Bestelling" />
           <EntitySet Name="BestellingProducts" EntityType="Self.BestellingProduct" />
           <EntitySet Name="Categories" EntityType="Self.Categorie" />
@@ -411,6 +430,7 @@
           <EntitySet Name="Personeelslids" EntityType="Self.Personeelslid" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users_Password" EntityType="Self.Users_Password" />
           <AssociationSet Name="FK_Bestelling_Klant" Association="Self.FK_Bestelling_Klant">
             <End Role="Klant" EntitySet="Klants" />
             <End Role="Bestelling" EntitySet="Bestellings" />
@@ -445,7 +465,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IndividueelProjectModelStoreContainer" CdmEntityContainer="IndividueelProjectEntities">
+        <EntityContainerMapping StorageEntityContainer="IndividueelProjectModelStoreContainer" CdmEntityContainer="IndividueelProjectEntities1">
           <EntitySetMapping Name="Bestellings">
             <EntityTypeMapping TypeName="IndividueelProjectModel.Bestelling">
               <MappingFragment StoreEntitySet="Bestelling">
@@ -537,6 +557,16 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users_Password">
+            <EntityTypeMapping TypeName="IndividueelProjectModel.Users_Password">
+              <MappingFragment StoreEntitySet="Users_Password">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

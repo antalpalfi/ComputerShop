@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ffe8a03c4b564081b9044a8ffbddb62e" Name="Diagram1">
+      <Diagram DiagramId="47cf4966a00c4f618d6cd2b8082c4c4c" Name="Diagram1">
         <EntityTypeShape EntityType="IndividueelProjectModel.Bestelling" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IndividueelProjectModel.BestellingProduct" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IndividueelProjectModel.Categorie" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
@@ -13,6 +13,7 @@
         <EntityTypeShape EntityType="IndividueelProjectModel.Personeelslid" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="IndividueelProjectModel.Product" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="IndividueelProjectModel.sysdiagram" Width="1.5" PointX="2.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndividueelProjectModel.Users_Password" Width="1.5" PointX="4.75" PointY="10" IsExpanded="true" />
         <AssociationConnector Association="IndividueelProjectModel.FK_Bestelling_Klant" ManuallyRouted="false" />
         <AssociationConnector Association="IndividueelProjectModel.FK_Bestelling_Leverancier" ManuallyRouted="false" />
         <AssociationConnector Association="IndividueelProjectModel.FK_Bestelling_Personeelslid" ManuallyRouted="false" />

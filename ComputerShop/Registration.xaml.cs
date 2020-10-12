@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,37 +30,23 @@ namespace ComputerShop
             cmbUserType.Items.Add("Seller");
         }
 
-        private static  string newPassword()
+        private void btnReg_Click(object sender, RoutedEventArgs e)
         {
-            string password = null;
-            bool pas = true;
-
-            do
+            using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
             {
-                if (!pas)
+                ctx.Users_Password.Add(new Users_Password
                 {
-                    if (!password.Any(char.IsUpper))
-                        MessageBox.Show("It does not contain capital letters.");
-                    if (!password.Any(char.IsLower))
-                        MessageBox.Show("It does not contain lowercase letters.");
-                    if (!password.Any(char.IsDigit))
-                        MessageBox.Show("It does not contain numbers.");
-                    if (password.Length < 8)
-                        MessageBox.Show("It's too short");
-                    if (password.Length > 20)
-                        MessageBox.Show("It's too long");
-                    if (Regex.IsMatch(password, @"^[a-zA-Z0-9]+$"))
-                        MessageBox.Show("It does not contain a strange sign");
-                }
-                pas = false;
-            } while (!password.Any(char.IsUpper)
-            || !password.Any(char.IsLower)
-            || !password.Any(char.IsDigit)
-            || password.Length < 8
-            || password.Length > 20
-            || Regex.IsMatch(password, @"^[a-zA-Z0-9]+$"));
-
-            return password;
+                    UserName = txtUserName.Text.ToString(),
+                    Password = txtPassword.ToString(),
+                    UserType = cmbUserType.SelectedItem.ToString()
+                });
+                ctx.SaveChanges();
+            }
+            MessageBox.Show($"New user successfully created\n" +
+                $"{txtUserName.Text}\n" +
+                $"{txtPassword.ToString()}\n" +
+                $"{cmbUserType.SelectedItem.ToString()}");
+            DialogResult = true;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

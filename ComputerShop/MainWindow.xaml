@@ -33,7 +33,7 @@
 
             <StackPanel Grid.Row="1">
                 <StackPanel  Orientation="Horizontal" Margin="5">
-                    <TextBox Text="Username" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
+                    <TextBox Text="Username" x:Name="txtUsersName" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
                            Width="230" Opacity="0.5" Height="25" Margin="63,0,0,0"/>
                     <iconPacks:PackIconMaterial Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
 
@@ -41,14 +41,14 @@
                 <Border Width="250" Height="2" Background="White"/>
 
                 <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
-                    <PasswordBox Password="Password" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
+                    <PasswordBox Password="Password" x:Name="txtPassword" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
                            Width="230" Opacity="0.5" Height="25" Margin="63,0,0,0"/>
                     <iconPacks:PackIconMaterial Kind="FormTextboxPassword" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
                 <Border Width="250" Height="2" Background="White"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                    <Button Width="100" Height="40" Content="Login" x:Name="btnLogin" Margin="60,0,60,0"/>
+                    <Button Width="100" Height="40" Content="Login" x:Name="btnLogin" Margin="60,0,60,0" Click="btnLogin_Click"/>
                     <Button Width="100" Height="40" Content="Register" x:Name="btnRegister" Click="btnRegister_Click"/>
                 </StackPanel>
                 <Button Width="100" Height="40" Content="Esc" x:Name="btnEsc" Margin="0,20,0,0" Click="btnEsc_Click"/>

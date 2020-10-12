@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,20 @@ namespace ComputerShop
         private void btnEsc_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+            using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
+            {
+                var selectAll = ctx.Users_Password.Select(x => x);
+                if )
+                {
+                    MessageBox.Show("siker");
+                }
+               
+            };
         }
     }
 }
