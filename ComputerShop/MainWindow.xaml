@@ -7,7 +7,37 @@
         mc:Ignorable="d"
       Title="Registration" Height="450" Width="380" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
         AllowsTransparency="True">
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Helvetica"/>
+            <Setter Property="Foreground" Value="White"/>
+
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="20"
+                            BorderThickness="2" BorderBrush="White">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="Foreground" Value="DeepSkyBlue"/>
+                </Trigger>
+            </Style.Triggers>
+
+
+        </Style>
+    </Window.Resources>
+        <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -34,7 +64,7 @@
             <StackPanel Grid.Row="1">
                 <StackPanel  Orientation="Horizontal" Margin="5">
                     <TextBox Text="Username" x:Name="txtUsersName" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
-                           Width="230" Opacity="0.5" Height="25" Margin="63,0,0,0"/>
+                           Width="230"  Height="25" Margin="63,0,0,0"/>
                     <iconPacks:PackIconMaterial Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
 
                 </StackPanel>
@@ -42,7 +72,7 @@
 
                 <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
                     <PasswordBox Password="Password" x:Name="txtPassword" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
-                           Width="230" Opacity="0.5" Height="25" Margin="63,0,0,0"/>
+                           Width="230" Height="25" Margin="63,0,0,0"/>
                     <iconPacks:PackIconMaterial Kind="FormTextboxPassword" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
                 <Border Width="250" Height="2" Background="White"/>

@@ -37,14 +37,14 @@ namespace ComputerShop
                 ctx.Users_Password.Add(new Users_Password
                 {
                     UserName = txtUserName.Text.ToString(),
-                    Password = txtPassword.ToString(),
+                    Password = txtPassword.Password.ToString(),
                     UserType = cmbUserType.SelectedItem.ToString()
                 });
                 ctx.SaveChanges();
             }
             MessageBox.Show($"New user successfully created\n" +
                 $"{txtUserName.Text}\n" +
-                $"{txtPassword.ToString()}\n" +
+                $"{txtPassword.Password.ToString()}\n" +
                 $"{cmbUserType.SelectedItem.ToString()}");
             DialogResult = true;
         }

@@ -42,12 +42,15 @@ namespace ComputerShop
 
             using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
             {
-                var selectAll = ctx.Users_Password.Select(x => x);
-                if )
+                var selectUser = ctx.Users_Password.Where(x => x.UserName == txtUsersName.Text && x.Password == txtPassword.Password).Count();
+                if (selectUser == 1)
                 {
-                    MessageBox.Show("siker");
+                    MessageBox.Show("Welkom");
                 }
-               
+                else
+                {
+                    MessageBox.Show("This username and password cannot be found");
+                }
             };
         }
     }

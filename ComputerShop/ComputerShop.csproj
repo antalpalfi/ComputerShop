@@ -97,6 +97,9 @@
     <Compile Include="Leverancier.cs">
       <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
+    <Compile Include="MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyWareHousData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -127,7 +130,7 @@
     <Compile Include="Users_Password.cs">
       <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
-    <Page Include="Button.xaml">
+    <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
