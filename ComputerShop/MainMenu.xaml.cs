@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ComputerShop
 {
@@ -22,6 +23,27 @@ namespace ComputerShop
         public MainMenu()
         {
             InitializeComponent();
+            DispatcherTimer timeNow = new DispatcherTimer();
+            timeNow.Tick += new EventHandler(UpdateTimer_Tick);
+            timeNow.Interval = new TimeSpan(0, 0, 1);
+            timeNow.Start();
+        }
+
+        private void UpdateTimer_Tick(object sender, EventArgs e)
+        {
+            txtDateTime.Text = DateTime.Now.ToString();
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.ShowDialog();
+        }
+
+        private void btnEcs_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }

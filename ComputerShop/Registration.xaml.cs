@@ -53,6 +53,16 @@ namespace ComputerShop
         {
             DialogResult = false;
         }
+
+        private void txtUserName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtUserName.Clear();
+        }
+
+        private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPassword.Clear();
+        }
     }
     
 }

@@ -24,6 +24,7 @@ namespace ComputerShop
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -45,15 +46,29 @@ namespace ComputerShop
                 var selectUser = ctx.Users_Password.Where(x => x.UserName == txtUsersName.Text && x.Password == txtPassword.Password).Count();
                 if (selectUser == 1)
                 {
+                    txtPassword.Clear();
+                    txtUsersName.Clear();
                     MessageBox.Show("Welkom");
                     MainMenu mainMenu = new MainMenu();
+                    this.Close();
                     mainMenu.ShowDialog();
                 }
                 else
                 {
                     MessageBox.Show("This username and password cannot be found");
                 }
-            };
+            }
+            
+        }
+
+        private void txtUsersName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtUsersName.Clear();
+        }
+
+        private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPassword.Clear();
         }
     }
 }
