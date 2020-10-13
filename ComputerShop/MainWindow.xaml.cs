@@ -46,6 +46,8 @@ namespace ComputerShop
                 if (selectUser == 1)
                 {
                     MessageBox.Show("Welkom");
+                    MainMenu mainMenu = new MainMenu();
+                    mainMenu.ShowDialog();
                 }
                 else
                 {

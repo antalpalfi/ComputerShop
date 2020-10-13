@@ -5,26 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComputerShop"
         mc:Ignorable="d"
-        Title="MainMenu" Height="450" Width="800">
+        Title="MainMenu" Height="423.731" Width="435.66">
     <Window.Resources>
-        <Style x:Key = "TriggerStyle" TargetType = "Button">
-            <Setter Property = "Foreground" Value = "Blue" />
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Helvetica"/>
+            <Setter Property="Foreground" Value="White"/>
+
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="20"
+                            BorderThickness="2" BorderBrush="White">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
             <Style.Triggers>
-                <Trigger Property = "IsMouseOver" Value = "True">
-                    <Setter Property = "Foreground" Value = "Green" />
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="Foreground" Value="DeepSkyBlue"/>
                 </Trigger>
             </Style.Triggers>
+
+
         </Style>
     </Window.Resources>
     <Grid>
         <Grid>
+            <Border CornerRadius="10" Grid.RowSpan="2">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#7be9f9" Offset="0.0"/>
+                        <GradientStop Color="#f083da" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
             <StackPanel>
                 <StackPanel>
-                    <TextBlock Text="Main Menu" FontSize="40" TextAlignment="Center" Margin="0,20,0,0"/>
+                    <TextBlock Text="Main Menu" FontSize="50" TextAlignment="Center" Margin="0,20,0,0"/>
                 </StackPanel>
+                <Border Width="250" Height="2" Background="White"/>
                 <StackPanel>
-                    <Button Content="Data management" Height="40" Width="140" Foreground="Black" BorderBrush="Black" BorderThickness="2"/>
-                    <Button Content="Data management" Height="40" Width="140" Foreground="Black" BorderBrush="Black" BorderThickness="2"/>
+                    <Button Content="Data management" Height="50" Width="220" FontSize="25" Margin="0,40,0,20"/>
+                    <Button Content="Overview " Height="50" Width="220" FontSize="25" Margin="0,0,0,20"/>
+                    <Button Content="Order " Height="50" Width="220" FontSize="25" Margin="0,0,0,20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Back" x:Name="btnBack" Height="30" Width="100" Margin="50,20,150,0"/>
+                    <Button Content="Ecs" x:Name="btnEcs"  Height="30" Width="100" Margin="0,20,0,0"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
