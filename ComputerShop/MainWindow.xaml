@@ -60,14 +60,14 @@
             <StackPanel Grid.Row="1">
                 <StackPanel  Orientation="Horizontal" Margin="5">
                     <TextBox Text="Username" x:Name="txtUsersName" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
-                           Width="230"  Height="25" Margin="63,0,0,0" GotFocus="txtUsersName_GotFocus" LostFocus="txtUsersName_LostFocus"/>
+                           Width="230"  Height="25" Margin="63,0,0,0" GotFocus="txtUsersName_GotFocus" LostFocus="txtUsersName_LostFocus" BorderThickness="0"/>
                     <iconPacks:PackIconMaterial Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
                 <Border Width="250" Height="2" Background="White"/>
 
                 <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
                     <PasswordBox Password="Password" x:Name="txtPassword" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
-                           Width="230" Height="25" Margin="63,0,0,0" GotFocus="txtPassword_GotFocus" LostFocus="txtPassword_LostFocus" AllowDrop="True"/>
+                           Width="230" Height="25" Margin="63,0,0,0" GotFocus="txtPassword_GotFocus" LostFocus="txtPassword_LostFocus" AllowDrop="True" BorderThickness="0"/>
                     <iconPacks:PackIconMaterial Kind="FormTextboxPassword" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
                 <Border Width="250" Height="2" Background="White"/>

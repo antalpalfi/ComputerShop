@@ -1,0 +1,69 @@
+﻿<Window x:Class="ComputerShop.NewSuplier"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ComputerShop"
+        mc:Ignorable="d"
+        Title="NewSuplier" Height="611.51" Width="807.797"  Background="Beige" FontSize="25" FontFamily="Segoe UI Semibold">
+
+    <Grid Margin="10,0,,0">
+        <StackPanel>
+            <StackPanel Orientation="Vertical">
+
+                <TextBlock Text="Create a new supplier" TextAlignment="Center" Margin="0,0,20,0">
+                    <TextBlock.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFC7BDBD" Offset="0"/>
+                            <GradientStop Color="#FFE0DADA" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBlock.Background>
+                </TextBlock>
+                <Border BorderThickness="2" BorderBrush="Black" Margin="0,0,20,0"/>
+
+                <StackPanel Orientation="Horizontal" Height="488" Margin="0,0,10,0">
+                    <Border BorderThickness="2" BorderBrush="Black"/>
+
+
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                        <TextBlock Text="Company name" Margin="5,0,0,0"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBlock Text="Contact person" Margin="5"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBlock Text="Phone number" Margin="5"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBlock Text="Email adres" Margin="5"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                    </StackPanel>
+                    <Border BorderThickness="2" BorderBrush="Black"/>
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,10">
+                        <TextBlock Text="Streetname"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBlock Text="House number"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBlock Text="Mailbox"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBlock Text="Zip code"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBlock Text="Town"/>
+                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5,5,5,0" FontSize="15" Background="White" BorderBrush="black"/>
+                    </StackPanel>
+                    <Border BorderThickness="2" BorderBrush="Black"/>
+
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,10" Width="307">
+                        <Image/>
+                        <Image/>
+                    </StackPanel>
+                    <Border BorderThickness="2" BorderBrush="Black" Margin="0,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+            <Border BorderThickness="2" BorderBrush="Black" Margin="0,0,21,0"/>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Save" x:Name="btnSave" Margin="50,10,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6"/>
+                <Button Content="Esc" x:Name="btnEsc" Margin="140,10,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" RenderTransformOrigin="-0.246,0.364"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>

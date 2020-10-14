@@ -136,6 +136,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyWareHousData.edmx</DependentUpon>
     </Compile>
+    <Compile Include="NewSuplier.xaml.cs">
+      <DependentUpon>NewSuplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Personeelslid.cs">
       <DependentUpon>MyWareHousData.tt</DependentUpon>
     </Compile>
@@ -174,6 +177,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewSuplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Registration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

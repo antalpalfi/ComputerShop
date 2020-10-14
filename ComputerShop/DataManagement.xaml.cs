@@ -22,11 +22,11 @@ namespace ComputerShop
     {
         public DataManagement()
         {
-            InitializeComponent();
             DispatcherTimer timeNow = new DispatcherTimer();
             timeNow.Tick += new EventHandler(UpdateTimer_Tick);
             timeNow.Interval = new TimeSpan(0, 0, 1);
             timeNow.Start();
+            InitializeComponent();
         }
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
@@ -43,6 +43,40 @@ namespace ComputerShop
                 case 0:
                     gridPages.Children.Clear();
                     gridPages.Children.Add(new Supplier());
+                    break;
+                case 1:
+                    gridPages.Children.Clear();
+                    gridPages.Children.Add(new Supplier());
+                    break;
+                case 2:
+                    gridPages.Children.Clear();
+                    gridPages.Children.Add(new Supplier());
+                    break;
+                case 3:
+                    gridPages.Children.Clear();
+                    gridPages.Children.Add(new Supplier());
+                    break;
+                case 4:
+                    gridPages.Children.Clear();
+                    gridPages.Children.Add(new Supplier());
+                    break;
+                case 5:
+                    gridPages.Children.Clear();
+                    gridPages.Children.Add(new Supplier());
+                    break;
+                case 6:
+                    gridPages.Children.Clear();
+                    gridPages.Children.Add(new Supplier());
+                    break;
+                case 7:
+                    MainWindow mainWindow = new MainWindow();
+                    this.Close();
+                    mainWindow.ShowDialog();
+                    break;
+                case 8:
+                    MainMenu mainMenu = new MainMenu();
+                    this.Close();
+                    mainMenu.ShowDialog();
                     break;
                 default:
                     break;

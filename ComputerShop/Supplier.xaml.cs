@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace ComputerShop
     /// </summary>
     public partial class Supplier : UserControl
     {
-        List<Leverancier> leveranciers = new List<Leverancier>();
+
         public Supplier()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace ComputerShop
             {
                 var supl = ctx.Leveranciers.Select(l => l);
                 lbSupplierName.SelectedValuePath = "LeverancierID";
-                //lbSupplierName.DisplayMemberPath = "Contactpersoon";
+                //lbSupplierName.DisplayMemberPath = "Company";
                 lbSupplierName.ItemsSource = supl.ToList();
             }
         }
@@ -50,6 +51,17 @@ namespace ComputerShop
                 txtZipCode.Text = $"Zipcode: {supl.Postcode}";
                 txtTown.Text = $"Town: {supl.Gemeente}";
             }
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NewSuplier suplier = new NewSuplier();
+            suplier.ShowDialog();
         }
     }
 }

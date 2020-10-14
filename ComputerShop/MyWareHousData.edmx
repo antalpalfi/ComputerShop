@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IndividueelProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IndividueelProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bestelling">
           <Key>
             <PropertyRef Name="BestellingID" />
@@ -60,6 +60,7 @@
           <Property Name="Bus" Type="int" />
           <Property Name="Postcode" Type="int" />
           <Property Name="Gemeente" Type="nvarchar" MaxLength="50" />
+          <Property Name="Company" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Personeelslid">
           <Key>
@@ -223,8 +224,7 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IndividueelProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -293,6 +293,7 @@
           <Property Name="Gemeente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bestellings" Relationship="Self.FK_Bestelling_Leverancier" FromRole="Leverancier" ToRole="Bestelling" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_Leverancier" FromRole="Leverancier" ToRole="Product" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Personeelslid">
           <Key>
@@ -515,6 +516,7 @@
           <EntitySetMapping Name="Leveranciers">
             <EntityTypeMapping TypeName="IndividueelProjectModel.Leverancier">
               <MappingFragment StoreEntitySet="Leverancier">
+                <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="LeverancierID" ColumnName="LeverancierID" />
                 <ScalarProperty Name="Contactpersoon" ColumnName="Contactpersoon" />
                 <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />

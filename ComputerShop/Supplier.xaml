@@ -25,7 +25,7 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                <TextBlock Text="{Binding Contactpersoon}"/>
+                                    <TextBlock Text="{Binding Company}"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -43,8 +43,8 @@
                 <TextBlock x:Name="txtTown" Text="Test Antal Palfi"  FontSize="15" FontFamily="Franklin Gothic Medium Cond" Margin="10,0,5,5"/>
                 <Border BorderBrush="Black" Width="auto" BorderThickness="2"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="5"/>
-                    <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="5"/>
+                    <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="5" Click="btnAdd_Click"/>
+                    <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="5" Click="btnRemove_Click"/>
                     <Button Content="Edit" x:Name="btnedit" Foreground="Black" Background="#FFF1F1E6" Margin="5"/>
                 </StackPanel>
                 

@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:ComputerShop"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Data Management" Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="Data Management" Height="629" Width="1089" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
-        
+
         <Grid Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="273,0,0,0">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -17,16 +17,16 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Palfi Computer Store" HorizontalAlignment="Center" FontSize="40" VerticalAlignment="Center" Foreground="White" Margin="0,0,200,0"/>
+                <TextBlock Text="Palfi Computer Store" HorizontalAlignment="Center" FontSize="40" VerticalAlignment="Center" Foreground="White" Margin="0,0,170,0"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0">
-                        <materialDesign:PackIcon Kind="Settings"/>
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Margin="0,0,5,0">
+                        <materialDesign:PackIcon Kind="Settings"  Height="30" Width="30"/>
                     </Button>
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Click="Button_Click_1">
-                        <materialDesign:PackIcon Kind="WindowMinimize"/>
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Click="Button_Click_1" Margin="0,0,5,0">
+                        <materialDesign:PackIcon Kind="WindowMinimize"  Height="30" Width="30"/>
                     </Button>
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Click="Button_Click">
-                        <materialDesign:PackIcon Kind="Power"/>
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Click="Button_Click" Margin="0,0,5,0">
+                        <materialDesign:PackIcon Kind="Power" Height="30" Width="30"/>
                     </Button>
                 </StackPanel>
             </StackPanel>
@@ -42,7 +42,7 @@
 
             </TextBlock>
 
-            <ListView Margin="0 50" Foreground="White" x:Name="ListView" SelectionChanged="ListView_SelectionChanged">
+            <ListView Margin="0,50,0,0" Foreground="White" x:Name="ListView" SelectionChanged="ListView_SelectionChanged">
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="TruckDelivery" Width="40" Height="40" VerticalAlignment="Center" Margin="5"/>
@@ -83,6 +83,18 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="OrderCheckboxAscending" Width="40" Height="40" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Order product" VerticalAlignment="Center"  FontSize="20" Margin="30 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Logout" Width="40" Height="40" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Logout" VerticalAlignment="Center"  FontSize="20" Margin="30 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Backspace" Width="40" Height="40" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Back" VerticalAlignment="Center"  FontSize="20" Margin="30 0"/>
                     </StackPanel>
                 </ListViewItem>
             </ListView>

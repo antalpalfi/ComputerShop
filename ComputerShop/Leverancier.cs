@@ -30,6 +30,7 @@ namespace ComputerShop
         public Nullable<int> Bus { get; set; }
         public Nullable<int> Postcode { get; set; }
         public string Gemeente { get; set; }
+        public string Company { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bestelling> Bestellings { get; set; }
