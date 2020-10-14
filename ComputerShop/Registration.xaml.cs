@@ -63,6 +63,22 @@ namespace ComputerShop
         {
             txtPassword.Clear();
         }
+
+        private void txtPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtPassword.Password == "")
+            {
+                txtPassword.Password = "Password";
+            }
+        }
+
+        private void txtUserName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtUserName.Text == "")
+            {
+                txtUserName.Text = "Username";
+            }
+        }
     }
-    
+
 }

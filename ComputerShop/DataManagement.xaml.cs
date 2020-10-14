@@ -16,42 +16,53 @@ using System.Windows.Threading;
 namespace ComputerShop
 {
     /// <summary>
-    /// Interaction logic for MainMenu.xaml
+    /// Interaction logic for DataManagement.xaml
     /// </summary>
-    public partial class MainMenu : Window
+    public partial class DataManagement : Window
     {
-        public MainMenu()
+        public DataManagement()
         {
             InitializeComponent();
             DispatcherTimer timeNow = new DispatcherTimer();
             timeNow.Tick += new EventHandler(UpdateTimer_Tick);
             timeNow.Interval = new TimeSpan(0, 0, 1);
             timeNow.Start();
-            MainWindow mainWindow = new MainWindow();
         }
-
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
             txtDateTime.Text = DateTime.Now.ToString();
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            this.Close();
-            mainWindow.ShowDialog();
+            int index = ListView.SelectedIndex;
+            MoveCursorMenu(index);
+            switch (index)
+            {
+                case 0:
+                    gridPages.Children.Clear();
+                    gridPages.Children.Add(new Supplier());
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void btnEcs_Click(object sender, RoutedEventArgs e)
+        private void MoveCursorMenu(int index)
         {
-            System.Windows.Application.Current.Shutdown();
+            transationSlide.OnApplyTemplate();
+            sideGridCursor.Margin = new Thickness(0, (50 + (60 * index)), 0, 0);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DataManagement myDataManagement = new DataManagement();
-            this.Close();
-            myDataManagement.ShowDialog();
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

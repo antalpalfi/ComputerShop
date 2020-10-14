@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ComputerShop" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Registration" Height="450" Width="380" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
+        Title="Registration" Height="465" Width="379" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
         AllowsTransparency="True">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -33,8 +33,6 @@
                     <Setter Property="Foreground" Value="DeepSkyBlue"/>
                 </Trigger>
             </Style.Triggers>
-
-
         </Style>
     </Window.Resources>
     <Grid>
@@ -43,7 +41,6 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
             <Border CornerRadius="10" Grid.RowSpan="2">
                 <Border.Background>
                     <LinearGradientBrush>
@@ -60,20 +57,20 @@
             <StackPanel Grid.Row="1">
                 <StackPanel  Orientation="Horizontal" Margin="5">
                     <TextBox Text="Username" x:Name="txtUserName" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
-                           Width="230" Height="25" Margin="63,0,0,0" GotFocus="txtUserName_GotFocus"/>
+                           Width="230" Height="25" Margin="63,0,0,0" GotFocus="txtUserName_GotFocus" LostFocus="txtUserName_LostFocus"/>
                     <iconPacks:PackIconMaterial Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
 
                 </StackPanel>
                 <Border Width="250" Height="2" Background="White"/>
 
                 <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
-                    <PasswordBox Password="Password" x:Name="txtPassword" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
-                           Width="230"  Height="25" Margin="63,0,0,0" GotFocus="txtPassword_GotFocus"/>
+                    <PasswordBox Password="Password" x:Name="txtPassword" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent"
+                           Width="230"  Height="25" Margin="63,0,0,0" GotFocus="txtPassword_GotFocus" LostFocus="txtPassword_LostFocus"/>
                     <iconPacks:PackIconMaterial Kind="FormTextboxPassword" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
                 <Border Width="250" Height="2" Background="White"/>
 
-                <ComboBox x:Name="cmbUserType" FontSize="20" Width="250" Margin="0,30,0,0" Foreground="Black" Background="Transparent" BorderBrush="#FFC9C5C5">
+                <ComboBox x:Name="cmbUserType" FontSize="20" Width="250"  Margin="0,30,0,0" Foreground="Black" BorderBrush="#FFC9C5C5" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
                     <ComboBox.Effect>
                         <DropShadowEffect/>
                     </ComboBox.Effect>

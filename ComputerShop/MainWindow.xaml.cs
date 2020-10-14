@@ -26,7 +26,7 @@ namespace ComputerShop
             InitializeComponent();
             
         }
-
+        public string loginUser = "";
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             Registration newReg = new Registration();
@@ -46,10 +46,13 @@ namespace ComputerShop
                 var selectUser = ctx.Users_Password.Where(x => x.UserName == txtUsersName.Text && x.Password == txtPassword.Password).Count();
                 if (selectUser == 1)
                 {
+                    loginUser = txtUsersName.Text;
                     txtPassword.Clear();
                     txtUsersName.Clear();
-                    MessageBox.Show("Welkom");
+                  
+                    MessageBox.Show($"Welkom {loginUser}");
                     MainMenu mainMenu = new MainMenu();
+                    mainMenu.txtUserName.Text = $"Hello {loginUser}";
                     this.Close();
                     mainMenu.ShowDialog();
                 }
@@ -69,6 +72,22 @@ namespace ComputerShop
         private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
         {
             txtPassword.Clear();
+        }
+
+        private void txtPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtPassword.Password == "")
+            {
+                txtPassword.Password = "Password";
+            }
+        }
+
+        private void txtUsersName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtUsersName.Text == "")
+            {
+                txtUsersName.Text = "Username";
+            }
         }
     }
 }

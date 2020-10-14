@@ -13,9 +13,6 @@
             <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="Transparent"/>
-
-
-
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -63,15 +60,14 @@
             <StackPanel Grid.Row="1">
                 <StackPanel  Orientation="Horizontal" Margin="5">
                     <TextBox Text="Username" x:Name="txtUsersName" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
-                           Width="230"  Height="25" Margin="63,0,0,0" GotFocus="txtUsersName_GotFocus"/>
+                           Width="230"  Height="25" Margin="63,0,0,0" GotFocus="txtUsersName_GotFocus" LostFocus="txtUsersName_LostFocus"/>
                     <iconPacks:PackIconMaterial Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
-
                 </StackPanel>
                 <Border Width="250" Height="2" Background="White"/>
 
                 <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
                     <PasswordBox Password="Password" x:Name="txtPassword" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
-                           Width="230" Height="25" Margin="63,0,0,0" GotFocus="txtPassword_GotFocus"/>
+                           Width="230" Height="25" Margin="63,0,0,0" GotFocus="txtPassword_GotFocus" LostFocus="txtPassword_LostFocus" AllowDrop="True"/>
                     <iconPacks:PackIconMaterial Kind="FormTextboxPassword" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
                 <Border Width="250" Height="2" Background="White"/>
