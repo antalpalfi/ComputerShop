@@ -42,10 +42,10 @@ namespace ComputerShop
                 });
                 ctx.SaveChanges();
             }
-            MessageBox.Show($"New user successfully created\n" +
-                $"{txtUserName.Text}\n" +
-                $"{txtPassword.Password.ToString()}\n" +
-                $"{cmbUserType.SelectedItem.ToString()}");
+            //MessageBox.Show($"New user successfully created\n" +
+            //    $"{txtUserName.Text}\n" +
+            //    $"{txtPassword.Password.ToString()}\n" +
+            //    $"{cmbUserType.SelectedItem.ToString()}");
             DialogResult = true;
         }
 

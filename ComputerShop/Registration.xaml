@@ -56,7 +56,7 @@
 
             <StackPanel Grid.Row="1">
                 <StackPanel  Orientation="Horizontal" Margin="5">
-                    <TextBox Text="Username" x:Name="txtUserName" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
+                    <TextBox Text="Username" x:Name="txtUserName" BorderThickness="0" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent" FontWeight="Light"
                            Width="230" Height="25" Margin="63,0,0,0" GotFocus="txtUserName_GotFocus" LostFocus="txtUserName_LostFocus"/>
                     <iconPacks:PackIconMaterial Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
 
@@ -64,7 +64,7 @@
                 <Border Width="250" Height="2" Background="White"/>
 
                 <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
-                    <PasswordBox Password="Password" x:Name="txtPassword" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent"
+                    <PasswordBox Password="Password" x:Name="txtPassword" BorderThickness="0" FontSize="20" FontFamily="Helvetica" Foreground="White" HorizontalAlignment="Center" Background="Transparent"
                            Width="230"  Height="25" Margin="63,0,0,0" GotFocus="txtPassword_GotFocus" LostFocus="txtPassword_LostFocus"/>
                     <iconPacks:PackIconMaterial Kind="FormTextboxPassword" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>

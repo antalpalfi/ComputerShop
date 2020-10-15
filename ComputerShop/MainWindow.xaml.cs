@@ -25,6 +25,7 @@ namespace ComputerShop
         {
             InitializeComponent();
             
+            
         }
         public string loginUser = "";
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -49,8 +50,7 @@ namespace ComputerShop
                     loginUser = txtUsersName.Text;
                     txtPassword.Clear();
                     txtUsersName.Clear();
-                  
-                    MessageBox.Show($"Welkom {loginUser}");
+                    WelcomMessageBox.Show(loginUser);
                     MainMenu mainMenu = new MainMenu();
                     mainMenu.txtUserName.Text = $"Hello {loginUser}";
                     this.Close();

@@ -24,5 +24,54 @@ namespace ComputerShop
             InitializeComponent();
         }
 
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+          
+            if (txtCompany.Text != "" && txtContactPerson.Text != "" && txtEmail.Text != "" && txtHouseNumber.Text != "" && txtMailbox.Text != "" && txtPhone.Text != "" && txtStreet.Text != "" && txtTown.Text != "" && txtZipcode.Text != "")
+            {
+
+
+                using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
+                {
+                    var sup = ctx.Leveranciers.Where(x => x.Company == txtCompany.Text && x.Contactpersoon == txtContactPerson.Text).Count();
+
+                    if (sup == 0)
+                    {
+                            ctx.Leveranciers.Add(new Leverancier()
+                            {
+                                Contactpersoon = txtContactPerson.Text,
+                                Company = txtCompany.Text,
+                                Telefoonnummer = txtPhone.Text,
+                                Emailadres = txtEmail.Text,
+                                Straatnaam = txtStreet.Text,
+                                Huisnummer = Convert.ToInt32(txtHouseNumber.Text),
+                                Bus = Convert.ToInt32(txtMailbox.Text),
+                                Postcode = Convert.ToInt32(txtZipcode.Text),
+                                Gemeente = txtTown.Text
+                            });
+                            ctx.SaveChanges();
+                            string newSuppplier = $"{txtCompany.Text}\n" +
+                                $"{txtContactPerson.Text}\n" +
+                                $"{txtPhone.Text}\n" +
+                                $"{txtEmail.Text}\n" +
+                                $"{txtStreet.Text} {txtHouseNumber.Text} {txtMailbox.Text}\n" +
+                                $"{txtZipcode.Text}\n" +
+                                $"{txtTown.Text}";
+                            System.Windows.Forms.DialogResult result = MyMessageBox.Show(newSuppplier, MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                        this.Close();
+                    }
+                    else 
+                    {
+                            MessageBox.Show("Company is already exist");
+                    }
+                }
+            }
+            else MessageBox.Show("Lookup again");
+        }
+
+        private void btnEsc_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

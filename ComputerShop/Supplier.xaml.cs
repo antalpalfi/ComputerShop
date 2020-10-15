@@ -26,14 +26,7 @@ namespace ComputerShop
         public Supplier()
         {
             InitializeComponent();
-
-            using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
-            {
-                var supl = ctx.Leveranciers.Select(l => l);
-                lbSupplierName.SelectedValuePath = "LeverancierID";
-                //lbSupplierName.DisplayMemberPath = "Company";
-                lbSupplierName.ItemsSource = supl.ToList();
-            }
+            FillTheList();
         }
 
 
@@ -41,15 +34,19 @@ namespace ComputerShop
         {
             using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
             {
-                var supl = ctx.Leveranciers.Select(l => l).Where(b => b.LeverancierID ==(int)lbSupplierName.SelectedValue).FirstOrDefault();
-                txtContactPerson.Text =$"Contact person: {supl.Contactpersoon}";
-                txtTelefon.Text =$"Telefon: {supl.Telefoonnummer}";
-                txtEmail.Text =$"Email: {supl.Emailadres}";
-                txtStreet.Text = $"Street: {supl.Straatnaam}";
-                txtHousNumber.Text = $"House number: {supl.Huisnummer}";
-                txtBox.Text = $"Box: {supl.Bus}";
-                txtZipCode.Text = $"Zipcode: {supl.Postcode}";
-                txtTown.Text = $"Town: {supl.Gemeente}";
+                if (lbSupplierName.SelectedValue != null)
+                {
+                    var supl = ctx.Leveranciers.Select(l => l).Where(b => b.LeverancierID == (int)lbSupplierName.SelectedValue).FirstOrDefault();
+                    txtContactPerson.Text = $"Contact person: {supl.Contactpersoon}";
+                    txtTelefon.Text = $"Telefon: {supl.Telefoonnummer}";
+                    txtEmail.Text = $"Email: {supl.Emailadres}";
+                    txtStreet.Text = $"Street: {supl.Straatnaam}";
+                    txtHousNumber.Text = $"House number: {supl.Huisnummer}";
+                    txtBox.Text = $"Box: {supl.Bus}";
+                    txtZipCode.Text = $"Zipcode: {supl.Postcode}";
+                    txtTown.Text = $"Town: {supl.Gemeente}";
+                }
+              
             }
         }
 
@@ -62,6 +59,18 @@ namespace ComputerShop
         {
             NewSuplier suplier = new NewSuplier();
             suplier.ShowDialog();
+            FillTheList();
+        }
+        
+        private void FillTheList()
+        {
+            using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
+            {
+                var supl = ctx.Leveranciers.Select(l => l);
+                lbSupplierName.SelectedValuePath = "LeverancierID";
+                //lbSupplierName.DisplayMemberPath = "Company";
+                lbSupplierName.ItemsSource = supl.ToList();
+            }
         }
     }
 }

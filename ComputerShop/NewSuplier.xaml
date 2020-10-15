@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComputerShop"
         mc:Ignorable="d"
-        Title="NewSuplier" Height="611.51" Width="807.797"  Background="Beige" FontSize="25" FontFamily="Segoe UI Semibold">
+        Title="NewSuplier" Height="621.831" Width="810.377"  Background="Beige" FontSize="25" FontFamily="Segoe UI Semibold"
+         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
-    <Grid Margin="10,0,,0">
+    <Grid Margin="10,0,0,0">
         <StackPanel>
             <StackPanel Orientation="Vertical">
 
@@ -27,26 +28,26 @@
 
                     <StackPanel Orientation="Vertical" Margin="10,10,0,0">
                         <TextBlock Text="Company name" Margin="5,0,0,0"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtCompany" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
                         <TextBlock Text="Contact person" Margin="5"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtContactPerson" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
                         <TextBlock Text="Phone number" Margin="5"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtPhone" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
                         <TextBlock Text="Email adres" Margin="5"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtEmail" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
                     </StackPanel>
                     <Border BorderThickness="2" BorderBrush="Black"/>
                     <StackPanel Orientation="Vertical" Margin="10,10,0,10">
                         <TextBlock Text="Streetname"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtStreet" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
                         <TextBlock Text="House number"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtHouseNumber" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
                         <TextBlock Text="Mailbox"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtMailbox" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
                         <TextBlock Text="Zip code"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtZipcode" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
                         <TextBlock Text="Town"/>
-                        <TextBox BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5,5,5,0" FontSize="15" Background="White" BorderBrush="black"/>
+                        <TextBox x:Name="txtTown" BorderThickness="0,0,0,3" Width="200" Height="50" Margin="5,5,5,0" FontSize="15" Background="White" BorderBrush="black"/>
                     </StackPanel>
                     <Border BorderThickness="2" BorderBrush="Black"/>
 
@@ -54,14 +55,14 @@
                         <Image/>
                         <Image/>
                     </StackPanel>
-                    <Border BorderThickness="2" BorderBrush="Black" Margin="0,0,0,0"/>
+                    <Border BorderThickness="2" BorderBrush="Black"/>
                 </StackPanel>
             </StackPanel>
             <Border BorderThickness="2" BorderBrush="Black" Margin="0,0,21,0"/>
 
             <StackPanel Orientation="Horizontal">
-                <Button Content="Save" x:Name="btnSave" Margin="50,10,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6"/>
-                <Button Content="Esc" x:Name="btnEsc" Margin="140,10,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" RenderTransformOrigin="-0.246,0.364"/>
+                <Button Content="Save" x:Name="btnSave" Margin="50,10,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnSave_Click"/>
+                <Button Content="Esc" x:Name="btnEsc" Margin="140,10,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" RenderTransformOrigin="-0.246,0.364" Click="btnEsc_Click"/>
             </StackPanel>
         </StackPanel>
 
