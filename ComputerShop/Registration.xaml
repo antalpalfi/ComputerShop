@@ -75,7 +75,6 @@
                         <DropShadowEffect/>
                     </ComboBox.Effect>
                 </ComboBox>
-
                 <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                     <Button Width="100" Height="40" Content="Regsiter" x:Name="btnReg" Margin="60,0,60,0" Click="btnReg_Click"/>
                     <Button Width="100" Height="40" Content="Back" x:Name="btnBack" Click="btnBack_Click"/>

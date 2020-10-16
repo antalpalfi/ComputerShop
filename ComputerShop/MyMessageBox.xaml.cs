@@ -27,6 +27,7 @@ namespace ComputerShop
         }
         static MyMessageBox myMessageBox;
         static DialogResult result = System.Windows.Forms.DialogResult.No;
+       
         public enum CMessageBoxButton
         {
             Yes,
@@ -41,6 +42,7 @@ namespace ComputerShop
         }
         public static DialogResult Show(string message,/* CmessageBoxTitle titel*/ CMessageBoxButton btnYes, CMessageBoxButton btnNo)
         {
+            
             myMessageBox = new MyMessageBox();
             myMessageBox.txtMessagebx.Text = message;
             myMessageBox.btnYes.Content = myMessageBox.GetMessageButton(btnYes);

@@ -29,8 +29,6 @@ namespace ComputerShop
           
             if (txtCompany.Text != "" && txtContactPerson.Text != "" && txtEmail.Text != "" && txtHouseNumber.Text != "" && txtMailbox.Text != "" && txtPhone.Text != "" && txtStreet.Text != "" && txtTown.Text != "" && txtZipcode.Text != "")
             {
-
-
                 using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
                 {
                     var sup = ctx.Leveranciers.Where(x => x.Company == txtCompany.Text && x.Contactpersoon == txtContactPerson.Text).Count();
@@ -57,16 +55,19 @@ namespace ComputerShop
                                 $"{txtStreet.Text} {txtHouseNumber.Text} {txtMailbox.Text}\n" +
                                 $"{txtZipcode.Text}\n" +
                                 $"{txtTown.Text}";
-                            System.Windows.Forms.DialogResult result = MyMessageBox.Show(newSuppplier, MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                        this.Close();
+                            System.Windows.Forms.DialogResult result = MessagBoxInfo.Show(newSuppplier, MessagBoxInfo.CmessageBoxTitle.Info);
+                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            this.Close();
+                        }
                     }
                     else 
                     {
-                            MessageBox.Show("Company is already exist");
+                            MessagBoxInfo.Show("Company is already exist",MessagBoxInfo.CmessageBoxTitle.Error);
                     }
                 }
             }
-            else MessageBox.Show("Lookup again");
+            else MessagBoxInfo.Show("Lookup again",MessagBoxInfo.CmessageBoxTitle.Warning);
         }
 
         private void btnEsc_Click(object sender, RoutedEventArgs e)
