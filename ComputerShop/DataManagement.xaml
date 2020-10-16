@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ComputerShop"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Data Management" Height="629" Width="1089" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="Data Management" Height="800" Width="1700" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
 
         <Grid Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="273,0,0,0">
@@ -17,7 +17,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Palfi Computer Store" HorizontalAlignment="Center" FontSize="40" VerticalAlignment="Center" Foreground="White" Margin="0,0,170,0"/>
+                <TextBlock Text="Palfi Computer Store" HorizontalAlignment="Center" FontSize="40" VerticalAlignment="Center" Foreground="White" Margin="0,0,500,0"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Padding="0" Margin="0,0,5,0">
                         <materialDesign:PackIcon Kind="Settings"  Height="30" Width="30"/>

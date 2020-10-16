@@ -32,7 +32,7 @@ namespace ComputerShop
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
-            txtDateTime.Text = DateTime.Now.ToString();
+            txtDateTime.Text = DateTime.Now.ToString("g");
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

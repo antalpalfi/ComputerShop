@@ -102,22 +102,40 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bestelling.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
     </Compile>
     <Compile Include="BestellingProduct.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
     </Compile>
     <Compile Include="Categorie.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComputerWarehous.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComputerWarehous.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComputerWarehous.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComputerWarehous.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComputerWarehous.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerUserControl.xaml.cs">
+      <DependentUpon>CustomerUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataManagement.xaml.cs">
       <DependentUpon>DataManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Klant.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
     </Compile>
     <Compile Include="Leverancier.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
     </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
@@ -128,29 +146,17 @@
     <Compile Include="MyMessageBox.xaml.cs">
       <DependentUpon>MyMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyWareHousData.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyWareHousData.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MyWareHousData.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MyWareHousData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyWareHousData.edmx</DependentUpon>
-    </Compile>
     <Compile Include="NewSuplier.xaml.cs">
       <DependentUpon>NewSuplier.xaml</DependentUpon>
     </Compile>
     <Compile Include="Personeelslid.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductPage.xaml.cs">
+      <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -159,17 +165,21 @@
       <DependentUpon>Supplier.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
     </Compile>
     <Compile Include="Test1.xaml.cs">
       <DependentUpon>Test1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Users_Password.cs">
-      <DependentUpon>MyWareHousData.tt</DependentUpon>
+      <DependentUpon>ComputerWarehous.tt</DependentUpon>
     </Compile>
     <Compile Include="WelcomMessageBox.xaml.cs">
       <DependentUpon>WelcomMessageBox.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewSuplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,12 +251,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="MyWareHousData.edmx">
+    <EntityDeploy Include="ComputerWarehous.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MyWareHousData.Designer.cs</LastGenOutput>
+      <LastGenOutput>ComputerWarehous.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="MyWareHousData.edmx.diagram">
-      <DependentUpon>MyWareHousData.edmx</DependentUpon>
+    <None Include="ComputerWarehous.edmx.diagram">
+      <DependentUpon>ComputerWarehous.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -257,15 +271,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MyWareHousData.Context.tt">
+    <Content Include="ComputerWarehous.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyWareHousData.edmx</DependentUpon>
-      <LastGenOutput>MyWareHousData.Context.cs</LastGenOutput>
+      <DependentUpon>ComputerWarehous.edmx</DependentUpon>
+      <LastGenOutput>ComputerWarehous.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="MyWareHousData.tt">
+    <Content Include="ComputerWarehous.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyWareHousData.edmx</DependentUpon>
-      <LastGenOutput>MyWareHousData.cs</LastGenOutput>
+      <DependentUpon>ComputerWarehous.edmx</DependentUpon>
+      <LastGenOutput>ComputerWarehous.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

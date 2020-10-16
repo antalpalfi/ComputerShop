@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="632a95a23719493cbe99804d036e3dab" Name="Diagram1">
+        <EntityTypeShape EntityType="ComputerWareHous.Bestelling" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerWareHous.BestellingProduct" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerWareHous.Categorie" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerWareHous.Klant" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerWareHous.Leverancier" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerWareHous.Personeelslid" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerWareHous.Product" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerWareHous.sysdiagram" Width="1.5" PointX="2.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerWareHous.Users_Password" Width="1.5" PointX="4.75" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="ComputerWareHous.FK_Bestelling_Klant" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerWareHous.FK_Bestelling_Leverancier" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerWareHous.FK_Bestelling_Personeelslid" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerWareHous.FK_BestellingProduct_Bestelling" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerWareHous.FK_BestellingProduct_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerWareHous.FK_Product_Categorie" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerWareHous.FK_Product_Leverancier" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

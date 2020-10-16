@@ -13,10 +13,10 @@ namespace ComputerShop
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class IndividueelProjectEntities1 : DbContext
+    public partial class ComputerWareHousProject : DbContext
     {
-        public IndividueelProjectEntities1()
-            : base("name=IndividueelProjectEntities1")
+        public ComputerWareHousProject()
+            : base("name=ComputerWareHousProject")
         {
         }
     

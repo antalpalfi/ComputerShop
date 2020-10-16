@@ -29,7 +29,7 @@ namespace ComputerShop
           
             if (txtCompany.Text != "" && txtContactPerson.Text != "" && txtEmail.Text != "" && txtHouseNumber.Text != "" && txtMailbox.Text != "" && txtPhone.Text != "" && txtStreet.Text != "" && txtTown.Text != "" && txtZipcode.Text != "")
             {
-                using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
+                using (ComputerWareHousProject ctx = new ComputerWareHousProject())
                 {
                     var sup = ctx.Leveranciers.Where(x => x.Company == txtCompany.Text && x.Contactpersoon == txtContactPerson.Text).Count();
 

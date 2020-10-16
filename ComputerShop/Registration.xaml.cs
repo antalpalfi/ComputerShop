@@ -32,7 +32,7 @@ namespace ComputerShop
 
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
-            using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
+            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
             {
                 ctx.Users_Password.Add(new Users_Password
                 {

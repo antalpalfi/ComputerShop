@@ -32,7 +32,7 @@ namespace ComputerShop
 
         private void lbSupplierName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
+            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
             {
                 if (lbSupplierName.SelectedValue != null)
                 {
@@ -64,7 +64,7 @@ namespace ComputerShop
         
         private void FillTheList()
         {
-            using (IndividueelProjectEntities1 ctx = new IndividueelProjectEntities1())
+            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
             {
                 var supl = ctx.Leveranciers.Select(l => l);
                 lbSupplierName.SelectedValuePath = "LeverancierID";

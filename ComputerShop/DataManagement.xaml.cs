@@ -30,7 +30,7 @@ namespace ComputerShop
         }
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
-            txtDateTime.Text = DateTime.Now.ToString();
+            txtDateTime.Text = DateTime.Now.ToString("g");
         }
 
 
@@ -46,11 +46,11 @@ namespace ComputerShop
                     break;
                 case 1:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new Supplier());
+                    gridPages.Children.Add(new CustomerUserControl());
                     break;
                 case 2:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new Supplier());
+                    gridPages.Children.Add(new ProductPage());
                     break;
                 case 3:
                     gridPages.Children.Clear();
