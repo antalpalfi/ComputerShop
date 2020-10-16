@@ -39,7 +39,7 @@ namespace ComputerShop
 
         private void productListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show(productListView.SelectedValue.ToString());
+            MessageBox.Show(productListView.SelectedItems.ToString());
         }
     }
 }

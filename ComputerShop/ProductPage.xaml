@@ -28,9 +28,9 @@
                     <GridViewColumn Header="BTW" Width="100" DisplayMemberBinding="{Binding BTW}"/>
                     <GridViewColumn Header="SupplierID" Width="100" DisplayMemberBinding="{Binding LeverancierID}"/>
                     <GridViewColumn Header="CategoryID" Width="100" DisplayMemberBinding="{Binding CategorieID}"/>
-                    <GridViewColumn Header="Instock" Width="100" DisplayMemberBinding="{Binding CategorieID}"/>
-                    <GridViewColumn Header="Source" Width="150" DisplayMemberBinding="{Binding CategorieID}"/>
-                    <GridViewColumn Header="Specifications" Width="150" DisplayMemberBinding="{Binding CategorieID}"/>
+                    <GridViewColumn Header="Instock" Width="100" DisplayMemberBinding="{Binding InStock}"/>
+                    <GridViewColumn Header="Source" Width="150" DisplayMemberBinding="{Binding Source}"/>
+                    <GridViewColumn Header="Specifications" Width="150" DisplayMemberBinding="{Binding Specifications}"/>
                     
 
                 </GridView>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ComputerWareHous.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ComputerWareHous.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bestelling">
           <Key>
             <PropertyRef Name="BestellingID" />
@@ -81,6 +81,9 @@
           <Property Name="BTW" Type="int" />
           <Property Name="LeverancierID" Type="int" />
           <Property Name="CategorieID" Type="int" />
+          <Property Name="InStock" Type="int" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="Specifications" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -224,8 +227,7 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ComputerWareHous" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -319,6 +321,9 @@
           <NavigationProperty Name="BestellingProducts" Relationship="Self.FK_BestellingProduct_Product" FromRole="Product" ToRole="BestellingProduct" />
           <NavigationProperty Name="Categorie" Relationship="Self.FK_Product_Categorie" FromRole="Product" ToRole="Categorie" />
           <NavigationProperty Name="Leverancier" Relationship="Self.FK_Product_Leverancier" FromRole="Product" ToRole="Leverancier" />
+          <Property Name="InStock" Type="Int32" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Specifications" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -541,6 +546,9 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ComputerWareHous.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Specifications" ColumnName="Specifications" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="InStock" ColumnName="InStock" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Naam" ColumnName="Naam" />
                 <ScalarProperty Name="Inkoopprijs" ColumnName="Inkoopprijs" />
