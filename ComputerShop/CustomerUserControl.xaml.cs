@@ -35,7 +35,7 @@ namespace ComputerShop
                 foreach (var item in name)
                 {
                     klantName += item.Achternaam.ToString();
-                    klantName += item.Voornaam.ToString();
+                    klantName += " "+item.Voornaam.ToString();
                 }
                 var klant = ctx.Klants.RemoveRange(ctx.Klants.Where(x => x.KlantID == (int)listViewCustomer.SelectedValue)).FirstOrDefault();
                 System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete " + klantName + "\n " + "and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);

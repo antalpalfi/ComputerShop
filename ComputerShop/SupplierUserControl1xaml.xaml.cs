@@ -62,5 +62,21 @@ namespace ComputerShop
                 }
             }
         }
+        public  int getSelectedValue()
+        {
+            int selectedValue = Convert.ToInt32(supportList.SelectedValue);
+            return selectedValue;
+        }
+
+        private void btnEdit_Click_1(object sender, RoutedEventArgs e)
+        {
+            EditSupplier supl = new EditSupplier();
+            supl.ShowDialog();
+        }
+
+        private void supportList_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show(supportList.SelectedValue.ToString());
+        }
     }
 }

@@ -55,19 +55,19 @@ namespace ComputerShop
                     break;
                 case 3:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new ProductPage());
+                    gridPages.Children.Add(new PersonMembersUserControl1());
                     break;
                 case 4:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new ProductPage());
+                    gridPages.Children.Add(new PersonMembersUserControl1());
                     break;
                 case 5:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new ProductPage());
+                    gridPages.Children.Add(new OrderUserControl1());
                     break;
                 case 6:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new ProductPage());
+                    gridPages.Children.Add(new OrderProductUserControl1());
                     break;
                 case 7:
                     MainWindow mainWindow = new MainWindow();
