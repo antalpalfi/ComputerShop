@@ -56,7 +56,7 @@ namespace ComputerShop
                                 $"{txtZipcode.Text}\n" +
                                 $"{txtTown.Text}";
                             System.Windows.Forms.DialogResult result = MessagBoxInfo.Show(newSuppplier, MessagBoxInfo.CmessageBoxTitle.Info);
-                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        if (result == System.Windows.Forms.DialogResult.OK)
                         {
                             this.Close();
                         }

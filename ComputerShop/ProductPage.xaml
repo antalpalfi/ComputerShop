@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ComputerShop"
+             xmlns:local="clr-namespace:ComputerShop" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1200" Background="Beige">
+             Height="650" Width="1350" Background="Beige">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="28*"/>
+          
             <RowDefinition Height="161*"/>
             <RowDefinition Height="36*"/>
         </Grid.RowDefinitions>
-        <ListView Margin="10" Grid.Row="1" Name="productListView" SelectionChanged="productListView_SelectionChanged">
+        <ListView Margin="10,10,10,0" Grid.Row="0" Name="productListView" SelectionChanged="productListView_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="{x:Type GridViewColumnHeader}">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -30,11 +30,18 @@
                     <GridViewColumn Header="CategoryID" Width="100" DisplayMemberBinding="{Binding CategorieID}"/>
                     <GridViewColumn Header="Instock" Width="100" DisplayMemberBinding="{Binding InStock}"/>
                     <GridViewColumn Header="Source" Width="150" DisplayMemberBinding="{Binding Source}"/>
-                    <GridViewColumn Header="Specifications" Width="150" DisplayMemberBinding="{Binding Specifications}"/>
-                    
-
+                    <GridViewColumn Header="Specifications" Width="220" DisplayMemberBinding="{Binding Specifications}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="1"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="300,0,100,0" Width="150" Height="50"/>
+            <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50"/>
+            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50"/>
+            <iconPacks:PackIconMaterial Kind="Apple"  Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,25,0"/>
+            <iconPacks:PackIconMaterial Kind="Microsoft" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,25,0"/>
+            <iconPacks:PackIconMaterial Kind="MicrosoftVisualStudio" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+        </StackPanel>
     </Grid>
 </UserControl>

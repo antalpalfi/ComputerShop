@@ -75,7 +75,7 @@
                 <ColumnDefinition Width="133*"/>
                 <ColumnDefinition Width="317*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" Text="info" Margin="10,5" x:Name="txtMessagebx" Padding="10" HorizontalAlignment="Center" Width="297"/>
+            <TextBlock Grid.Column="1" Text="info" Margin="10,5" x:Name="txtMessagebx" Padding="10" HorizontalAlignment="Center" Width="297" FontWeight="Bold"/>
             <materialDesign:PackIcon Name="iconMsg" Grid.Column="0" Kind="Error" Foreground="Red" Width="100" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,22,9,23"/>
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="2">

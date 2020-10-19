@@ -23,19 +23,37 @@ namespace ComputerShop
         public CustomerUserControl()
         {
             InitializeComponent();
-            List<Klant> myKlant = new List<Klant>();
-            myKlant.Add(new Klant() { Voornaam = "Antal", Achternaam = "Palfi", Straatnaam = "Teststraat", Huisnummer = 11, Bus = 1, Postcode = 8000, Gemeente = "Brugge", Telefoonnummer = "025480", Emailadres = "antalpalfi90@gmail.com", AangemaaktOp = DateTime.Now, Opmerking = "Hallo hallo" });
-            
-            using(ComputerWareHousProject ctx = new ComputerWareHousProject())
+            FilltheList();
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
             {
-                var cusList = ctx.Klants.Select(x => x).ToList();
-                customerList.SelectedValuePath = "KlantID";
-                //customerList.ItemsSource = myKlant;
-                foreach (var item in cusList)
+                string klantName = "";
+                var name = ctx.Klants.Where(x => x.KlantID == (int)listViewCustomer.SelectedValue);
+                foreach (var item in name)
                 {
-                    myKlant.Add(item);
+                    klantName += item.Achternaam.ToString();
+                    klantName += item.Voornaam.ToString();
                 }
-                customerList.ItemsSource = myKlant;
+                var klant = ctx.Klants.RemoveRange(ctx.Klants.Where(x => x.KlantID == (int)listViewCustomer.SelectedValue)).FirstOrDefault();
+                System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete " + klantName + "\n " + "and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    ctx.SaveChanges();
+                    FilltheList();
+                }
+            }
+        }
+        private void FilltheList()
+        {
+            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            {
+                var cusList = ctx.Klants.Select(x => x);
+                listViewCustomer.SelectedValuePath = "KlantID";
+                listViewCustomer.ItemsSource = cusList.ToList();
+
             }
         }
     }
