@@ -8,9 +8,9 @@
              Height="650" Width="1350" Background="Beige">
     <Grid>
         <Grid.RowDefinitions>
-          
-            <RowDefinition Height="161*"/>
-            <RowDefinition Height="36*"/>
+            <RowDefinition Height="167*" x:Name="viewList"/>
+            <RowDefinition Height="382*" x:Name="editProductRow"/>
+            <RowDefinition Height="101*"/>
         </Grid.RowDefinitions>
         <ListView Margin="10,10,10,0" Grid.Row="0" Name="productListView" SelectionChanged="productListView_SelectionChanged">
             <ListView.Resources>
@@ -34,11 +34,49 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="1"/>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="300,0,100,0" Width="150" Height="50"/>
+        <ContentControl x:Name="editProduct" Grid.Row="1">
+            <StackPanel  x:Name="gridEditProduct" Grid.Row="1">
+                <Border BorderThickness="2" BorderBrush="Black"/>
+                <Border BorderThickness="2" BorderBrush="Black"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                    <TextBlock Text="Product name" Margin="5,0,0,0" FontSize="20" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtName" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="20,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="Purchase price" Margin="60,5,5,5" FontSize="20" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtPurchasePrice" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="45,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="Margin" FontSize="20" VerticalAlignment="Center" Margin="90,5,5,5"/>
+                    <TextBox x:Name="txtMargin" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="10,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <Button Content="Add" x:Name="btnAddSave" Margin="35,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnAddSave_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0,0,10">
+                    <TextBlock Text="Unit" Margin="5" FontSize="20"/>
+                    <TextBox x:Name="txtUnit" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="95,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="Btw" FontSize="20" Margin="65,5,0,5"/>
+                    <TextBox x:Name="txtBtw" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="142,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="Supplier" FontSize="20" Margin="88,15,5,5"/>
+                    <ComboBox x:Name="cmbSupplier" Width="200">
+                    </ComboBox>
+                    <Button Content="Save" x:Name="btnSave" Margin="40,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnSave_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Category" FontSize="20" Margin="5"/>
+                    <ComboBox x:Name="cmbCategory" Width="200" Margin="60,5,0,0"/>
+                    <TextBlock Text="Instock" FontSize="20" Margin="60,10,0,0"/>
+                    <TextBox x:Name="txtInstock" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="115,5,0,5" FontSize="15" Background="White" BorderBrush="black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Text="Source" FontSize="20" Margin="90,10,0,0"/>
+                    <TextBox x:Name="txtSource" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="25,5,0,5" FontSize="15" Background="White" BorderBrush="black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Button Content="Esc" x:Name="btnEsc" Margin="30,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnEsc_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Specifications" FontSize="20" Margin="5,15,0,0"/>
+                    <TextBox x:Name="txtSpecifications" BorderThickness="0,0,0,3" Width="619" Height="172" Margin="25,10,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                </StackPanel>
+            </StackPanel>
+        </ContentControl>
+        <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="2" Margin="0,0,0,1"/>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="62,0" Width="1226">
+            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="300,0,100,0" Width="150" Height="50" Click="btnAdd_Click"/>
             <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50"/>
-            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50"/>
+            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50" Click="btnEdit_Click"/>
             <iconPacks:PackIconMaterial Kind="Apple"  Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,25,0"/>
             <iconPacks:PackIconMaterial Kind="Microsoft" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,25,0"/>
             <iconPacks:PackIconMaterial Kind="MicrosoftVisualStudio" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>

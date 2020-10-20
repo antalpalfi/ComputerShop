@@ -131,9 +131,6 @@
     <Compile Include="DataManagement.xaml.cs">
       <DependentUpon>DataManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditSupplier.xaml.cs">
-      <DependentUpon>EditSupplier.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Klant.cs">
       <DependentUpon>ComputerWarehous.tt</DependentUpon>
     </Compile>
@@ -148,9 +145,6 @@
     </Compile>
     <Compile Include="MyMessageBox.xaml.cs">
       <DependentUpon>MyMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewSuplier.xaml.cs">
-      <DependentUpon>NewSuplier.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrderProductUserControl1.xaml.cs">
       <DependentUpon>OrderProductUserControl1.xaml</DependentUpon>
@@ -196,10 +190,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditSupplier.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -221,10 +211,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MyMessageBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NewSuplier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

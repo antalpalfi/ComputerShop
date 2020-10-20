@@ -8,10 +8,11 @@
              Height="650" Width="1350" Background="Beige">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="161*"/>
-            <RowDefinition Height="36*"/>
+            <RowDefinition Height="542*" x:Name="viewList"/>
+            <RowDefinition Height="3*" x:Name="editCus"/>
+            <RowDefinition Height="105*"/>
         </Grid.RowDefinitions>
-        <ListView Margin="10,10,10,0" Name="listViewCustomer" Grid.Row="0">
+        <ListView Margin="10,10,10,0" Name="listViewCustomer" Grid.Row="0" SelectionChanged="listViewCustomer_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="{x:Type GridViewColumnHeader}">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -20,7 +21,8 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding KlantID}"/>
-                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Voornaam}"/>
+                    <GridViewColumn Header="Firstname" Width="150" DisplayMemberBinding="{Binding Voornaam}"/>
+                    <GridViewColumn Header="Lastname" Width="150" DisplayMemberBinding="{Binding Achternaam}"/>
                     <GridViewColumn Header="Street" Width="180" DisplayMemberBinding="{Binding Straatnaam}"/>
                     <GridViewColumn Header="Housnr." Width="70" DisplayMemberBinding="{Binding Huisnummer}"/>
                     <GridViewColumn Header="MailBox" Width="70" DisplayMemberBinding="{Binding Bus}"/>
@@ -40,11 +42,50 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="1"/>
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50"/>
+        <ContentControl x:Name="editCustomer" Grid.Row="1">
+            <StackPanel  x:Name="gridEditCustomer" Grid.Row="1">
+                <Border BorderThickness="2" BorderBrush="Black"/>
+                <Border BorderThickness="2" BorderBrush="Black"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                    <TextBlock Text="First name" Margin="5,0,0,0" FontSize="20" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtFirstName" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="55,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="Last name" Margin="60,5,5,5" FontSize="20" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtLastName" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="45,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="Phone number" FontSize="20" VerticalAlignment="Center" Margin="50,5,5,5"/>
+                    <TextBox x:Name="txtPhone" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="10,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <Button Content="Add" x:Name="btnAddSave" Margin="30,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnAddSave_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0,0,10">
+                    <TextBlock Text="Email adres" Margin="5" FontSize="20"/>
+                    <TextBox x:Name="txtEmail" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="33,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="Streetname" FontSize="20" Margin="60,5,0,5"/>
+                    <TextBox x:Name="txtStreet" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="40,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="House number" FontSize="20" Margin="55,15,5,5"/>
+                    <TextBox x:Name="txtHouseNumber" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <Button Content="Save" x:Name="btnSave" Margin="25,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnSave_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Mailbox" FontSize="20" Margin="5"/>
+                    <TextBox x:Name="txtMailbox" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="70,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                    <TextBlock Text="Zip code" FontSize="20" Margin="60,10,0,0"/>
+                    <TextBox x:Name="txtZipcode" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="65,5,0,5" FontSize="15" Background="White" BorderBrush="black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Text="Town" FontSize="20" Margin="55,10,0,0"/>
+                    <TextBox x:Name="txtTown" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="95,5,0,5" FontSize="15" Background="White" BorderBrush="black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Button Content="Esc" x:Name="btnEsc" Margin="30,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnEsc_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Made on" FontSize="20" Margin="5"/>
+                    <DatePicker Height="25" HorizontalAlignment="Left" Margin="42,10,0,10" Name="DateTimePicker" VerticalAlignment="Center" Width="250" />
+                    <TextBlock Text="Comment" FontSize="20" Margin="30,10,0,0"/>
+                    <TextBox x:Name="txtComment" BorderThickness="0,0,0,3" Width="600" Height="40" Margin="55,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
+                </StackPanel>
+            </StackPanel>
+        </ContentControl>
+        <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="2"/>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="48,0" Width="1254">
+            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50" Click="btnAdd_Click"/>
             <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50" Click="btnRemove_Click"/>
-            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50"/>
+            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50" Click="btnEdit_Click"/>
             <iconPacks:PackIconMaterial Kind="Apple"  Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="Microsoft" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="MicrosoftVisualStudio" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
