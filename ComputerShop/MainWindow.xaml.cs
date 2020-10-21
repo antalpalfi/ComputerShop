@@ -42,9 +42,9 @@ namespace ComputerShop
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
 
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var selectUser = ctx.Users_Password.Where(x => x.UserName == txtUsersName.Text && x.Password == txtPassword.Password).Count();
+                var selectUser = ctx.Personeelslids.Where(x => x.Username == txtUsersName.Text && x.Password == txtPassword.Password).Count();
                 if (selectUser == 1)
                 {
                     loginUser = txtUsersName.Text;

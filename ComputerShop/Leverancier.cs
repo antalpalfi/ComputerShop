@@ -21,7 +21,7 @@ namespace ComputerShop
             this.Products = new HashSet<Product>();
         }
     
-        public int LeverancierID { get; set; }
+        public int ID { get; set; }
         public string Contactpersoon { get; set; }
         public string Telefoonnummer { get; set; }
         public string Emailadres { get; set; }

@@ -20,8 +20,12 @@ namespace ComputerShop
             this.Bestellings = new HashSet<Bestelling>();
         }
     
-        public int PersoneelslidID { get; set; }
+        public int ID { get; set; }
         public string Voornaam { get; set; }
+        public string Achternaam { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Usertype { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bestelling> Bestellings { get; set; }

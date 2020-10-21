@@ -8,8 +8,9 @@
              Height="650" Width="1350" Background="Beige">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="161*"/>
-            <RowDefinition Height="36*"/>
+            <RowDefinition Height="350*" x:Name="listViewUser"/>
+            <RowDefinition Height="200" x:Name="editRow"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
         <ListView Grid.Column="0" x:Name="listViewPersonLid">
             <ListView.Resources>
@@ -19,14 +20,39 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding PersoneelslidID}"/>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}"/>
                     <GridViewColumn Header="Firstname" Width="150" DisplayMemberBinding="{Binding Voornaam}"/>
+                    <GridViewColumn Header="Lastname" Width="150" DisplayMemberBinding="{Binding Achternaam}"/>
+                    <GridViewColumn Header="Username" Width="150" DisplayMemberBinding="{Binding Username}"/>
+                    <GridViewColumn Header="Password" Width="150" DisplayMemberBinding="{Binding Password}"/>
+                    <GridViewColumn Header="User type" Width="150" DisplayMemberBinding="{Binding Usertype}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="1"/>
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10,0,0,0" Width="1290">
-            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50"/>
+        <StackPanel Grid.Row="1" x:Name="stackEdit" Orientation="Vertical">
+            <StackPanel  Orientation="Horizontal">
+                <TextBlock Text="Firstname" FontSize="20" Margin="40,10,0,10"/>
+                <TextBlock Text="Lastname" FontSize="20"  Margin="200,10,0,10"/>
+                <TextBlock Text="Username" FontSize="20"  Margin="170,10,0,10"/>
+                <TextBlock Text="Password" FontSize="20"  Margin="180,10,0,10"/>
+                <TextBlock Text="Usertype" FontSize="20"  Margin="190,10,0,10"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <TextBox x:Name="txtFirstname" Width="150" Height="40" Margin="25,5,0,5" BorderThickness="0,0,0,3" FontSize="15" Background="White" BorderBrush="black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtLastname" Width="150" Height="40" BorderThickness="0,0,0,3" Margin="115,5,0,5" FontSize="15" Background="White" BorderBrush="black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtUsername" Width="150" BorderThickness="0,0,0,3" Height="40" Margin="115,5,0,5" FontSize="15" Background="White" BorderBrush="black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtPassword" Width="150" BorderThickness="0,0,0,3"  Height="40" Margin="115,5,0,5" FontSize="15" Background="White" BorderBrush="black" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cmbUsertype" Width="150"  Height="40" Margin="115,10,0,10" Background="White" Foreground="Black"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Save" x:Name="btnSave" Margin="0,25,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6"/>
+                <Button Content="Add" x:Name="btnAddNew" Margin="30,25,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnAddNew_Click"/>
+                <Button Content="Esc" x:Name="btnEsc" Margin="30,25,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnEsc_Click"/>
+            </StackPanel>
+        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="2"/>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="35,0,25,0" Width="1290">
+            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50" Click="btnAdd_Click"/>
             <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50"/>
             <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50"/>
             <iconPacks:PackIconMaterial Kind="Apple"  Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>

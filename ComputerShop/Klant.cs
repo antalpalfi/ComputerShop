@@ -20,7 +20,7 @@ namespace ComputerShop
             this.Bestellings = new HashSet<Bestelling>();
         }
     
-        public int KlantID { get; set; }
+        public int ID { get; set; }
         public string Voornaam { get; set; }
         public string Achternaam { get; set; }
         public string Straatnaam { get; set; }

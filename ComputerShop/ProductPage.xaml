@@ -8,8 +8,8 @@
              Height="650" Width="1350" Background="Beige">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="167*" x:Name="viewList"/>
-            <RowDefinition Height="382*" x:Name="editProductRow"/>
+            <RowDefinition Height="549*" x:Name="viewList"/>
+            <RowDefinition Height="0*" x:Name="editProductRow"/>
             <RowDefinition Height="101*"/>
         </Grid.RowDefinitions>
         <ListView Margin="10,10,10,0" Grid.Row="0" Name="productListView" SelectionChanged="productListView_SelectionChanged">
@@ -20,13 +20,13 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ProductID}" />
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Naam}" />
                     <GridViewColumn Header="Purchase price" Width="100" DisplayMemberBinding="{Binding Inkoopprijs}"/>
                     <GridViewColumn Header="Margin" Width="100" DisplayMemberBinding="{Binding Marge}"/>
                     <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Eenheid}"/>
                     <GridViewColumn Header="BTW" Width="100" DisplayMemberBinding="{Binding BTW}"/>
-                    <GridViewColumn Header="SupplierID" Width="100" DisplayMemberBinding="{Binding LeverancierID}"/>
+                    <GridViewColumn x:Name="supplierHeader" Header="SupplierID" Width="100" DisplayMemberBinding="{Binding LeverancierID}"/>
                     <GridViewColumn Header="CategoryID" Width="100" DisplayMemberBinding="{Binding CategorieID}"/>
                     <GridViewColumn Header="Instock" Width="100" DisplayMemberBinding="{Binding InStock}"/>
                     <GridViewColumn Header="Source" Width="150" DisplayMemberBinding="{Binding Source}"/>
@@ -34,7 +34,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ContentControl x:Name="editProduct" Grid.Row="1">
+        <ContentControl x:Name="editProduct" Grid.Row="1" Margin="0,0,0,101" Grid.RowSpan="2">
             <StackPanel  x:Name="gridEditProduct" Grid.Row="1">
                 <Border BorderThickness="2" BorderBrush="Black"/>
                 <Border BorderThickness="2" BorderBrush="Black"/>
@@ -53,8 +53,8 @@
                     <TextBlock Text="Btw" FontSize="20" Margin="65,5,0,5"/>
                     <TextBox x:Name="txtBtw" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="142,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
                     <TextBlock Text="Supplier" FontSize="20" Margin="88,15,5,5"/>
-                    <ComboBox x:Name="cmbSupplier" Width="200">
-                    </ComboBox>
+                    <ComboBox x:Name="cmbSupplier" Width="200" SelectionChanged="cmbSupplier_SelectionChanged"/>
+
                     <Button Content="Save" x:Name="btnSave" Margin="40,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnSave_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

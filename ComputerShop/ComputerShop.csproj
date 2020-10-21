@@ -102,28 +102,31 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bestelling.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
     <Compile Include="BestellingProduct.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
     <Compile Include="Categorie.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
-    <Compile Include="ComputerWarehous.Context.cs">
+    <Compile Include="CategoryUserControl1.xaml.cs">
+      <DependentUpon>CategoryUserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ComputerShopData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ComputerWarehous.Context.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ComputerWarehous.cs">
+    <Compile Include="ComputerShopData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
-    <Compile Include="ComputerWarehous.Designer.cs">
+    <Compile Include="ComputerShopData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ComputerWarehous.edmx</DependentUpon>
+      <DependentUpon>ComputerShopData.edmx</DependentUpon>
     </Compile>
     <Compile Include="CustomerUserControl.xaml.cs">
       <DependentUpon>CustomerUserControl.xaml</DependentUpon>
@@ -132,10 +135,10 @@
       <DependentUpon>DataManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Klant.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
     <Compile Include="Leverancier.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
@@ -153,13 +156,13 @@
       <DependentUpon>OrderUserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Personeelslid.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
     <Compile Include="PersonMembersUserControl1.xaml.cs">
       <DependentUpon>PersonMembersUserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
@@ -171,17 +174,18 @@
       <DependentUpon>SupplierUserControl1xaml.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
+      <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
     <Compile Include="Test1.xaml.cs">
       <DependentUpon>Test1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Users_Password.cs">
-      <DependentUpon>ComputerWarehous.tt</DependentUpon>
-    </Compile>
     <Compile Include="WelcomMessageBox.xaml.cs">
       <DependentUpon>WelcomMessageBox.xaml</DependentUpon>
     </Compile>
+    <Page Include="CategoryUserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomerUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -265,13 +269,28 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ComputerWarehous.edmx">
+    <EntityDeploy Include="ComputerShopData.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ComputerWarehous.Designer.cs</LastGenOutput>
+      <LastGenOutput>ComputerShopData.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ComputerWarehous.edmx.diagram">
-      <DependentUpon>ComputerWarehous.edmx</DependentUpon>
+    <None Include="ComputerShopData.edmx.diagram">
+      <DependentUpon>ComputerShopData.edmx</DependentUpon>
     </None>
+    <None Include="images\Behuizingen\Cooler Master MasterBox MB511 ARGB.webp" />
+    <None Include="images\Behuizingen\Cooler Master MasterBox MB511 RGB.webp" />
+    <None Include="images\Behuizingen\Cooler Master MasterCase H500M.webp" />
+    <None Include="images\Geheugen\CORSAIR Vengeance LPX.webp" />
+    <None Include="images\Geheugen\Corsair Vengenance RGB Pro.webp" />
+    <None Include="images\Geheugen\G.Skill Ripjaws V F4-3200C16D-32GVK.webp" />
+    <None Include="images\Koeling\Corsair Hydro Series H100i RGB PLATINUM SE.webp" />
+    <None Include="images\Laptops\MSI GT76 Titan DT 10SFS-034NL.webp" />
+    <None Include="images\Moederbord\AsusMaximus.webp" />
+    <None Include="images\Moederbord\MSI PRESTIGE X570 CREATION.webp" />
+    <None Include="images\Pc\Azerty Gaming Titanium Plus - Core i9-10850K.webp" />
+    <None Include="images\Processor\AMD Ryzen 9 3950X.webp" />
+    <None Include="images\Processor\Intel Core i3-9100.webp" />
+    <None Include="images\Ssd\Kingston A2000 1 TB.webp" />
+    <None Include="images\Voeding\CORSAIR RMx Series RM850x.webp" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -285,15 +304,39 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ComputerWarehous.Context.tt">
+    <Resource Include="images\Koeling\Dark Rock Pro 4.jpg" />
+    <Resource Include="images\Koeling\Pure Rock 2 Black.jpeg" />
+    <Resource Include="images\Laptops\Asus X509JA-EJ031T.jpeg" />
+    <Resource Include="images\Laptops\HP ProBook 450 G7.jpg" />
+    <Resource Include="images\Laptops\Lenovo ThinkBook 13s-IML 20RR.jpeg" />
+    <Resource Include="images\Logos\MainLogo.jpg" />
+    <Resource Include="images\Logos\registMain.jpg" />
+    <Resource Include="images\Moederbord\ASUS ROG MAXIMUS IX EXTREME.jpg" />
+    <Resource Include="images\Moederbord\Gigabyte X299X Aorus Master.png" />
+    <Resource Include="images\Moederbord\MSI MEG Z490 GODLIKE.png" />
+    <Resource Include="images\Pc\Gaming Diamond II - Ryzen 9 3900X.jpg" />
+    <Resource Include="images\Pc\Gaming Diamond Ultimate AMD iCUE Certified - Ryzen 9 3950X.jpg" />
+    <Resource Include="images\Pc\Gaming Titanium Super RTX Battlebox - Core i9-9900KF.jpg" />
+    <Resource Include="images\Processor\AMD Ryzen 7 3700X.jpg" />
+    <Resource Include="images\Processor\AMD Ryzen 9 3900X.jpg" />
+    <Resource Include="images\Processor\Intel Core i7 10700K.jpg" />
+    <Resource Include="images\Processor\Intel Core i9 10900K.jpg" />
+    <Resource Include="images\Ssd\Samsung 860 EVO 1TB.jpg" />
+    <Resource Include="images\VGA\INNO3D GEFORCE RTX 3090 ICHILL X4 - Grafische kaart GF RTX 3090.jpg" />
+    <Resource Include="images\VGA\MSI GeForce RTX 2080 Ti LIGHTNING.png" />
+    <Resource Include="images\VGA\PNY GeForce GTX 1660 SUPER.jpg" />
+    <Resource Include="images\Voeding\Seasonic Focus PX-850.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ComputerShopData.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ComputerWarehous.edmx</DependentUpon>
-      <LastGenOutput>ComputerWarehous.Context.cs</LastGenOutput>
+      <DependentUpon>ComputerShopData.edmx</DependentUpon>
+      <LastGenOutput>ComputerShopData.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ComputerWarehous.tt">
+    <Content Include="ComputerShopData.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ComputerWarehous.edmx</DependentUpon>
-      <LastGenOutput>ComputerWarehous.cs</LastGenOutput>
+      <DependentUpon>ComputerShopData.edmx</DependentUpon>
+      <LastGenOutput>ComputerShopData.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

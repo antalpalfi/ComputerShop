@@ -29,10 +29,10 @@ namespace ComputerShop
         }
         private void updateTheList()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 var supl = ctx.Leveranciers.Select(l => l);
-                supportList.SelectedValuePath = "LeverancierID";
+                supportList.SelectedValuePath = "ID";
                 supportList.ItemsSource = supl.ToList();
             }
         }
@@ -50,15 +50,15 @@ namespace ComputerShop
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 string company = "";
-                var name = ctx.Leveranciers.Where(x => x.LeverancierID == (int)supportList.SelectedValue);
+                var name = ctx.Leveranciers.Where(x => x.ID == (int)supportList.SelectedValue);
                 foreach (var item in name)
                 {
                     company+= item.Company.ToString();
                 }
-                var selec = ctx.Leveranciers.RemoveRange(ctx.Leveranciers.Where(x => x.LeverancierID == (int)supportList.SelectedValue)).FirstOrDefault();
+                var selec = ctx.Leveranciers.RemoveRange(ctx.Leveranciers.Where(x => x.ID == (int)supportList.SelectedValue)).FirstOrDefault();
                 System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete" + " " + company + "\n" + "and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -84,11 +84,11 @@ namespace ComputerShop
         }
         private void fillEditForm()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 if (supportList.SelectedValue!=null)
                 {
-                    var selectSup = ctx.Leveranciers.Select(y => y).Where(x => x.LeverancierID == (int)supportList.SelectedValue).FirstOrDefault();
+                    var selectSup = ctx.Leveranciers.Select(y => y).Where(x => x.ID == (int)supportList.SelectedValue).FirstOrDefault();
                     txtCompany.Text = selectSup.Company.ToString();
                     txtContactPerson.Text = selectSup.Contactpersoon.ToString();
                     txtEmail.Text = selectSup.Emailadres.ToString();
@@ -103,9 +103,9 @@ namespace ComputerShop
         }
         private void updateSupplierEditform()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var sup = ctx.Leveranciers.Select(x => x).Where(y => y.LeverancierID == (int)supportList.SelectedValue).FirstOrDefault();
+                var sup = ctx.Leveranciers.Select(x => x).Where(y => y.ID == (int)supportList.SelectedValue).FirstOrDefault();
                 sup.Contactpersoon = txtContactPerson.Text;
                 sup.Company = txtCompany.Text;
                 sup.Telefoonnummer = txtPhone.Text;
@@ -146,7 +146,7 @@ namespace ComputerShop
         {
             if (txtCompany.Text != "" && txtContactPerson.Text != "" && txtEmail.Text != "" && txtHouseNumber.Text != "" && txtMailbox.Text != "" && txtPhone.Text != "" && txtStreet.Text != "" && txtTown.Text != "" && txtZipcode.Text != "")
             {
-                using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+                using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
                 {
                     var sup = ctx.Leveranciers.Where(x => x.Company == txtCompany.Text && x.Contactpersoon == txtContactPerson.Text).Count();
 

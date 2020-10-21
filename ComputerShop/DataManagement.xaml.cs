@@ -55,7 +55,7 @@ namespace ComputerShop
                     break;
                 case 3:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new PersonMembersUserControl1());
+                    gridPages.Children.Add(new CategoryUserControl1());
                     break;
                 case 4:
                     gridPages.Children.Clear();

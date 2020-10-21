@@ -33,16 +33,16 @@ namespace ComputerShop
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 string klantName = "";
-                var name = ctx.Klants.Where(x => x.KlantID == (int)listViewCustomer.SelectedValue);
+                var name = ctx.Klants.Where(x => x.ID == (int)listViewCustomer.SelectedValue);
                 foreach (var item in name)
                 {
                     klantName += item.Achternaam.ToString();
                     klantName += " "+item.Voornaam.ToString();
                 }
-                var klant = ctx.Klants.RemoveRange(ctx.Klants.Where(x => x.KlantID == (int)listViewCustomer.SelectedValue)).FirstOrDefault();
+                var klant = ctx.Klants.RemoveRange(ctx.Klants.Where(x => x.ID == (int)listViewCustomer.SelectedValue)).FirstOrDefault();
                 System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete " + klantName + "\n " + "and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -53,10 +53,10 @@ namespace ComputerShop
         }
         private void UpdateListView()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 var cusList = ctx.Klants.Select(x => x);
-                listViewCustomer.SelectedValuePath = "KlantID";
+                listViewCustomer.SelectedValuePath = "ID";
                 listViewCustomer.ItemsSource = cusList.ToList();
 
             }
@@ -82,11 +82,11 @@ namespace ComputerShop
         }
         private void fillEditForm()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 if (listViewCustomer.SelectedValue != null)
                 {
-                    var selectKlant = ctx.Klants.Select(y => y).Where(x => x.KlantID == (int)listViewCustomer.SelectedValue).FirstOrDefault();
+                    var selectKlant = ctx.Klants.Select(y => y).Where(x => x.ID == (int)listViewCustomer.SelectedValue).FirstOrDefault();
                     txtFirstName.Text = selectKlant.Voornaam.ToString();
                     txtLastName.Text = selectKlant.Achternaam.ToString();
                     txtEmail.Text = selectKlant.Emailadres.ToString();
@@ -132,7 +132,7 @@ namespace ComputerShop
         }
         private void addNewCustomer()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 ctx.Klants.Add(new Klant()
                 {
@@ -173,9 +173,9 @@ namespace ComputerShop
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var klant = ctx.Klants.Select(x => x).Where(x => x.KlantID == (int)listViewCustomer.SelectedValue).FirstOrDefault();    
+                var klant = ctx.Klants.Select(x => x).Where(x => x.ID == (int)listViewCustomer.SelectedValue).FirstOrDefault();    
                 
                 klant.Voornaam = txtFirstName.Text;
                 klant.Achternaam = txtLastName.Text;

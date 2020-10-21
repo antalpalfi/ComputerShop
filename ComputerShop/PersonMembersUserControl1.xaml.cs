@@ -23,16 +23,59 @@ namespace ComputerShop
         public PersonMembersUserControl1()
         {
             InitializeComponent();
-            fillTheList();
+            updateTheList();
+            cmbUsertype.Items.Add("Administrator");
+            cmbUsertype.Items.Add("Storekeeper");
+            cmbUsertype.Items.Add("Seller");
         }
-        private void fillTheList()
+        private void updateTheList()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 var personLid = ctx.Personeelslids.Select(x => x);
-                listViewPersonLid.SelectedValuePath = "PersoneelslidID";
+                listViewPersonLid.SelectedValuePath = "ID";
                 listViewPersonLid.ItemsSource = personLid.ToList();
             }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            listViewUser.Height = new GridLength(350, GridUnitType.Star);
+            editRow.Height = new GridLength(200, GridUnitType.Star);
+            stackEdit.Visibility = Visibility.Visible;
+            listViewPersonLid.IsEnabled = false;
+            btnSave.Visibility = Visibility.Hidden;
+            btnAddNew.Visibility = Visibility.Visible;
+        }
+
+        private void btnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                ctx.Personeelslids.Add(new Personeelslid()
+                {
+                    Achternaam = txtLastname.Text,
+                    Voornaam = txtFirstname.Text,
+                    Username = txtUsername.Text,
+                    Password = txtPassword.Text,
+                    Usertype = cmbUsertype.SelectedItem.ToString()
+                });
+                ctx.SaveChanges();
+                updateTheList();
+                hideEditform();
+            }
+        }
+        private void hideEditform()
+        {
+            listViewUser.Height = new GridLength(550, GridUnitType.Star);
+            editRow.Height = new GridLength(0, GridUnitType.Star);
+            stackEdit.Visibility = Visibility.Hidden;
+            listViewPersonLid.IsEnabled = true;
+        }
+
+        private void btnEsc_Click(object sender, RoutedEventArgs e)
+        {
+            hideEditform();
         }
     }
 }

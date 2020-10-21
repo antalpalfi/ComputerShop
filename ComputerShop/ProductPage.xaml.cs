@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,31 +36,35 @@ namespace ComputerShop
         }
         private void updateListView()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 var joinLeverancie = ctx.Products.Join(
                     ctx.Leveranciers,
                     p => p.LeverancierID,
-                    l => l.LeverancierID,
+                    l => l.ID,
                     (p, l) => new { p, l});
 
-                //supplierHeader.DisplayMemberBinding = Supname;
+                //supplierHeader.DisplayMemberBinding = new Binding("l.Company");
 
                 var allProd = ctx.Products.Select(p => p);
-                productListView.SelectedValuePath = "ProductID";
+                productListView.SelectedValuePath = "ID";
                 productListView.ItemsSource = allProd.ToList();
             }
         }
         private void fillComboBox()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var supList = ctx.Leveranciers.Select(x => x.Company);
-                cmbSupplier.SelectedValuePath = "LeverancierID";
+                
+                var supList = ctx.Leveranciers.Select(x => x);
+                cmbSupplier.SelectedValuePath = "ID";
+                cmbSupplier.DisplayMemberPath = "Company";
                 cmbSupplier.ItemsSource = supList.ToList();
+               
 
-                var catList = ctx.Categories.Select(x => x.CategorieNaam);
-                cmbCategory.SelectedValuePath = "CategorieID";
+                var catList = ctx.Categories.Select(x => x);
+                cmbCategory.SelectedValuePath = "ID";
+                cmbCategory.DisplayMemberPath = "CategorieNaam";
                 cmbCategory.ItemsSource = catList.ToList();
             }
         }
@@ -77,7 +82,7 @@ namespace ComputerShop
 
         private void btnAddSave_Click(object sender, RoutedEventArgs e)
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 ctx.Products.Add(new Product()
                 {
@@ -92,7 +97,7 @@ namespace ComputerShop
                     LeverancierID = (int)cmbSupplier.SelectedValue,
                     CategorieID = (int)cmbCategory.SelectedValue
 
-                });
+                }); ;
                 ctx.SaveChanges();
                 updateListView();
                 MessagBoxInfo.Show("New product successfully added to the warehouse.", MessagBoxInfo.CmessageBoxTitle.Info);
@@ -128,9 +133,9 @@ namespace ComputerShop
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var product = ctx.Products.Select(x => x).Where(x => x.ProductID == (int)productListView.SelectedValue).FirstOrDefault();
+                var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
                 product.Naam = txtName.Text;
                 product.Inkoopprijs = Convert.ToInt32(txtPurchasePrice.Text);
                 product.Marge = Convert.ToInt32(txtMargin.Text);
@@ -153,11 +158,11 @@ namespace ComputerShop
         }
         private void updateEditForm()
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 if (productListView.SelectedValue!=null)
                 {
-                    var product = ctx.Products.Select(x => x).Where(x => x.ProductID == (int)productListView.SelectedValue).FirstOrDefault();
+                    var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
                     txtBtw.Text = product.BTW.ToString();
                     txtInstock.Text = product.InStock.ToString();
                     txtMargin.Text = product.Marge.ToString();
@@ -166,8 +171,8 @@ namespace ComputerShop
                     txtSource.Text = product.Source;
                     txtSpecifications.Text = product.Specifications;
                     txtUnit.Text = product.Eenheid;
-                    //cmbCategory
-                    //cmbSupplier
+                    cmbCategory.SelectedIndex = (int)product.CategorieID;
+                    cmbSupplier.SelectedIndex = (int)product.LeverancierID;
                 }
             }
         }
@@ -181,6 +186,16 @@ namespace ComputerShop
             txtSource.Text = String.Empty;
             txtSpecifications.Text = String.Empty;
             txtUnit.Text = String.Empty;
+            cmbCategory.SelectedIndex = -1;
+            cmbSupplier.SelectedIndex = -1;
+        }
+
+        private void cmbSupplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbSupplier.SelectedValue!=null)
+            {
+                MessageBox.Show(cmbSupplier.SelectedValue.ToString());
+            }
         }
     }
 }

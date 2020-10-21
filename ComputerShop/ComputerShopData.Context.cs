@@ -13,10 +13,10 @@ namespace ComputerShop
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ComputerWareHousProject : DbContext
+    public partial class IndividueelProjectEntities2 : DbContext
     {
-        public ComputerWareHousProject()
-            : base("name=ComputerWareHousProject")
+        public IndividueelProjectEntities2()
+            : base("name=IndividueelProjectEntities2")
         {
         }
     
@@ -33,6 +33,5 @@ namespace ComputerShop
         public virtual DbSet<Personeelslid> Personeelslids { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Users_Password> Users_Password { get; set; }
     }
 }

@@ -19,7 +19,7 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding LeverancierID}"/>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}"/>
                     <GridViewColumn Header="Company" Width="170" DisplayMemberBinding="{Binding Company}"/>
                     <GridViewColumn Header="Contact person" Width="200" DisplayMemberBinding="{Binding Contactpersoon}"/>
                     <GridViewColumn Header="Street" Width="180" DisplayMemberBinding="{Binding Straatnaam}"/>

@@ -17,6 +17,7 @@ namespace ComputerShop
         public int BestellingProductID { get; set; }
         public Nullable<int> BestellingID { get; set; }
         public Nullable<int> ProductID { get; set; }
+        public Nullable<int> Pieces { get; set; }
     
         public virtual Bestelling Bestelling { get; set; }
         public virtual Product Product { get; set; }

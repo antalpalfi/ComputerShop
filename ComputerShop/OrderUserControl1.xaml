@@ -8,10 +8,11 @@
              Height="650" Width="1350" Background="Beige">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="161*"/>
-            <RowDefinition Height="36*"/>
+            <RowDefinition Height="417*" x:Name="viewListRow"/>
+            <RowDefinition Height="114*" x:Name="EditRow"/>
+            <RowDefinition Height="119*"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Column="0" x:Name="listViewOrder">
+        <ListView Grid.Column="0" x:Name="listViewOrder" SelectionChanged="listViewOrder_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="{x:Type GridViewColumnHeader}">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -19,23 +20,42 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding BestellingID}"/>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}"/>
                     <GridViewColumn Header="Date created" Width="200" DisplayMemberBinding="{Binding DatumOpgemaakt}"/>
                     <GridViewColumn Header="Staff memberID" Width="150" DisplayMemberBinding="{Binding PersoneelslidID}"/>
                     <GridViewColumn Header="SupplierID" Width="150" DisplayMemberBinding="{Binding LeverancierID}"/>
                     <GridViewColumn Header="CustomerID" Width="150" DisplayMemberBinding="{Binding KlantID}"/>
-
                 </GridView>
             </ListView.View>
         </ListView>
         <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="1"/>
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10,0,0,0" Width="1290">
-            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50"/>
+
+        <StackPanel  x:Name="Editpanel" Grid.Row="1" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Made on" Margin="50,10,0,10" FontSize="20"/>
+                <TextBlock Text="Person member" Margin="120,10,0,10" FontSize="20"/>
+                <TextBlock Text="Supplier" Margin="120,10,0,10" FontSize="20"/>
+                <TextBlock Text="Customer" Margin="150,10,0,10" FontSize="20"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <DatePicker x:Name="dtDatum" Width="150" Margin="10,10,0,10"/>
+                <ComboBox x:Name="cmbPersonmember" Width="150" Margin="80,10,0,10"/>
+                <ComboBox x:Name="cmbSupplier" Width="150" Margin="80,10,0,10"/>
+                <ComboBox x:Name="cmbKlant" Width="150" Margin="80,10,0,10"/>
+                <Button Content="Save" x:Name="btnSave" Margin="70,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnSave_Click"/>
+                <Button Content="Add" x:Name="btnAddNew" Margin="30,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnAddNew_Click"/>
+                <Button Content="Esc" x:Name="btnEsc" Margin="30,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnEsc_Click"/>
+            </StackPanel>
+        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="2"/>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="35,0,25,0" Width="1290">
+            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50" Click="btnAdd_Click"/>
             <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50"/>
-            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50"/>
+            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50" Click="btnEdit_Click"/>
             <iconPacks:PackIconMaterial Kind="Apple"  Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="Microsoft" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="MicrosoftVisualStudio" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
         </StackPanel>
+
     </Grid>
 </UserControl>

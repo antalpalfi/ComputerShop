@@ -27,10 +27,10 @@ namespace ComputerShop
         }
         private void fillTheList()
         {
-             using(ComputerWareHousProject ctx = new ComputerWareHousProject())
+             using(IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 var orderopro = ctx.BestellingProducts.Select(x => x);
-                listViewOrderProduct.SelectedValuePath = "BestellingProductID";
+                listViewOrderProduct.SelectedValuePath = "ID";
                 listViewOrderProduct.ItemsSource = orderopro.ToList();
             }
         }

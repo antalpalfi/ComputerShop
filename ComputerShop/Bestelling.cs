@@ -20,7 +20,7 @@ namespace ComputerShop
             this.BestellingProducts = new HashSet<BestellingProduct>();
         }
     
-        public int BestellingID { get; set; }
+        public int ID { get; set; }
         public Nullable<System.DateTime> DatumOpgemaakt { get; set; }
         public Nullable<int> PersoneelslidID { get; set; }
         public Nullable<int> LeverancierID { get; set; }

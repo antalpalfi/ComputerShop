@@ -20,7 +20,7 @@ namespace ComputerShop
             this.Products = new HashSet<Product>();
         }
     
-        public int CategorieID { get; set; }
+        public int ID { get; set; }
         public string CategorieNaam { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

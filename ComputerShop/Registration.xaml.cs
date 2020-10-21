@@ -32,13 +32,13 @@ namespace ComputerShop
 
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
-            using (ComputerWareHousProject ctx = new ComputerWareHousProject())
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                ctx.Users_Password.Add(new Users_Password
+                ctx.Personeelslids.Add(new Personeelslid
                 {
-                    UserName = txtUserName.Text.ToString(),
+                    Username = txtUserName.Text.ToString(),
                     Password = txtPassword.Password.ToString(),
-                    UserType = cmbUserType.SelectedItem.ToString()
+                    Usertype = cmbUserType.SelectedItem.ToString()
                 });
                 ctx.SaveChanges();
             }
