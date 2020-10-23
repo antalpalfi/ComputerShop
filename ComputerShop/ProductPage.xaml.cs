@@ -38,17 +38,24 @@ namespace ComputerShop
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var joinLeverancie = ctx.Products.Join(
-                    ctx.Leveranciers,
-                    p => p.LeverancierID,
-                    l => l.ID,
-                    (p, l) => new { p, l});
 
-                //supplierHeader.DisplayMemberBinding = new Binding("l.Company");
+                var company = ctx.Products.Select(x => new
+                {
+                    Id = x.ID,
+                    Name = x.Naam,
+                    Purchaseprice = x.Inkoopprijs,
+                    Margin = x.Marge,
+                    Unit = x.Eenheid,
+                    Btw = x.BTW,
+                    Leverancie = x.Leverancier.Company,
+                    Category = x.Categorie.CategorieNaam,
+                    Instock = x.InStock,
+                    Sources = x.Source,
+                    Specification = x.Specifications
+                });
 
-                var allProd = ctx.Products.Select(p => p);
-                productListView.SelectedValuePath = "ID";
-                productListView.ItemsSource = allProd.ToList();
+                productListView.SelectedValuePath = "Id";
+                productListView.ItemsSource = company.ToList();
             }
         }
         private void fillComboBox()
@@ -171,8 +178,8 @@ namespace ComputerShop
                     txtSource.Text = product.Source;
                     txtSpecifications.Text = product.Specifications;
                     txtUnit.Text = product.Eenheid;
-                    cmbCategory.SelectedIndex = (int)product.CategorieID;
-                    cmbSupplier.SelectedIndex = (int)product.LeverancierID;
+                    cmbCategory.SelectedValue = (int)product.CategorieID;
+                    cmbSupplier.SelectedValue = (int)product.LeverancierID;
                 }
             }
         }

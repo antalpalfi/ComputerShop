@@ -24,6 +24,7 @@ namespace ComputerShop
         {
             InitializeComponent();
             updateTheList();
+            hideEditform();
             cmbUsertype.Items.Add("Administrator");
             cmbUsertype.Items.Add("Storekeeper");
             cmbUsertype.Items.Add("Seller");
@@ -46,6 +47,7 @@ namespace ComputerShop
             listViewPersonLid.IsEnabled = false;
             btnSave.Visibility = Visibility.Hidden;
             btnAddNew.Visibility = Visibility.Visible;
+            clearTextBox();
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
@@ -76,6 +78,66 @@ namespace ComputerShop
         private void btnEsc_Click(object sender, RoutedEventArgs e)
         {
             hideEditform();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            listViewUser.Height = new GridLength(350, GridUnitType.Star);
+            editRow.Height = new GridLength(200, GridUnitType.Star);
+            stackEdit.Visibility = Visibility.Visible;
+            listViewPersonLid.IsEnabled = true;
+            btnSave.Visibility = Visibility.Visible;
+            btnAddNew.Visibility = Visibility.Hidden;
+            fillEditForm();
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                var select = ctx.Personeelslids.Select(x => x).Where(x => x.ID == (int)listViewPersonLid.SelectedValue).FirstOrDefault();
+                select.Voornaam = txtFirstname.Text;
+                select.Achternaam = txtLastname.Text;
+                select.Username = txtUsername.Text;
+                select.Password = txtPassword.Text;
+                select.Usertype = cmbUsertype.SelectedItem.ToString();
+
+                System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to change it? ", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    MessagBoxInfo.Show("Succesful", MessagBoxInfo.CmessageBoxTitle.Info);
+                    ctx.SaveChanges();
+                }
+            }
+            hideEditform();
+        }
+        private void fillEditForm()
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                if (listViewPersonLid.SelectedValue != null)
+                {
+                    var select = ctx.Personeelslids.Select(x => x).Where(x => x.ID == (int)listViewPersonLid.SelectedValue).FirstOrDefault();
+                    txtFirstname.Text = select.Voornaam;
+                    txtLastname.Text = select.Achternaam;
+                    txtPassword.Text = select.Password;
+                    txtUsername.Text = select.Username;
+                }
+            }
+
+        }
+        private void clearTextBox()
+        {
+            txtFirstname.Text = String.Empty;
+            txtLastname.Text = String.Empty;
+            txtPassword.Text = String.Empty;
+            txtUsername.Text = String.Empty;
+            cmbUsertype.SelectedIndex = -1;
+        }
+        private void listViewPersonLid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            fillEditForm();
         }
     }
 }

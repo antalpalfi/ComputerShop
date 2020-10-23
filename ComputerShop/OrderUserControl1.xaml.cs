@@ -31,8 +31,9 @@ namespace ComputerShop
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var order = ctx.Bestellings.Select(x => x);
-                listViewOrder.SelectedValuePath = "ID";
+                var order = ctx.Bestellings.Select(x => new {Id = x.ID, Datum = x.DatumOpgemaakt, Person = x.Personeelslid.Voornaam + " " + x.Personeelslid.Achternaam,
+                Leveran = x.Leverancier.Company, Klant = x.Klant.Voornaam + " " + x.Klant.Achternaam});
+                listViewOrder.SelectedValuePath = "Id";
                 listViewOrder.ItemsSource = order.ToList();
             }
         }
@@ -114,16 +115,7 @@ namespace ComputerShop
             btnSave.Visibility = Visibility.Visible;
             btnAddNew.Visibility = Visibility.Hidden;
 
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
-            {
-                if (listViewOrder.SelectedValue != null)
-                {
-                    var select = ctx.Bestellings.Select(x => x).Where(x => x.ID == (int)listViewOrder.SelectedValue).FirstOrDefault();
-                    cmbKlant.SelectedValue = select.KlantID;
-                    cmbPersonmember.SelectedValue = select.PersoneelslidID;
-                    cmbSupplier.SelectedValue = select.LeverancierID;
-                }
-            }
+            updateEditForm();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -149,6 +141,10 @@ namespace ComputerShop
 
         private void listViewOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            updateEditForm();
+        }
+        private void updateEditForm()
+        {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 if (listViewOrder.SelectedValue != null)
@@ -157,6 +153,7 @@ namespace ComputerShop
                     cmbKlant.SelectedValue = select.KlantID;
                     cmbPersonmember.SelectedValue = select.PersoneelslidID;
                     cmbSupplier.SelectedValue = select.LeverancierID;
+                    dtDatum.SelectedDate = select.DatumOpgemaakt;
                 }
             }
         }

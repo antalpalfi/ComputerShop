@@ -8,11 +8,11 @@
              Height="650" Width="1350" Background="Beige">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="350*" x:Name="listViewUser"/>
-            <RowDefinition Height="200" x:Name="editRow"/>
+            <RowDefinition Height="550*" x:Name="listViewUser"/>
+            <RowDefinition Height="0" x:Name="editRow"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Column="0" x:Name="listViewPersonLid">
+        <ListView Grid.Column="0" x:Name="listViewPersonLid" SelectionChanged="listViewPersonLid_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="{x:Type GridViewColumnHeader}">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -45,7 +45,7 @@
                 <ComboBox x:Name="cmbUsertype" Width="150"  Height="40" Margin="115,10,0,10" Background="White" Foreground="Black"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Save" x:Name="btnSave" Margin="0,25,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6"/>
+                <Button Content="Save" x:Name="btnSave" Margin="0,25,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnSave_Click"/>
                 <Button Content="Add" x:Name="btnAddNew" Margin="30,25,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnAddNew_Click"/>
                 <Button Content="Esc" x:Name="btnEsc" Margin="30,25,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnEsc_Click"/>
             </StackPanel>
@@ -54,7 +54,7 @@
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="35,0,25,0" Width="1290">
             <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50" Click="btnAdd_Click"/>
             <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50"/>
-            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50"/>
+            <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50" Click="btnEdit_Click"/>
             <iconPacks:PackIconMaterial Kind="Apple"  Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="Microsoft" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="MicrosoftVisualStudio" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>

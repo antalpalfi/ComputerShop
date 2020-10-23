@@ -24,7 +24,7 @@ namespace ComputerShop
         public MainWindow()
         {
             InitializeComponent();
-            
+            btnRegister.IsEnabled = false;
             
         }
         public string loginUser = "";
@@ -58,7 +58,7 @@ namespace ComputerShop
                 }
                 else
                 {
-                    MessageBox.Show("This username and password cannot be found");
+                    MessagBoxInfo.Show("This username and password cannot be found",MessagBoxInfo.CmessageBoxTitle.Error);
                 }
             }
             

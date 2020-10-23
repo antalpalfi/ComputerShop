@@ -29,8 +29,9 @@ namespace ComputerShop
         {
              using(IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var orderopro = ctx.BestellingProducts.Select(x => x);
-                listViewOrderProduct.SelectedValuePath = "ID";
+                var orderopro = ctx.BestellingProducts.Select(x => new {Id = x.BestellingProductID, BestelinId = x.BestellingID,
+                ProductName = x.Product.Naam , Quantity = x.Pieces});
+                listViewOrderProduct.SelectedValuePath = "Id";
                 listViewOrderProduct.ItemsSource = orderopro.ToList();
             }
         }

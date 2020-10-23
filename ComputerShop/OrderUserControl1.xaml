@@ -20,11 +20,11 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}"/>
-                    <GridViewColumn Header="Date created" Width="200" DisplayMemberBinding="{Binding DatumOpgemaakt}"/>
-                    <GridViewColumn Header="Staff memberID" Width="150" DisplayMemberBinding="{Binding PersoneelslidID}"/>
-                    <GridViewColumn Header="SupplierID" Width="150" DisplayMemberBinding="{Binding LeverancierID}"/>
-                    <GridViewColumn Header="CustomerID" Width="150" DisplayMemberBinding="{Binding KlantID}"/>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Date created" Width="200" DisplayMemberBinding="{Binding Datum}"/>
+                    <GridViewColumn Header="Staff member" Width="150" DisplayMemberBinding="{Binding Person}"/>
+                    <GridViewColumn Header="Supplier" Width="150" DisplayMemberBinding="{Binding Leveran}"/>
+                    <GridViewColumn Header="Customer" Width="150" DisplayMemberBinding="{Binding Klant}"/>
                 </GridView>
             </ListView.View>
         </ListView>

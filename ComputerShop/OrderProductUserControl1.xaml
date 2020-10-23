@@ -19,10 +19,10 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding BestellingProductID}"/>
-                    <GridViewColumn Header="Order ID" Width="200" DisplayMemberBinding="{Binding BestellingID}"/>
-                    <GridViewColumn Header="Product ID" Width="150" DisplayMemberBinding="{Binding ProductID}"/>
-
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Order ID" Width="50" DisplayMemberBinding="{Binding BestelinId}"/>
+                    <GridViewColumn Header="Product" Width="200" DisplayMemberBinding="{Binding ProductName}"/>
+                    <GridViewColumn Header="Quantity" Width="50" DisplayMemberBinding="{Binding Quantity}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -53,5 +53,12 @@ namespace ComputerShop
             this.Close();
             myDataManagement.ShowDialog();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Shopping myshopping = new Shopping();
+            this.Close();
+            myshopping.ShowDialog();
+        }
     }
 }

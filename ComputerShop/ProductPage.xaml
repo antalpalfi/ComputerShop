@@ -20,17 +20,17 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
-                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Naam}" />
-                    <GridViewColumn Header="Purchase price" Width="100" DisplayMemberBinding="{Binding Inkoopprijs}"/>
-                    <GridViewColumn Header="Margin" Width="100" DisplayMemberBinding="{Binding Marge}"/>
-                    <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Eenheid}"/>
-                    <GridViewColumn Header="BTW" Width="100" DisplayMemberBinding="{Binding BTW}"/>
-                    <GridViewColumn x:Name="supplierHeader" Header="SupplierID" Width="100" DisplayMemberBinding="{Binding LeverancierID}"/>
-                    <GridViewColumn Header="CategoryID" Width="100" DisplayMemberBinding="{Binding CategorieID}"/>
-                    <GridViewColumn Header="Instock" Width="100" DisplayMemberBinding="{Binding InStock}"/>
-                    <GridViewColumn Header="Source" Width="150" DisplayMemberBinding="{Binding Source}"/>
-                    <GridViewColumn Header="Specifications" Width="220" DisplayMemberBinding="{Binding Specifications}"/>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Purchase price" Width="100" DisplayMemberBinding="{Binding Purchaseprice}"/>
+                    <GridViewColumn Header="Margin" Width="100" DisplayMemberBinding="{Binding Margin}"/>
+                    <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}"/>
+                    <GridViewColumn Header="BTW" Width="100" DisplayMemberBinding="{Binding Btw}"/>
+                    <GridViewColumn Header="Supplier" Width="100" DisplayMemberBinding="{Binding Leverancie}"/>
+                    <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Header="Instock" Width="100" DisplayMemberBinding="{Binding Instock}"/>
+                    <GridViewColumn Header="Source" Width="150" DisplayMemberBinding="{Binding Sources}"/>
+                    <GridViewColumn Header="Specifications" Width="220" DisplayMemberBinding="{Binding Specification}"/>
                 </GridView>
             </ListView.View>
         </ListView>

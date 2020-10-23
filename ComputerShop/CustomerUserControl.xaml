@@ -20,7 +20,7 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding KlantID}"/>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}"/>
                     <GridViewColumn Header="Firstname" Width="150" DisplayMemberBinding="{Binding Voornaam}"/>
                     <GridViewColumn Header="Lastname" Width="150" DisplayMemberBinding="{Binding Achternaam}"/>
                     <GridViewColumn Header="Street" Width="180" DisplayMemberBinding="{Binding Straatnaam}"/>

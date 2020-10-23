@@ -11,7 +11,8 @@ namespace ComputerShop
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Windows.Forms;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -36,5 +37,16 @@ namespace ComputerShop
         public virtual ICollection<BestellingProduct> BestellingProducts { get; set; }
         public virtual Categorie Categorie { get; set; }
         public virtual Leverancier Leverancier { get; set; }
+
+        public  double sellPrice()
+        {
+            double sellPrice = Convert.ToDouble((Inkoopprijs + Marge)*(1+Convert.ToDouble(BTW)/100));
+            return sellPrice;
+        }
+        public double nettoPrice()
+        {
+            double netto = Convert.ToDouble(Marge + Inkoopprijs);
+            return netto;
+        }
     }
 }

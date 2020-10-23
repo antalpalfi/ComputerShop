@@ -97,7 +97,7 @@ namespace ComputerShop
                     txtTown.Text = selectKlant.Gemeente.ToString();
                     txtZipcode.Text = selectKlant.Postcode.ToString();
                     txtComment.Text = selectKlant.Opmerking.ToString();
-                    //DateTimePicker = selectKlant.AangemaaktOp;
+                    DateTimePicker.SelectedDate  = selectKlant.AangemaaktOp;
                 }
             }
         }

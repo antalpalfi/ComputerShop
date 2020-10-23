@@ -65,7 +65,7 @@
                 <StackPanel>
                     <Button Content="Data management" Height="50" Width="220" FontSize="25" Margin="0,40,0,20" Click="Button_Click"/>
                     <Button Content="Overview " Height="50" Width="220" FontSize="25" Margin="0,0,0,20"/>
-                    <Button Content="Order " Height="50" Width="220" FontSize="25" Margin="0,0,0,20"/>
+                    <Button Content="Order " Height="50" Width="220" FontSize="25" Margin="0,0,0,20" Click="Button_Click_1"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="Logout" x:Name="btnLogout" Height="30" Width="100" Margin="30,20,170,0" Click="btnBack_Click"/>
