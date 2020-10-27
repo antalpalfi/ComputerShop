@@ -20,15 +20,19 @@ namespace ComputerShop
     /// </summary>
     public partial class MainMenu : Window
     {
-        public MainMenu()
+        public Personeelslid loggedInPerson { get; set; }
+        public MainMenu(Personeelslid selectUser)
         {
+
             InitializeComponent();
+            loggedInPerson = selectUser;
             DispatcherTimer timeNow = new DispatcherTimer();
             timeNow.Tick += new EventHandler(UpdateTimer_Tick);
             timeNow.Interval = new TimeSpan(0, 0, 1);
             timeNow.Start();
-            MainWindow mainWindow = new MainWindow();
+            chekUserType();
         }
+       
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
@@ -47,18 +51,47 @@ namespace ComputerShop
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnDatamanegement_Click(object sender, RoutedEventArgs e)
         {
             DataManagement myDataManagement = new DataManagement();
             this.Close();
             myDataManagement.ShowDialog();
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void chekUserType()
         {
-            Shopping myshopping = new Shopping();
+            if (loggedInPerson.Usertype == "Seller")
+            {
+                btnDatamanegement.IsEnabled = false;
+            }
+        }
+
+        private void btnOrder_Click_1(object sender, RoutedEventArgs e)
+        {
+            switch (loggedInPerson.Usertype)
+            {
+                case "Seller":
+                    Shopping myshopping = new Shopping(loggedInPerson);
+                    this.Close();
+                    myshopping.ShowDialog();
+                    break;
+                case "Administrator":
+                    Shopping myshopping2 = new Shopping(loggedInPerson);
+                    this.Close();
+                    myshopping2.ShowDialog();
+                    break;
+                case "Storekeeper":
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+
+        private void btnOverwiew_Click(object sender, RoutedEventArgs e)
+        {
+            Overwiew myOverwiew = new Overwiew();
             this.Close();
-            myshopping.ShowDialog();
+            myOverwiew.ShowDialog();
         }
     }
 }

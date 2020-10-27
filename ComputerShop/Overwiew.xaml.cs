@@ -16,24 +16,22 @@ using System.Windows.Threading;
 namespace ComputerShop
 {
     /// <summary>
-    /// Interaction logic for DataManagement.xaml
+    /// Interaction logic for Overwiew.xaml
     /// </summary>
-    public partial class DataManagement : Window
+    public partial class Overwiew : Window
     {
-        public DataManagement()
+        public Overwiew()
         {
+            InitializeComponent();
             DispatcherTimer timeNow = new DispatcherTimer();
             timeNow.Tick += new EventHandler(UpdateTimer_Tick);
             timeNow.Interval = new TimeSpan(0, 0, 1);
             timeNow.Start();
-            InitializeComponent();
         }
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
             txtDateTime.Text = DateTime.Now.ToString("g");
         }
-
-
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = ListView.SelectedIndex;
@@ -43,11 +41,11 @@ namespace ComputerShop
             {
                 case 0:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new SupplierUserControl1xaml());
+                    gridPages.Children.Add(new SupplierOverview());
                     break;
                 case 1:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new CustomerUserControl());
+                    gridPages.Children.Add(new CustomerOverview());
                     break;
                 case 2:
                     gridPages.Children.Clear();
@@ -90,14 +88,11 @@ namespace ComputerShop
             sideGridCursor.Margin = new Thickness(0, (50 + (60 * index)), 0, 0);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnEcs_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
         }
     }
 }

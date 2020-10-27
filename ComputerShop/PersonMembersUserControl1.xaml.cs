@@ -139,5 +139,13 @@ namespace ComputerShop
         {
             fillEditForm();
         }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                
+            }
+        }
     }
 }

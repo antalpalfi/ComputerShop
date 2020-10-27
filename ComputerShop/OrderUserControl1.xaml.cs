@@ -77,6 +77,11 @@ namespace ComputerShop
             Editpanel.IsEnabled = true;
             btnSave.Visibility = Visibility.Hidden;
             btnAddNew.Visibility = Visibility.Visible;
+            dtDatum.Text = string.Empty;
+            cmbPersonmember.SelectedValue = -1;
+            cmbSupplier.SelectedValue = -1;
+            cmbKlant.SelectedValue = -1;
+
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
@@ -103,6 +108,12 @@ namespace ComputerShop
             Editpanel.Visibility = Visibility.Hidden;
             Editpanel.IsEnabled = false;
             listViewOrder.IsEnabled = true;
+            dtDatum.Text = string.Empty;
+            cmbPersonmember.SelectedValue = -1;
+            cmbSupplier.SelectedValue = -1;
+            cmbKlant.SelectedValue = -1;
+
+
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)

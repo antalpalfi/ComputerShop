@@ -50,7 +50,7 @@ namespace ComputerShop
                     Leverancie = x.Leverancier.Company,
                     Category = x.Categorie.CategorieNaam,
                     Instock = x.InStock,
-                    Sources = x.Source,
+                    Foto = x.Foto,
                     Specification = x.Specifications
                 });
 
@@ -99,7 +99,7 @@ namespace ComputerShop
                     Eenheid = txtUnit.Text,
                     BTW = Convert.ToInt32(txtBtw.Text),
                     InStock = Convert.ToInt32(txtInstock.Text),
-                    Source = txtSource.Text,
+                    Foto = txtSource.Text,
                     Specifications = txtSpecifications.Text,
                     LeverancierID = (int)cmbSupplier.SelectedValue,
                     CategorieID = (int)cmbCategory.SelectedValue
@@ -149,7 +149,7 @@ namespace ComputerShop
                 product.Eenheid = txtUnit.Text;
                 product.BTW = Convert.ToInt32(txtBtw.Text);
                 product.InStock = Convert.ToInt32(txtInstock.Text);
-                product.Source = txtSource.Text;
+                product.Foto = txtSource.Text;
                 product.Specifications = txtSpecifications.Text;
                 product.LeverancierID = (int)cmbSupplier.SelectedValue;
                 product.CategorieID = (int)cmbCategory.SelectedValue;
@@ -175,7 +175,7 @@ namespace ComputerShop
                     txtMargin.Text = product.Marge.ToString();
                     txtName.Text = product.Naam;
                     txtPurchasePrice.Text = product.Inkoopprijs.ToString();
-                    txtSource.Text = product.Source;
+                    txtSource.Text = product.Foto;
                     txtSpecifications.Text = product.Specifications;
                     txtUnit.Text = product.Eenheid;
                     cmbCategory.SelectedValue = (int)product.CategorieID;
@@ -202,6 +202,25 @@ namespace ComputerShop
             if (cmbSupplier.SelectedValue!=null)
             {
                 MessageBox.Show(cmbSupplier.SelectedValue.ToString());
+            }
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                var bestelingId = ctx.BestellingProducts.Select(x => x).Where(x => x.ProductID == (int)productListView.SelectedValue).FirstOrDefault();
+                ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.ProductID == (int)productListView.SelectedValue)).FirstOrDefault();
+                ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.ID == bestelingId.BestellingID));
+                ctx.Products.RemoveRange(ctx.Products.Where(p=>p.ID == (int)productListView.SelectedValue)).FirstOrDefault();
+
+                System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure want to delet the product?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    MessagBoxInfo.Show("Product successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
+                   ctx.SaveChanges();
+                }
+
             }
         }
     }

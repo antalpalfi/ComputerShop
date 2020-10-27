@@ -20,9 +20,9 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}"/>
-                    <GridViewColumn Header="Order ID" Width="50" DisplayMemberBinding="{Binding BestelinId}"/>
+                    <GridViewColumn Header="Order ID" Width="100" DisplayMemberBinding="{Binding BestelinId}"/>
                     <GridViewColumn Header="Product" Width="200" DisplayMemberBinding="{Binding ProductName}"/>
-                    <GridViewColumn Header="Quantity" Width="50" DisplayMemberBinding="{Binding Quantity}"/>
+                    <GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -44,14 +44,14 @@ namespace ComputerShop
 
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var selectUser = ctx.Personeelslids.Where(x => x.Username == txtUsersName.Text && x.Password == txtPassword.Password).Count();
-                if (selectUser == 1)
+                Personeelslid selectUser = ctx.Personeelslids.Where(x => x.Username == txtUsersName.Text && x.Password == txtPassword.Password).FirstOrDefault();
+                if (selectUser != null )
                 {
-                    loginUser = txtUsersName.Text;
+                    loginUser = selectUser.Username;
                     txtPassword.Clear();
                     txtUsersName.Clear();
                     WelcomMessageBox.Show(loginUser);
-                    MainMenu mainMenu = new MainMenu();
+                    MainMenu mainMenu = new MainMenu(selectUser);
                     mainMenu.txtUserName.Text = $"Hello {loginUser}";
                     this.Close();
                     mainMenu.ShowDialog();

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace ComputerShop
 {
     /// <summary>
@@ -21,16 +22,18 @@ namespace ComputerShop
     /// </summary>
     public partial class Shopping : Window
     {
-        //public Dictionary<double, double> shoppingKart = new Dictionary<double, double>();
         public List<ProductinKar> myProductinKars = new List<ProductinKar>();
-        public Shopping()
+        public Personeelslid loggedInUser { get; set; }
+        public Shopping(Personeelslid loggedInPerson)
         {
             InitializeComponent();
-
+            loggedInUser = loggedInPerson;
             lbShoppingCart.ItemsSource = null;
             lbShoppingCart.SelectedValuePath = "ProductinKarID";
             lbShoppingCart.ItemsSource = myProductinKars;
+            updateCmbKlant();
         }
+       
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
@@ -40,7 +43,7 @@ namespace ComputerShop
                     var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)lbProduct.SelectedValue).FirstOrDefault();
                     if (product.InStock >= Convert.ToInt32(txtQuantity.Text))
                     {
-                        myProductinKars.Add(new ProductinKar(Convert.ToDouble(txtQuantity.Text), (product as Product).sellPrice(), product.ID, product.Naam));
+                        myProductinKars.Add(new ProductinKar(Convert.ToDouble(txtQuantity.Text), (product as Product).sellPrice(), product.ID, product.Naam, (int)product.LeverancierID));
                     }
                 }
                
@@ -58,10 +61,12 @@ namespace ComputerShop
                 if (lbProduct.SelectedValue!=null)
                 {
                     var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)lbProduct.SelectedValue).FirstOrDefault();
-                    txtPrice.Text = (product as Product).nettoPrice().ToString();
-                    txtTaxPrice.Text = (product as Product).sellPrice().ToString();
+                    //txtPrice.Text = (product as Product).nettoPrice().ToString();
+                    txtTaxPrice.Text = (product as Product).sellPrice().ToString() + "€";
+                    txtInfo.Text = product.Specifications;
                 }
             };
+            
         }
         public class ProductinKar
         {
@@ -69,13 +74,16 @@ namespace ComputerShop
             public double Price { get; set; }
             public int ProductinKarID { get; set; }
             public string ProductInKarNaam { get; set; }
-                
-            public ProductinKar(double quantity, double price, int productinKarID, string productInKarNaam)
+
+            public int SupplierId { get; set; }
+
+            public ProductinKar(double quantity, double price, int productinKarID, string productInKarNaam, int supplierId)
             {
                 Quantity = quantity;
                 Price = price;
                 ProductinKarID = productinKarID;
                 ProductInKarNaam = productInKarNaam;
+                SupplierId = supplierId;
             }
             public ProductinKar()
             {
@@ -95,19 +103,22 @@ namespace ComputerShop
             lbShoppingCart.ItemsSource = null;
             lbShoppingCart.ItemsSource = myProductinKars;
             updateTotalPrice();
+            
         }
 
         private void btnMinus_Click(object sender, RoutedEventArgs e)
         {
+            
             foreach (var item in myProductinKars)
             {
                 if (lbShoppingCart.SelectedValue != null && (int)lbShoppingCart.SelectedValue == item.ProductinKarID)
                 {
                     item.Quantity--;
                 }
+               
             }
-            lbShoppingCart.ItemsSource = null;
-            lbShoppingCart.ItemsSource = myProductinKars;
+
+            updateShoppingList();
             updateTotalPrice();
         }
         private void updateTotalPrice()
@@ -121,14 +132,6 @@ namespace ComputerShop
             txtTotalPrice.Text = totalprice.ToString();
 
         }
-
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            MainMenu mymenu = new MainMenu();
-            this.Close();
-            mymenu.ShowDialog();
-        }
-
         private void btnMotherboard_Click(object sender, RoutedEventArgs e)
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
@@ -241,9 +244,12 @@ namespace ComputerShop
 
         private void btnPlusQuantity_Click(object sender, RoutedEventArgs e)
         {
-            int number = Convert.ToInt32(txtQuantity.Text);
-            number++;
-            txtQuantity.Text = number.ToString();
+            if (lbProduct.SelectedValue != null)
+            {
+                int number = Convert.ToInt32(txtQuantity.Text);
+                number++;
+                txtQuantity.Text = number.ToString();
+            }
         }
 
         private void btnMinuszQuantity_Click(object sender, RoutedEventArgs e)
@@ -253,6 +259,67 @@ namespace ComputerShop
                 int number = Convert.ToInt32(txtQuantity.Text);
                 number--;
                 txtQuantity.Text = number.ToString();
+            }
+        }
+        private void updateCmbKlant()
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                var klant = ctx.Klants.Select(x => new { Id = x.ID, Name = x.Voornaam + " " + x.Achternaam });
+                cmbKlant.SelectedValuePath = "Id";
+                cmbKlant.DisplayMemberPath = "Name";
+                cmbKlant.ItemsSource = klant.ToList();
+            }
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbShoppingCart.SelectedIndex != -1)
+            {
+                myProductinKars.RemoveAt(lbShoppingCart.SelectedIndex);
+                updateShoppingList();
+            }
+            updateShoppingList();
+        }
+        private void updateShoppingList()
+        {
+            lbShoppingCart.ItemsSource = null;
+            lbShoppingCart.SelectedValuePath = "ProductinKarID";
+            lbShoppingCart.ItemsSource = myProductinKars;
+        }
+
+        private void btnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+               
+                    ctx.Bestellings.Add(new Bestelling() { PersoneelslidID = loggedInUser.ID, 
+                        KlantID = (int)cmbKlant.SelectedValue,
+                        LeverancierID = null,
+                        DatumOpgemaakt = DateTime.Now});
+
+                ctx.SaveChanges();
+                var lastBesttelingId = ctx.Bestellings.Select(x => x.ID).Max();
+                foreach (var item in myProductinKars)
+                {
+                    ctx.BestellingProducts.Add(new BestellingProduct()
+                    {
+                        BestellingID = lastBesttelingId,
+                        ProductID = item.ProductinKarID,
+                        Pieces = (int)item.Quantity
+                    });
+
+                    var product = ctx.Products.Select(x => x).Where(x => x.ID == item.ProductinKarID).FirstOrDefault();
+                    product.InStock = Convert.ToInt32(product.InStock - item.Quantity);
+                }
+                ctx.SaveChanges();
+                myProductinKars.Clear();
+                txtInfo.Text = string.Empty;
+                txtQuantity.Text = string.Empty;
+                txtTaxPrice.Text = string.Empty;
+                txtTotalPrice.Text = string.Empty;
+                txtTotalPriceWithTax.Text = string.Empty;
+                updateShoppingList();
             }
         }
     }

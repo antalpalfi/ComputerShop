@@ -11,8 +11,7 @@ namespace ComputerShop
 {
     using System;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,17 +29,17 @@ namespace ComputerShop
         public Nullable<int> LeverancierID { get; set; }
         public Nullable<int> CategorieID { get; set; }
         public Nullable<int> InStock { get; set; }
-        public string Source { get; set; }
         public string Specifications { get; set; }
+        public string Foto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BestellingProduct> BestellingProducts { get; set; }
         public virtual Categorie Categorie { get; set; }
         public virtual Leverancier Leverancier { get; set; }
 
-        public  double sellPrice()
+        public double sellPrice()
         {
-            double sellPrice = Convert.ToDouble((Inkoopprijs + Marge)*(1+Convert.ToDouble(BTW)/100));
+            double sellPrice = Convert.ToDouble((Inkoopprijs + Marge) * (1 + Convert.ToDouble(BTW) / 100));
             return sellPrice;
         }
         public double nettoPrice()
