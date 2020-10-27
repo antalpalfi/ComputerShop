@@ -53,7 +53,7 @@ namespace ComputerShop
 
         private void btnDatamanegement_Click(object sender, RoutedEventArgs e)
         {
-            DataManagement myDataManagement = new DataManagement();
+            DataManagement myDataManagement = new DataManagement(loggedInPerson);
             this.Close();
             myDataManagement.ShowDialog();
         }
@@ -63,6 +63,11 @@ namespace ComputerShop
             {
                 btnDatamanegement.IsEnabled = false;
             }
+            //if (loggedInPerson.Usertype == "Administrator" && loggedInPerson.Usertype == "Storekeeper")
+            //{
+            //    btnDatamanegement.IsEnabled = true;
+            //}
+          
         }
 
         private void btnOrder_Click_1(object sender, RoutedEventArgs e)

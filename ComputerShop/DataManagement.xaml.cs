@@ -20,13 +20,16 @@ namespace ComputerShop
     /// </summary>
     public partial class DataManagement : Window
     {
-        public DataManagement()
+        public Personeelslid selectUser { get; set; }
+
+        public DataManagement(Personeelslid loggedInPerson)
         {
             DispatcherTimer timeNow = new DispatcherTimer();
             timeNow.Tick += new EventHandler(UpdateTimer_Tick);
             timeNow.Interval = new TimeSpan(0, 0, 1);
             timeNow.Start();
             InitializeComponent();
+            selectUser = loggedInPerson;
         }
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
@@ -75,9 +78,9 @@ namespace ComputerShop
                     mainWindow.ShowDialog();
                     break;
                 case 8:
-                    //MainMenu mainMenu = new MainMenu(selectUser)
-                    //this.Close();
-                    //mainMenu.ShowDialog();
+                    MainMenu mainMenu = new MainMenu(selectUser);
+                    Close();
+                    mainMenu.ShowDialog();
                     break;
                 default:
                     break;

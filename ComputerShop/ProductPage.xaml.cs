@@ -220,8 +220,8 @@ namespace ComputerShop
                     MessagBoxInfo.Show("Product successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
                    ctx.SaveChanges();
                 }
-
             }
+            updateListView();
         }
     }
 }

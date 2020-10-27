@@ -68,13 +68,13 @@
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ListStatus" Width="40" Height="40" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Json edit" VerticalAlignment="Center"  FontSize="20" Margin="30 0"/>
+                        <Button Content="Json edit" x:Name="btneditJson" VerticalAlignment="Center"  FontSize="20" Margin="15 0" Background="Transparent" BorderBrush="Transparent" Click="btneditJson_Click"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="BookOpenBlankVariant" Width="40" Height="40" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Json file" VerticalAlignment="Center"  FontSize="20" Margin="30 0"/>
+                        <Button Content="Json file" x:Name="btnJasonCreat" VerticalAlignment="Center"  FontSize="20" Margin="15 0" Background="Transparent" BorderBrush="Transparent" Click="btnJasonCreat_Click"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
