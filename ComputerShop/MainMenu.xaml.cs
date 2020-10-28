@@ -63,11 +63,6 @@ namespace ComputerShop
             {
                 btnDatamanegement.IsEnabled = false;
             }
-            //if (loggedInPerson.Usertype == "Administrator" && loggedInPerson.Usertype == "Storekeeper")
-            //{
-            //    btnDatamanegement.IsEnabled = true;
-            //}
-          
         }
 
         private void btnOrder_Click_1(object sender, RoutedEventArgs e)
@@ -76,6 +71,7 @@ namespace ComputerShop
             {
                 case "Seller":
                     Shopping myshopping = new Shopping(loggedInPerson);
+                    myshopping.btnSupl.IsEnabled = false;
                     this.Close();
                     myshopping.ShowDialog();
                     break;
@@ -85,6 +81,10 @@ namespace ComputerShop
                     myshopping2.ShowDialog();
                     break;
                 case "Storekeeper":
+                    Shopping myshopping3 = new Shopping(loggedInPerson);
+                    myshopping3.btnSupl.IsEnabled = false;
+                    this.Close();
+                    myshopping3.ShowDialog();
                     break;
                 default:
                     break;
@@ -94,7 +94,7 @@ namespace ComputerShop
 
         private void btnOverwiew_Click(object sender, RoutedEventArgs e)
         {
-            Overwiew myOverwiew = new Overwiew();
+            Overwiew myOverwiew = new Overwiew(loggedInPerson);
             this.Close();
             myOverwiew.ShowDialog();
         }

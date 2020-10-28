@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="ComputerShop.ShoppingCustomerUSC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ComputerShop" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+              Height="750" Width="1460"  Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="GridCategory" Height="50*"/>
+            <RowDefinition x:Name="GridDisplay" Height="600*"/>
+        </Grid.RowDefinitions>
+      
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2C2A2A" Offset="0.233"/>
+                    <GradientStop Color="#FFECE9E8" Offset="0.707"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <Button Background="{x:Null}" Foreground="White" Content="All" x:Name="btnAll" FontSize="20" BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnAll_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Motherboard" x:Name="btnMotherboard" FontSize="20" BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnMotherboard_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Processor" x:Name="btnProcessor" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnProcessor_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Memory" x:Name="btnMemory" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnMemory_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="VGA" x:Name="btnVGA" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnVGA_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Power Supply" x:Name="btnPowerSupply" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnPowerSupply_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="SSD's" x:Name="btnSSDs" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnSSDs_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Cooling" x:Name="btnCooling" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnCooling_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Computer Case" x:Name="btnComputerCase" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnComputerCase_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Pc" x:Name="btnPc" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnPc_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Laptop" x:Name="btnLaptop" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnLaptop_Click"/>
+            <Button Background="{x:Null}" Foreground="White"  x:Name="btnShoppingCart" FontSize="20"  BorderThickness="0"  Height="45" Click="btnShoppingCart_Click">
+                <materialDesign:PackIcon Kind="ShoppingCart" Height="40" Width="40"/>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Background="LightGray">
+            <StackPanel Orientation="Vertical" Width="444" Margin="0,0,0,5">
+                <TextBlock Text="Klant" FontSize="20" Margin="10,10,0,0"/>
+                <ComboBox x:Name="cmbKlant" Margin="20,0,20,0" FontSize="30"/>
+                <ListBox Width="360" Height="350" Margin="42,20,42,5" x:Name="lbProduct" SelectionChanged="lbProduct_SelectionChanged">
+                </ListBox>
+                <StackPanel Orientation="Horizontal" Margin="20,0,0,0" Height="35">
+                    <TextBlock Text="Quantity" FontSize="20" HorizontalAlignment="Center" />
+                    <Button x:Name="btnMinuszQuantity" Content="-" Height="23" Width="20" FontSize="10" Margin="50,3,0,0" Foreground="Black" Background="White" Padding="0" Click="btnMinuszQuantity_Click"/>
+                    <TextBox Width="74" BorderBrush="Black" BorderThickness="1" x:Name="txtQuantity" Margin="0,11,0,9" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Button x:Name="btnPlusQuantity" Content="+" Height="23" Width="20" FontSize="10" Padding="0"  Foreground="Black" Background="White" Margin="0,3,0,0" Click="btnPlusQuantity_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Price" FontSize="20" Margin="20,0,0,0"/>
+                    <TextBlock x:Name="txtTaxPrice" Margin="200,0,0,0" FontSize="30"/>
+                </StackPanel>
+                <Button x:Name="btnAdd" Background="White" Foreground="Black" Content="Add" FontSize="15" Height="30" Width="100" Click="btnAdd_Click" Margin="0,10,0,0"/>
+            </StackPanel>
+            <StackPanel Width="581" Margin="10">
+                <TextBlock Text="Place for de images and information" FontSize="25"/>
+                <Image  Width="auto" Height="200" x:Name="images" Source="{Binding Foto}"/>
+                <Button Content="Back" x:Name="btnBack" Background="Black" FontSize="25" Height="64" Click="btnBack_Click"/>
+                <ScrollViewer Height="200" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="txtInfo"/>
+
+                </ScrollViewer>
+            </StackPanel>
+            <StackPanel Margin="10" x:Name="shoppingPanel">
+                <ListBox Height="350" x:Name="lbShoppingCart" Width="370" BorderBrush="Black" BorderThickness="3" Margin="5,20,10,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding ProductInKarNaam}" Width="300"/>
+                                <TextBlock Text="{Binding Quantity}" Width="70"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Price without TAX"/>
+                    <TextBlock x:Name="txtTotalPrice" Margin="100,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Price with TAX"/>
+                    <TextBlock x:Name="txtTotalPriceWithTax" Margin="100,0,0,0"/>
+                </StackPanel>
+                <Button x:Name="btnPlus" Content="+" FontSize="30" Padding="0" Height="44" Click="btnPlus_Click" Background="White" Foreground="Black"/>
+                <Button x:Name="btnMinus" Content="-" FontSize="30" Padding="0" Height="44" Click="btnMinus_Click" Background="White" Foreground="Black"/>
+                <Button x:Name="btnDelete" Content="Delet"  Background="White" Foreground="Black" Click="btnDelete_Click"/>
+                <Button x:Name="btnOrder" Content="Order"  Background="White" Foreground="Black" Click="btnOrder_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

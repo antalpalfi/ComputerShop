@@ -21,10 +21,16 @@ namespace ComputerShop
     /// </summary>
     public partial class CustomerUserControl : UserControl
     {
-        public CustomerUserControl()
+        public Personeelslid loggedInUser { get; set; }
+        public CustomerUserControl(Personeelslid loggedInPerson)
         {
             InitializeComponent();
+            loggedInUser = loggedInPerson;
             UpdateListView();
+            if (loggedInUser.Usertype == "Storekeeper")
+            {
+                gridCustomer.Visibility = Visibility.Hidden;
+            }
             listViewCustomer.IsEnabled = true;
             editCus.Height = new GridLength(0, GridUnitType.Star);
             viewList.Height = new GridLength(543, GridUnitType.Star);

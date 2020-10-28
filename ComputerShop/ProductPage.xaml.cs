@@ -21,10 +21,17 @@ namespace ComputerShop
     /// </summary>
     public partial class ProductPage : UserControl
     {
-
-        public ProductPage()
+        public Personeelslid loggedInUser { get; set; }
+        public ProductPage(Personeelslid loggedInPerson)
         {
             InitializeComponent();
+            loggedInUser = loggedInPerson;
+            if (loggedInUser.Usertype == "Storekeeper")
+            {
+                btnAdd.Visibility = Visibility.Hidden;
+                btnRemove.Visibility = Visibility.Hidden;
+                btnEdit.Visibility = Visibility.Hidden;
+            }
             updateListView();
             fillComboBox();
             hideGrid();

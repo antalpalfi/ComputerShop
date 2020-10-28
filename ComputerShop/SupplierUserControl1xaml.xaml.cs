@@ -21,10 +21,17 @@ namespace ComputerShop
     /// </summary>
     public partial class SupplierUserControl1xaml : UserControl
     {
-       
-        public SupplierUserControl1xaml()
+        public Personeelslid loggedInUser { get; set; }
+        public SupplierUserControl1xaml(Personeelslid loggedInPerson)
         {
             InitializeComponent();
+            loggedInUser = loggedInPerson;
+            if (loggedInUser.Usertype == "Storekeeper")
+            {
+                btnAdd.Visibility = Visibility.Hidden;
+                btnRemove.Visibility = Visibility.Hidden;
+                btnEdit.Visibility = Visibility.Hidden;
+            }
             updateTheList();
         }
         private void updateTheList()

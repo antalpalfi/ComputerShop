@@ -20,9 +20,16 @@ namespace ComputerShop
     /// </summary>
     public partial class OrderUserControl1 : UserControl
     {
-        public OrderUserControl1()
+        public Personeelslid loggedInUser { get; set; }
+        public OrderUserControl1(Personeelslid loggedInPerson)
         {
             InitializeComponent();
+            loggedInUser = loggedInPerson;
+            if (loggedInUser.Usertype == "Storekeeper")
+            {
+                btnAdd.Visibility = Visibility.Hidden;
+                btnRemove.Visibility = Visibility.Hidden;
+            }
             updateTheList();
             hidePanel();
             updateComboboxs();

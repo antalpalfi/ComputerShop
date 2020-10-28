@@ -20,7 +20,7 @@ namespace ComputerShop
     /// </summary>
     public partial class OrderProductUserControl1 : UserControl
     {
-        public OrderProductUserControl1()
+        public OrderProductUserControl1(Personeelslid loggedInPerson)
         {
             InitializeComponent();
             fillTheList();

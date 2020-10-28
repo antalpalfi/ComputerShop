@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="ComputerShop.ShoppingSupplierUSC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ComputerShop" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Height="705" Width="1464"  Background="#FFEAEAEA">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="GridCategory" Height="70*"/>
+            <RowDefinition x:Name="GridDisplay" Height="468*"/>
+            <RowDefinition x:Name="GridOnder" Height="167*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2C2A2A" Offset="0.233"/>
+                    <GradientStop Color="#FFECE9E8" Offset="0.707"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <Button Background="{x:Null}" Foreground="White" Content="All" x:Name="btnAll" FontSize="20" BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnAll_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Motherboard" x:Name="btnMotherboard" FontSize="20" BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnMotherboard_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Processor" x:Name="btnProcessor" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnProcessor_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Memory" x:Name="btnMemory" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnMemory_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="VGA" x:Name="btnVGA" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnVGA_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Power Supply" x:Name="btnPowerSupply" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnPowerSupply_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="SSD's" x:Name="btnSSDs" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnSSDs_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Cooling" x:Name="btnCooling" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnCooling_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Computer Case" x:Name="btnComputerCase" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnComputerCase_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Pc" x:Name="btnPc" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnPc_Click"/>
+            <Button Background="{x:Null}" Foreground="White" Content="Laptop" x:Name="btnLaptop" FontSize="20"  BorderThickness="0" Margin="0,0,20,0" Height="45" Click="btnLaptop_Click"/>
+            <Button Background="{x:Null}" Foreground="White"  x:Name="btnShoppingCart" FontSize="20"  BorderThickness="0"  Height="45" Click="btnShoppingCart_Click">
+                <materialDesign:PackIcon Kind="ShoppingCart" Height="40" Width="40"/>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <ListView Margin="10,10,10,0"  Name="productListView" SelectionChanged="productListView_SelectionChanged">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
+                        <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Naam}" />
+                        <GridViewColumn Header="Purchase price" Width="100" DisplayMemberBinding="{Binding Inkoopprijs}"/>
+                        <GridViewColumn Header="Margin" Width="100" DisplayMemberBinding="{Binding Marge}"/>
+                        <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Eenheid}"/>
+                        <GridViewColumn Header="BTW" Width="100" DisplayMemberBinding="{Binding BTW}"/>
+                        <GridViewColumn Header="Instock" Width="100" DisplayMemberBinding="{Binding InStock}"/>
+                        <GridViewColumn Header="Foto Source" Width="150" DisplayMemberBinding="{Binding Foto}"/>
+                        <GridViewColumn Header="Specifications" Width="150"  DisplayMemberBinding="{Binding Specifications}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel>
+                <StackPanel Margin="10" x:Name="shoppingPanel">
+                    <ListBox Height="300" x:Name="lbShoppingCart" Width="370" BorderBrush="Black" BorderThickness="3" Margin="5,20,10,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ProductInKarNaam}" Width="300"/>
+                                    <TextBlock Text="{Binding Quantity}" Width="70"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <TextBlock Text="Total Price" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="txtTotalPrice" Margin="200,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                    </StackPanel>
+                    <Border BorderBrush="Black" BorderThickness="2" Grid.Row="1"/>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Button x:Name="btnPlus" Content="+"  FontSize="15" Height="30" Width="100" Padding="0"  Click="btnPlus_Click" Background="White" Foreground="Black" Margin="80,0,0,0"/>
+                        <Button x:Name="btnMinus" Content="-"  FontSize="15" Height="30" Width="100" Padding="0" Click="btnMinus_Click" Background="White" Foreground="Black" Margin="30,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                        <Button x:Name="btnDelete" Content="Delet"  Background="White" Foreground="Black" Click="btnDelete_Click"  FontSize="15" Height="30" Width="100" Margin="80,0,0,0"/>
+                        <Button x:Name="btnOrder" Content="Order"  Background="White" Foreground="Black" Click="btnOrder_Click"  FontSize="15" Height="30" Width="100"  Margin="30,0,0,0"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Row="1"/>
+        <StackPanel x:Name="OnderPanel" Orientation="Horizontal" Grid.Row="2">
+            <StackPanel Margin="10,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Price" FontSize="20" Margin="20,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="txtPrice" Margin="100,0,0,0" FontSize="30" Width="150"/>
+                </StackPanel>
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <StackPanel Orientation="Horizontal" Margin="20,0,0,0" Height="61">
+                    <TextBlock Text="Quantity" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Button x:Name="btnMinuszQuantity" Content="-" Height="30" Width="30" FontSize="10" Margin="50,3,0,0" Foreground="Black" Background="White" Padding="0" Click="btnMinuszQuantity_Click"/>
+                    <TextBox Width="74" Height="41" BorderBrush="Black" BorderThickness="1" x:Name="txtQuantity" Margin="0,10" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="btnPlusQuantity" Content="+" Height="30" Width="30" FontSize="10" Padding="0"  Foreground="Black" Background="White" Margin="0,3,0,0" Click="btnPlusQuantity_Click"/>
+                </StackPanel>
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <Button x:Name="btnAdd" Background="White" Foreground="Black" Content="Add" FontSize="15" Height="30" Width="100" Click="btnAdd_Click" Margin="0,10,0,0"/>
+            </StackPanel>
+            <Border BorderBrush="Black" BorderThickness="1"/>
+
+            <StackPanel Orientation="Vertical" Margin="20,0,10,0">
+                <TextBlock Text="Supplier" FontSize="25" Margin="10" HorizontalAlignment="Center"/>
+                <ComboBox x:Name="cmbSupplier" Width="200" Margin="10"/>
+            </StackPanel>
+            <Border BorderBrush="Black" BorderThickness="1"/>
+            <materialDesign:PackIcon Kind="MicrosoftVisualStudio"  Margin="300,0,150,0" Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF6A3737"/>
+            <Button x:Name="btnBack" Background="Transparent" Foreground="Red" Height="Auto" BorderThickness="0" Click="btnBack_Click">
+                <materialDesign:PackIcon Kind="Backspace" Height="40" Width="40" Foreground="#FFFF08FF"/>
+            </Button>
+            <Button x:Name="btnLogout" Background="Transparent" Foreground="Red" Height="Auto" BorderThickness="0" Click="btnLogout_Click">
+                <materialDesign:PackIcon Kind="Logout" Height="40" Width="40" Foreground="#FF53B94E"/>
+            </Button>
+            <Button x:Name="btnMini" Background="Transparent" Foreground="#FFB89EDC" Height="Auto" BorderThickness="0" Click="btnMini_Click">
+                <materialDesign:PackIcon Kind="WindowMinimize" Height="40" Width="40"/>
+            </Button>
+            <Button x:Name="btnEcs" Background="Transparent" Foreground="Red" Height="Auto" BorderThickness="0" Click="btnEcs_Click">
+                <materialDesign:PackIcon Kind="Power" Height="40" Width="40" Foreground="#FF2CFFFF"/>
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

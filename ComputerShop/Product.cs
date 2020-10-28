@@ -37,15 +37,6 @@ namespace ComputerShop
         public virtual Categorie Categorie { get; set; }
         public virtual Leverancier Leverancier { get; set; }
 
-        public double sellPrice()
-        {
-            double sellPrice = Convert.ToDouble((Inkoopprijs + Marge) * (1 + Convert.ToDouble(BTW) / 100));
-            return sellPrice;
-        }
-        public double nettoPrice()
-        {
-            double netto = Convert.ToDouble(Marge + Inkoopprijs);
-            return netto;
-        }
+       
     }
 }

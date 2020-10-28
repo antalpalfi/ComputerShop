@@ -76,7 +76,7 @@
             <Button x:Name="btnClose" FontSize="20" Foreground="white" Style="{StaticResource myCloseButton}" Content="X" HorizontalAlignment="Right" Width="72" Background="#FFDE4646" Click="btnClose_Click" RenderTransformOrigin="0.345,0.506" FontWeight="Bold"/>
         </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#FFF0F0F0">
-            <TextBlock Text="inofooo"  x:Name="txtMessagebx" Padding="10" FontWeight="Bold" FontSize="18"/>
+            <TextBlock   x:Name="txtMessagebx" Padding="10" FontWeight="Bold" FontSize="18"/>
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <Border CornerRadius="0,0,20,20" Background="#FFF0F0F0"/>

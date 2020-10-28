@@ -140,6 +140,9 @@
     <Compile Include="DataManagement.xaml.cs">
       <DependentUpon>DataManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HappySmylexaml.xaml.cs">
+      <DependentUpon>HappySmylexaml.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Klant.cs">
       <DependentUpon>ComputerShopData.tt</DependentUpon>
     </Compile>
@@ -182,6 +185,12 @@
     <Compile Include="Shopping.xaml.cs">
       <DependentUpon>Shopping.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShoppingCustomerUSC.xaml.cs">
+      <DependentUpon>ShoppingCustomerUSC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingSupplierUSC.xaml.cs">
+      <DependentUpon>ShoppingSupplierUSC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SupplierOverview.xaml.cs">
       <DependentUpon>SupplierOverview.xaml</DependentUpon>
     </Compile>
@@ -210,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HappySmylexaml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,6 +275,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Shopping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShoppingCustomerUSC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShoppingSupplierUSC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

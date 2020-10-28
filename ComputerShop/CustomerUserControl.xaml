@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ComputerShop" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              Height="650" Width="1350" Background="Beige">
-    <Grid>
+    <Grid x:Name="gridCustomer">
         <Grid.RowDefinitions>
             <RowDefinition Height="542*" x:Name="viewList"/>
             <RowDefinition Height="3*" x:Name="editCus"/>

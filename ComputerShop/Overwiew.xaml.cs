@@ -22,9 +22,11 @@ namespace ComputerShop
     /// </summary>
     public partial class Overwiew : Window
     {
-        public Overwiew()
+        public Personeelslid loggedInUser { get; set; }
+        public Overwiew(Personeelslid loggedInPerson)
         {
             InitializeComponent();
+            loggedInUser = loggedInPerson;
             DispatcherTimer timeNow = new DispatcherTimer();
             timeNow.Tick += new EventHandler(UpdateTimer_Tick);
             timeNow.Interval = new TimeSpan(0, 0, 1);
@@ -50,8 +52,8 @@ namespace ComputerShop
                     gridPages.Children.Add(new CustomerOverview());
                     break;
                 case 2:
-                    gridPages.Children.Clear();
-                    gridPages.Children.Add(new ProductPage());
+                    //gridPages.Children.Clear();
+                    //gridPages.Children.Add(new ProductPage());
                     break;
                 case 3:
                     gridPages.Children.Clear();
@@ -59,11 +61,11 @@ namespace ComputerShop
                     break;
                 case 4:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new PersonMembersUserControl1());
+                    //gridPages.Children.Add(new PersonMembersUserControl1());
                     break;
                 case 5:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new OrderUserControl1());
+                    //gridPages.Children.Add(new OrderUserControl1());
                     break;
                 case 6:
                     MainWindow mainWindow = new MainWindow();
@@ -71,7 +73,9 @@ namespace ComputerShop
                     mainWindow.ShowDialog();
                     break;
                 case 7:
-                   
+                    MainMenu mainmenu = new MainMenu(loggedInUser);
+                    this.Close();
+                    mainmenu.ShowDialog();
                     break;
                
                 default:
