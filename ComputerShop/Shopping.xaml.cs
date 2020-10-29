@@ -72,7 +72,7 @@ namespace ComputerShop
         private void btnCust_Click(object sender, RoutedEventArgs e)
         {
             gridPages.Children.Clear();
-            gridPages.Children.Add(new ShoppingCustomerUSC(loggedInUser));
+            gridPages.Children.Add(new NewShoppingCustomer(loggedInUser));
         }
 
         private void btnSupl_Click(object sender, RoutedEventArgs e)

@@ -28,7 +28,7 @@
         </ListView>
         <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="1"/>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10,0,0,0" Width="1290">
-            <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50"/>
+            <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50" Click="btnRemove_Click"/>
             <iconPacks:PackIconMaterial Kind="Apple"  Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="850,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="Microsoft" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="MicrosoftVisualStudio" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>

@@ -43,14 +43,14 @@
                 <ComboBox x:Name="cmbSupplier" Width="150" Margin="80,10,0,10"/>
                 <ComboBox x:Name="cmbKlant" Width="150" Margin="80,10,0,10"/>
                 <Button Content="Save" x:Name="btnSave" Margin="70,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnSave_Click"/>
-                <Button Content="Add" x:Name="btnAddNew" Margin="30,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnAddNew_Click"/>
+                <Button Content="Add" x:Name="btnAddNew" Margin="30,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6"/>
                 <Button Content="Esc" x:Name="btnEsc" Margin="30,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnEsc_Click"/>
             </StackPanel>
         </StackPanel>
         <Border BorderBrush="Black" BorderThickness="0,3,0,0" Grid.Row="2"/>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="35,0,25,0" Width="1290">
-            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50" Click="btnAdd_Click"/>
-            <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50"/>
+            <Button Content="Add" x:Name="btnAdd" Foreground="Black" Background="#FFF1F1E6" Margin="320,0,100,0" Width="150" Height="50"/>
+            <Button Content="Remove" x:Name="btnRemove" Foreground="Black" Background="#FFF1F1E6"  Margin="0,0,100,0"  Width="150" Height="50" Click="btnRemove_Click"/>
             <Button Content="Edit" x:Name="btnEdit" Foreground="Black" Background="#FFF1F1E6" Margin="5,5,100,5"  Width="150" Height="50" Click="btnEdit_Click"/>
             <iconPacks:PackIconMaterial Kind="Apple"  Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>
             <iconPacks:PackIconMaterial Kind="Microsoft" Height="50" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" Margin="0,0,30,0"/>

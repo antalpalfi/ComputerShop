@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ComputerShop
 {
@@ -62,31 +52,38 @@ namespace ComputerShop
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                if (txtLastname.Text != string.Empty && txtFirstname.Text != string.Empty && txtUsername.Text != string.Empty && txtPassword.Text != string.Empty && cmbUsertype.Text != string.Empty)
+                if (chekText(true))
                 {
-                    bool uniekPerson = ctx.Personeelslids.Where(x => x.Username == txtUsername.Text).Count() == 0 ? true : false;
-                    if (!uniekPerson) MessagBoxInfo.Show("The user already exists", MessagBoxInfo.CmessageBoxTitle.Warning);
-                    if (uniekPerson)
+                    do
                     {
-                        ctx.Personeelslids.Add(new Personeelslid()
+                        try
                         {
-                            Achternaam = txtLastname.Text,
-                            Voornaam = txtFirstname.Text,
-                            Username = txtUsername.Text,
-                            Password = txtPassword.Text,
-                            Usertype = cmbUsertype.SelectedItem.ToString()
-                        });
+                            bool uniekPerson = ctx.Personeelslids.Where(x => x.Username == txtUsername.Text).Count() == 0 ? true : false;
+                            if (uniekPerson)
+                            {
+                                ctx.Personeelslids.Add(new Personeelslid()
+                                {
+                                    Achternaam = txtLastname.Text,
+                                    Voornaam = txtFirstname.Text,
+                                    Username = txtUsername.Text,
+                                    Password = txtPassword.Text,
+                                    Usertype = cmbUsertype.SelectedItem.ToString()
+                                });
 
-                        MessagBoxInfo.Show($"{txtUsername.Text} successfully created",MessagBoxInfo.CmessageBoxTitle.Info);
-                        ctx.SaveChanges();
-                        updateTheList();
-                        hideEditform();
-                    }
+                                MessagBoxInfo.Show($"{txtUsername.Text} successfully created", MessagBoxInfo.CmessageBoxTitle.Info);
+                                ctx.SaveChanges();
+                                updateTheList();
+                                hideEditform();
+                            }
+                            else MessagBoxInfo.Show("The user already exists", MessagBoxInfo.CmessageBoxTitle.Warning);
+                        }
+                        catch
+                        {
+                            MessagBoxInfo.Show("Something wrong", MessagBoxInfo.CmessageBoxTitle.Error);
+                        }
+                    } while (false);
                 }
-                else
-                {
-                    MessagBoxInfo.Show("Something missing", MessagBoxInfo.CmessageBoxTitle.Error);
-                }
+                else MessagBoxInfo.Show("Something missing", MessagBoxInfo.CmessageBoxTitle.Error);
             }
         }
         private void hideEditform()
@@ -119,24 +116,34 @@ namespace ComputerShop
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
                 var select = ctx.Personeelslids.Select(x => x).Where(x => x.ID == (int)listViewPersonLid.SelectedValue).FirstOrDefault();
-                if (txtLastname.Text != string.Empty && txtFirstname.Text != string.Empty && txtUsername.Text != string.Empty && txtPassword.Text != string.Empty && cmbUsertype.Text != string.Empty)
+                if (chekText(true))
                 {
-
-                    select.Voornaam = txtFirstname.Text;
-                    select.Achternaam = txtLastname.Text;
-                    select.Username = txtUsername.Text;
-                    select.Password = txtPassword.Text;
-                    select.Usertype = cmbUsertype.SelectedItem.ToString();
-
-                    System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to change it? ", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    do
                     {
-                        MessagBoxInfo.Show("Succesful", MessagBoxInfo.CmessageBoxTitle.Info);
-                        ctx.SaveChanges();
-                    }
+                        try
+                        {
+                            select.Voornaam = txtFirstname.Text;
+                            select.Achternaam = txtLastname.Text;
+                            select.Username = txtUsername.Text;
+                            select.Password = txtPassword.Text;
+                            select.Usertype = cmbUsertype.SelectedItem.ToString();
+
+                            System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to change it? ", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                            if (result == System.Windows.Forms.DialogResult.Yes)
+                            {
+                                MessagBoxInfo.Show("Succesful", MessagBoxInfo.CmessageBoxTitle.Info);
+                                ctx.SaveChanges();
+                                hideEditform();
+                            }
+                        }
+                        catch
+                        {
+                            MessagBoxInfo.Show("Something wrong", MessagBoxInfo.CmessageBoxTitle.Error);
+                        }
+                    } while (false);
                 }
+                else MessagBoxInfo.Show("Something missing", MessagBoxInfo.CmessageBoxTitle.Error);
             }
-            hideEditform();
         }
         private void fillEditForm()
         {
@@ -169,45 +176,58 @@ namespace ComputerShop
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            if (listViewPersonLid.SelectedValue != null)
             {
-                var bestelingperson = ctx.Bestellings.Select(x => x).ToList();
-                if (bestelingperson.Contains(listViewPersonLid.SelectedValue))
+
+                using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
                 {
-                    var selectPerson = ctx.Personeelslids.Select(x => x).Where(x => x.ID == (int)listViewPersonLid.SelectedValue).FirstOrDefault();
-                    var selectOrde = ctx.Bestellings.Select(x => x).Where(x => x.PersoneelslidID == selectPerson.ID).FirstOrDefault();
-                    var selectOrderProduct = ctx.BestellingProducts.Select(x => x).Where(x => x.BestellingID == selectOrde.ID).FirstOrDefault();
-                    System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete the user and all the datas and orders?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    var bestelingperson = ctx.Bestellings.Select(x => x).ToList();
+                    if (bestelingperson.Contains(listViewPersonLid.SelectedValue))
                     {
-                        var ord = ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.BestellingID == selectOrderProduct.BestellingID));
-                        var order = ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.PersoneelslidID == selectPerson.ID));
-                        var person = ctx.Personeelslids.RemoveRange(ctx.Personeelslids.Where(x => x.ID == (int)listViewPersonLid.SelectedValue)).FirstOrDefault();
-                        MessagBoxInfo.Show(selectPerson.Voornaam + " " + selectPerson.Achternaam + " " + "successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
-                        ctx.SaveChanges();
+                        var selectPerson = ctx.Personeelslids.Select(x => x).Where(x => x.ID == (int)listViewPersonLid.SelectedValue).FirstOrDefault();
+                        var selectOrde = ctx.Bestellings.Select(x => x).Where(x => x.PersoneelslidID == selectPerson.ID).FirstOrDefault();
+                        var selectOrderProduct = ctx.BestellingProducts.Select(x => x).Where(x => x.BestellingID == selectOrde.ID).FirstOrDefault();
+                        System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete the user and all the datas and orders?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            var ord = ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.BestellingID == selectOrderProduct.BestellingID));
+                            var order = ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.PersoneelslidID == selectPerson.ID));
+                            var person = ctx.Personeelslids.RemoveRange(ctx.Personeelslids.Where(x => x.ID == (int)listViewPersonLid.SelectedValue)).FirstOrDefault();
+                            MessagBoxInfo.Show(selectPerson.Voornaam + " " + selectPerson.Achternaam + " " + "successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
+                            ctx.SaveChanges();
+                        }
+                        else
+                        {
+                            System.Windows.Forms.DialogResult result2 = MyMessageBox.Show("Would you like to delete only the person", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                            if (result == System.Windows.Forms.DialogResult.Yes)
+                            {
+                                var person = ctx.Personeelslids.RemoveRange(ctx.Personeelslids.Where(x => x.ID == (int)listViewPersonLid.SelectedValue)).FirstOrDefault();
+                                ctx.SaveChanges();
+                            }
+                        }
                     }
                     else
                     {
-                        System.Windows.Forms.DialogResult result2 = MyMessageBox.Show("Would you like to delete only the person", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        System.Windows.Forms.DialogResult result2 = MyMessageBox.Show("Are you sure you want to delete the user?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                        if (result2 == System.Windows.Forms.DialogResult.Yes)
                         {
                             var person = ctx.Personeelslids.RemoveRange(ctx.Personeelslids.Where(x => x.ID == (int)listViewPersonLid.SelectedValue)).FirstOrDefault();
                             ctx.SaveChanges();
                         }
                     }
                 }
-                else
-                {
-                    System.Windows.Forms.DialogResult result2 = MyMessageBox.Show("Are you sure you want to delete the user?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                    if (result2 == System.Windows.Forms.DialogResult.Yes)
-                    {
-                        var person = ctx.Personeelslids.RemoveRange(ctx.Personeelslids.Where(x => x.ID == (int)listViewPersonLid.SelectedValue)).FirstOrDefault();
-                        ctx.SaveChanges();
-                    }
-                }
+                updateTheList();
+                hideEditform();
             }
-            updateTheList();
-            hideEditform();
+        }
+        private bool chekText(bool noerror)
+        {
+            if (txtLastname.Text != string.Empty && txtFirstname.Text != string.Empty && txtUsername.Text != string.Empty && txtPassword.Text != string.Empty && cmbUsertype.Text != string.Empty)
+            {
+                noerror = true;
+            }
+            else noerror = false;
+            return noerror;
         }
     }
 }

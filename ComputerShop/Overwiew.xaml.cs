@@ -52,12 +52,12 @@ namespace ComputerShop
                     gridPages.Children.Add(new CustomerOverview());
                     break;
                 case 2:
-                    //gridPages.Children.Clear();
-                    //gridPages.Children.Add(new ProductPage());
+                    gridPages.Children.Clear();
+                    gridPages.Children.Add(new ProductOveview());
                     break;
                 case 3:
                     gridPages.Children.Clear();
-                    gridPages.Children.Add(new CategoryUserControl1());
+                    gridPages.Children.Add(new PersonMemberOverview());
                     break;
                 case 4:
                     gridPages.Children.Clear();

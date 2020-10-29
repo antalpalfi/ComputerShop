@@ -12,7 +12,7 @@
             <RowDefinition Height="0" x:Name="editRow"/>
             <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Column="0" x:Name="listViewPersonLid" SelectionChanged="listViewPersonLid_SelectionChanged">
+        <ListView Grid.Row="0" x:Name="listViewPersonLid" SelectionChanged="listViewPersonLid_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="{x:Type GridViewColumnHeader}">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />

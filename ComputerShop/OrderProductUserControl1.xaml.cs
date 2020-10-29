@@ -24,6 +24,10 @@ namespace ComputerShop
         {
             InitializeComponent();
             fillTheList();
+            if (loggedInPerson.Usertype == "Storekeeper")
+            {
+                btnRemove.Visibility = Visibility.Hidden;
+            }
         }
         private void fillTheList()
         {
@@ -33,6 +37,24 @@ namespace ComputerShop
                 ProductName = x.Product.Naam , Quantity = x.Pieces});
                 listViewOrderProduct.SelectedValuePath = "Id";
                 listViewOrderProduct.ItemsSource = orderopro.ToList();
+            }
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (listViewOrderProduct.SelectedValue != null)
+            {
+                using  (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+                {
+                    System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure want to delet the product?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        var bestPro = ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.BestellingProductID == (int)listViewOrderProduct.SelectedValue)).FirstOrDefault();
+                        ctx.SaveChanges();
+                        MessagBoxInfo.Show("Data successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
+                        fillTheList();
+                    }
+                }
             }
         }
     }

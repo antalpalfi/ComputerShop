@@ -17,25 +17,49 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
-
 namespace ComputerShop
 {
     /// <summary>
-    /// Interaction logic for ShoppingSupplierUSC.xaml
+    /// Interaction logic for NewShoppingCustomer.xaml
     /// </summary>
-    public partial class ShoppingSupplierUSC : UserControl
+    ///  public Personeelslid loggedInUser { get; set; }
+    public partial class NewShoppingCustomer : UserControl
     {
-        public Personeelslid loggedInUser { get; set; }
         public WindowState WindowState { get; private set; }
-
+        public Personeelslid loggedInUser { get; set; }
         public List<ProductinKar> myProductinKars = new List<ProductinKar>();
-        public ProductinKar productinKar = new ProductinKar();
-        public ShoppingSupplierUSC(Personeelslid loggedInPerson)
+
+        public NewShoppingCustomer(Personeelslid loggedInPerson)
         {
             InitializeComponent();
             shoppingPanel.Visibility = Visibility.Hidden;
             loggedInUser = loggedInPerson;
             updateCmbSupplier();
+            btnPlus.Visibility = Visibility.Hidden;
+            btnMinus.Visibility = Visibility.Hidden;
+        }
+        private void updateCmbSupplier()
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                var supl = ctx.Klants.Select(x => new
+                {
+                    Id = x.ID,
+                    Name = x.Voornaam + x.Achternaam,
+                    Streetnaam = x.Straatnaam,
+                    Housnummer = x.Huisnummer,
+                    bus = x.Bus,
+                    postCode = x.Postcode,
+                    gemeente = x.Gemeente,
+                    Telephone = x.Telefoonnummer,
+                    email = x.Emailadres,
+                    datum = x.AangemaaktOp,
+                    commetn = x.Opmerking
+                });
+                cmbCustomer.SelectedValuePath = "Id";
+                cmbCustomer.DisplayMemberPath = "Name";
+                cmbCustomer.ItemsSource = supl.ToList();
+            }
         }
         public class ProductinKar
         {
@@ -64,7 +88,7 @@ namespace ComputerShop
             {
 
             }
-           
+
         }
         private void updateTotalPrice()
         {
@@ -72,7 +96,7 @@ namespace ComputerShop
 
             foreach (var item in myProductinKars)
             {
-                totalprice += item.Price  * item.Quantity;
+                totalprice += ((item.Price + item.Margin1) * (1 + item.Btw / 100)) * item.Quantity;
 
             }
             txtTotalPrice.Text = totalprice.ToString() + "€";
@@ -83,12 +107,13 @@ namespace ComputerShop
             int number = 0;
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                if (productListView.SelectedValue != null && Convert.ToInt32(txtQuantity.Text) != 0)
+                var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
+                if (productListView.SelectedValue != null && Convert.ToInt32(txtQuantity.Text) != 0 && product.InStock >= Convert.ToInt32(txtQuantity.Text))
                 {
-                    var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
+                    var product2 = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
                     foreach (var item in myProductinKars)
                     {
-                        if (item.ProductinKarID == product.ID)
+                        if (item.ProductinKarID == product2.ID)
                         {
                             number++;
                         }
@@ -99,8 +124,10 @@ namespace ComputerShop
                     }
                     else
                         myProductinKars.Add(new ProductinKar(Convert.ToInt32(txtQuantity.Text), (double)product.Inkoopprijs, product.ID, product.Naam, (int)product.LeverancierID, (double)product.Marge, (double)product.BTW, product.Eenheid));
-                    
+                        product.InStock = product.InStock - Convert.ToInt32(txtQuantity.Text);
+
                 }
+                else MessagBoxInfo.Show("We have " + product.InStock.ToString(), MessagBoxInfo.CmessageBoxTitle.Error);
                 ctx.SaveChanges();
             }
             lbShoppingCart.ItemsSource = null;
@@ -240,7 +267,7 @@ namespace ComputerShop
             txtQuantity.Text = 0.ToString();
             txtPrice.Text = string.Empty;
         }
-        
+        //hiddden
         private void btnPlus_Click(object sender, RoutedEventArgs e)
         {
             foreach (var item in myProductinKars)
@@ -255,7 +282,7 @@ namespace ComputerShop
             updateTotalPrice();
 
         }
-        // ha 0 akkor kitorolje meg kell csinalni
+        // ha 0 akkor kitorolje meg kell csinalni most hidden lesz
         private void btnMinus_Click(object sender, RoutedEventArgs e)
         {
 
@@ -285,9 +312,17 @@ namespace ComputerShop
         {
             if (productListView.SelectedValue != null && txtQuantity.Text != string.Empty)
             {
-                int number = Convert.ToInt32(txtQuantity.Text);
-                number++;
-                txtQuantity.Text = number.ToString();
+                using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+                {
+                    var selectProduct = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
+                    if (selectProduct.InStock > Convert.ToInt32(txtQuantity.Text))
+                    {
+                        int number = Convert.ToInt32(txtQuantity.Text);
+                        number++;
+                        txtQuantity.Text = number.ToString();
+                    }
+                    else MessagBoxInfo.Show("We have " + selectProduct.InStock.ToString(), MessagBoxInfo.CmessageBoxTitle.Error);
+                }
             }
         }
 
@@ -298,16 +333,6 @@ namespace ComputerShop
                 int number = Convert.ToInt32(txtQuantity.Text);
                 number--;
                 txtQuantity.Text = number.ToString();
-            }
-        }
-        private void updateCmbSupplier()
-        {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
-            {
-                var supl = ctx.Leveranciers.Select(x => x);
-                cmbSupplier.SelectedValuePath = "ID";
-                cmbSupplier.DisplayMemberPath = "Company";
-                cmbSupplier.ItemsSource = supl.ToList();
             }
         }
 
@@ -321,7 +346,10 @@ namespace ComputerShop
                     System.Windows.Forms.DialogResult result = MyMessageBox.Show("are you sure you want delete from shopping cart", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
                     if (result == System.Windows.Forms.DialogResult.Yes)
                     {
+
+                        product.InStock = Convert.ToInt32((lbShoppingCart.SelectedItem as ProductinKar).Quantity) + product.InStock;
                         myProductinKars.RemoveAt(lbShoppingCart.SelectedIndex);
+                        ctx.SaveChanges();
                     }
                 }
             }
@@ -331,22 +359,21 @@ namespace ComputerShop
         // le kell frisiteni az osszes listat
         private void btnOrder_Click(object sender, RoutedEventArgs e)
         {
-           
+
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                if (cmbSupplier.SelectedValue != null && lbShoppingCart.Items != null)
+                if (cmbCustomer.SelectedValue != null && lbShoppingCart.Items != null)
                 {
                     System.Windows.Forms.DialogResult result = MyMessageBox.Show("Do you confirm the order?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                    ctx.Bestellings.Add(new Bestelling()
-                    {
-                        PersoneelslidID = loggedInUser.ID,
-                        KlantID = null,
-                        LeverancierID = (int)cmbSupplier.SelectedValue,
-                        DatumOpgemaakt = DateTime.Now
-                    });
                     if (result == System.Windows.Forms.DialogResult.Yes)
                     {
-
+                        ctx.Bestellings.Add(new Bestelling()
+                        {
+                            PersoneelslidID = loggedInUser.ID,
+                            KlantID = (int)cmbCustomer.SelectedValue,
+                            LeverancierID = null,
+                            DatumOpgemaakt = DateTime.Now
+                        });
 
                         ctx.SaveChanges();
                         var lastBesttelingId = ctx.Bestellings.Select(x => x.ID).Max();
@@ -359,8 +386,7 @@ namespace ComputerShop
                                 Pieces = item.Quantity
                             });
                             var product = ctx.Products.Select(x => x).Where(x => x.ID == item.ProductinKarID).FirstOrDefault();
-                            product.InStock = product.InStock + item.Quantity;
-                            MessageBox.Show(product.InStock.ToString());
+                            product.InStock = product.InStock - item.Quantity;
                             ctx.SaveChanges();
                         }
                         myProductinKars.Clear();
@@ -385,7 +411,7 @@ namespace ComputerShop
                 if (productListView.SelectedValue != null)
                 {
                     var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
-                    txtPrice.Text = product.Inkoopprijs.ToString() + "€";
+                    txtPrice.Text = ((product.Inkoopprijs + product.Marge) * (1 + product.BTW / 100)) + "€";
                 }
             };
         }
@@ -397,6 +423,15 @@ namespace ComputerShop
 
         private void btnEcs_Click(object sender, RoutedEventArgs e)
         {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                foreach (var item in myProductinKars)
+                {
+                    var product = ctx.Products.Select(x => x).Where(x => x.ID == item.ProductinKarID).FirstOrDefault();
+                    product.InStock = product.InStock + item.Quantity;
+                    ctx.SaveChanges();
+                }
+            }
             System.Windows.Application.Current.Shutdown();
         }
 
@@ -408,6 +443,15 @@ namespace ComputerShop
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                foreach (var item in myProductinKars)
+                {
+                    var product = ctx.Products.Select(x => x).Where(x => x.ID == item.ProductinKarID).FirstOrDefault();
+                    product.InStock = product.InStock + item.Quantity;
+                    ctx.SaveChanges();
+                }
+            }
             MainWindow mainWindow = new MainWindow();
             var myWindow = Window.GetWindow(this);
             myWindow.Close();
@@ -416,6 +460,15 @@ namespace ComputerShop
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                foreach (var item in myProductinKars)
+                {
+                    var product = ctx.Products.Select(x => x).Where(x => x.ID == item.ProductinKarID).FirstOrDefault();
+                    product.InStock = product.InStock + item.Quantity;
+                    ctx.SaveChanges();
+                }
+            }
             MainMenu mainmenu = new MainMenu(loggedInUser);
             var myWindow = Window.GetWindow(this);
             myWindow.Close();
@@ -429,12 +482,12 @@ namespace ComputerShop
             double totalPrice = 0;
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                if (cmbSupplier.SelectedValue != null)
+                if (cmbCustomer.SelectedValue != null)
                 {
 
 
-                    var sup = ctx.Leveranciers.Select(x => x).Where(x => x.ID == (int)cmbSupplier.SelectedValue).FirstOrDefault();
-                    string fileName = sup.Company + "_" + loggedInUser.Username + "_" + DateTime.Now.ToString("dd_MMMM_yyyy");
+                    var cus = ctx.Klants.Select(x => x).Where(x => x.ID == (int)cmbCustomer.SelectedValue).FirstOrDefault();
+                    string fileName = cus.Voornaam + "_"+cus.Achternaam + "_" + loggedInUser.Username + "_" + DateTime.Now.ToString("dd_MMMM_yyyy");
                     var doc = DocX.Create(fileName);
                     string title = "Palfi Computer Warehouse";
                     Formatting titleFormat = new Formatting();
@@ -444,21 +497,21 @@ namespace ComputerShop
                     titleFormat.FontColor = System.Drawing.Color.Blue;
                     titleFormat.UnderlineColor = System.Drawing.Color.Black;
 
-                    string suplierData = $"{sup.Company}" + Environment.NewLine +
-                        sup.Gemeente + " " + sup.Postcode + Environment.NewLine +
-                        sup.Straatnaam + " " + sup.Huisnummer + "/" + sup.Bus + Environment.NewLine +
-                        sup.Emailadres + Environment.NewLine +
-                        sup.Telefoonnummer + Environment.NewLine +
+                    string CustomerData = $"{cus.Voornaam + "" + cus.Achternaam }" + Environment.NewLine +
+                        cus.Gemeente + " " + cus.Postcode + Environment.NewLine +
+                        cus.Straatnaam + " " + cus.Huisnummer + "/" + cus.Bus + Environment.NewLine +
+                        cus.Emailadres + Environment.NewLine +
+                        cus.Telefoonnummer + Environment.NewLine +
                         Environment.NewLine;
 
-                    Formatting suplierDataFormat = new Formatting();
-                    suplierDataFormat.FontFamily = new Xceed.Document.NET.Font("Century Gothic");
-                    suplierDataFormat.Size = 12D;
+                    Formatting customerDataFormat = new Formatting();
+                    customerDataFormat.FontFamily = new Xceed.Document.NET.Font("Century Gothic");
+                    customerDataFormat.Size = 12D;
 
                     Xceed.Document.NET.Paragraph paragraphTitel = doc.InsertParagraph(title, false, titleFormat);
                     paragraphTitel.Alignment = Alignment.center;
 
-                    doc.InsertParagraph(suplierData, false, suplierDataFormat);
+                    doc.InsertParagraph(CustomerData, false, customerDataFormat);
 
 
 
@@ -479,7 +532,7 @@ namespace ComputerShop
                         table.Rows[i + 1].Cells[0].Paragraphs.First().Append(myProductinKars[i].ProductInKarNaam);
                         table.Rows[i + 1].Cells[1].Paragraphs.First().Append(myProductinKars[i].Quantity.ToString() + " " + myProductinKars[i].Unit);
                         table.Rows[i + 1].Cells[2].Paragraphs.First().Append(myProductinKars[i].Btw.ToString() + "%");
-                        table.Rows[i + 1].Cells[3].Paragraphs.First().Append((myProductinKars[i].Price * myProductinKars[i].Quantity).ToString() + "€");
+                        table.Rows[i + 1].Cells[3].Paragraphs.First().Append((((myProductinKars[i].Price + myProductinKars[i].Margin1) * (1+myProductinKars[i].Btw/100))* myProductinKars[i].Quantity).ToString() + "€");
                     }
                     doc.InsertTable(table);
 
@@ -490,12 +543,14 @@ namespace ComputerShop
 
                     foreach (var item in myProductinKars)
                     {
+                        totalPrice += ((item.Price + item.Margin1) * (1 + item.Btw / 100)) * item.Quantity;
                         quantity += item.Quantity;
-                        totalPrice += item.Price * item.Quantity;
+
                     }
-                    sum.Rows[0].Cells[1].Paragraphs.First().Append("Total  "+ quantity.ToString());
+
+                    sum.Rows[0].Cells[1].Paragraphs.First().Append("Total  " + quantity.ToString());
                     sum.Rows[0].Cells[2].Paragraphs.First().Append("With TAX");
-                    sum.Rows[0].Cells[3].Paragraphs.First().Append("Total price    " + totalPrice.ToString() + "€");
+                    sum.Rows[0].Cells[3].Paragraphs.First().Append("Total price  " + totalPrice.ToString());
                     doc.InsertTable(sum);
                     doc.Save();
                 }

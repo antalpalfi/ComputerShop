@@ -30,19 +30,35 @@ namespace ComputerShop
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                string klantName = "";
-                var name = ctx.Klants.Where(x => x.ID == (int)listViewCustomer.SelectedValue);
-                foreach (var item in name)
+                if (listViewCustomer.SelectedValue != null)
                 {
-                    klantName += item.Achternaam.ToString();
-                    klantName += " " + item.Voornaam.ToString();
-                }
-                var klant = ctx.Klants.RemoveRange(ctx.Klants.Where(x => x.ID == (int)listViewCustomer.SelectedValue)).FirstOrDefault();
-                System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete " + klantName + "\n " + "and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                if (result == System.Windows.Forms.DialogResult.Yes)
-                {
-                    ctx.SaveChanges();
-                    UpdateListView();
+                    var selectedKlant= ctx.Klants.Select(x=>x).Where(x => x.ID == (int)listViewCustomer.SelectedValue).FirstOrDefault();
+                    var besteling = ctx.Bestellings.Select(x => x).ToList();
+                    if (besteling.Contains(listViewCustomer.SelectedValue))
+                    {
+                        var besteling2 = ctx.Bestellings.Select(x => x).Where(x => x.KlantID == selectedKlant.ID).FirstOrDefault();
+                        System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            var bestelingProd = ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.BestellingID == besteling2.ID));
+                            var bestelinRemove = ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.KlantID == selectedKlant.ID));
+                            var klant = ctx.Klants.RemoveRange(ctx.Klants.Where(x => x.ID == (int)listViewCustomer.SelectedValue)).FirstOrDefault();
+                            ctx.SaveChanges();
+                            UpdateListView();
+                            MessagBoxInfo.Show("Customer successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
+                        }
+                    }
+                    else
+                    {
+                        System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            var klant2 = ctx.Klants.RemoveRange(ctx.Klants.Where(x => x.ID == (int)listViewCustomer.SelectedValue)).FirstOrDefault();
+                            ctx.SaveChanges();
+                            UpdateListView();
+                            MessagBoxInfo.Show("Customer successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
+                        }
+                    }
                 }
             }
         }
@@ -158,10 +174,7 @@ namespace ComputerShop
                                 UpdateListView();
                                 hidePanel();
                             }
-                            else
-                            {
-                                MessagBoxInfo.Show("De customer alredy exist", MessagBoxInfo.CmessageBoxTitle.Error);
-                            }
+                            else MessagBoxInfo.Show("De customer alredy exist", MessagBoxInfo.CmessageBoxTitle.Error);
                         }
                         catch
                         {

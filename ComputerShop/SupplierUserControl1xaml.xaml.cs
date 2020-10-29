@@ -48,22 +48,42 @@ namespace ComputerShop
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            if (supportList.SelectedValue != null)
             {
-                string company = "";
-                var name = ctx.Leveranciers.Where(x => x.ID == (int)supportList.SelectedValue);
-                foreach (var item in name)
+                using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
                 {
-                    company += item.Company.ToString();
-                }
-                var selec = ctx.Leveranciers.RemoveRange(ctx.Leveranciers.Where(x => x.ID == (int)supportList.SelectedValue)).FirstOrDefault();
-                System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete" + " " + company + "\n" + "and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                if (result == System.Windows.Forms.DialogResult.Yes)
-                {
-                    ctx.SaveChanges();
-                    updateTheList();
+                    var productSup = ctx.Products.Select(x => x).Where(x=>x.LeverancierID == (int)supportList.SelectedValue).FirstOrDefault();
+                    var bestelSup = ctx.Bestellings.Select(x => x).ToList();
+                    var bestelingPro = ctx.BestellingProducts.Select(x => x).ToList();
+                    if (bestelSup.Contains(supportList.SelectedValue))
+                    {
+                        var selectBest = ctx.Bestellings.Select(x => x).Where(x => x.LeverancierID == (int)supportList.SelectedValue).FirstOrDefault();
+
+                        System.Windows.Forms.DialogResult result1 = MyMessageBox.Show("Are you sure you want to delete and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                        if (result1 == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            var bestProremove = ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.BestellingID == selectBest.ID));
+                            var bestRemove = ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.LeverancierID == (int)supportList.SelectedValue));
+                            // select product
+                            //if (bestelingPro.Contains(productSup))
+                            //{
+
+                            //}
+                            var selectSup = ctx.Leveranciers.RemoveRange(ctx.Leveranciers.Where(x => x.ID == (int)supportList.SelectedValue)).FirstOrDefault();
+                            ctx.SaveChanges();
+                            updateTheList();
+                        }
+                    }
+                    var selec = ctx.Leveranciers.RemoveRange(ctx.Leveranciers.Where(x => x.ID == (int)supportList.SelectedValue)).FirstOrDefault();
+                    System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        ctx.SaveChanges();
+                        updateTheList();
+                    }
                 }
             }
+
         }
         private void btnEdit_Click_1(object sender, RoutedEventArgs e)
         {

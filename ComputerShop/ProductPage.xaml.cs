@@ -235,26 +235,29 @@ namespace ComputerShop
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            if (productListView.SelectedValue != null)
             {
-                var bestel = ctx.BestellingProducts.Select(x => x).ToList();
-                if ( bestel.Contains(productListView.SelectedValue))
+                using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
                 {
-                    var bestelingId = ctx.BestellingProducts.Select(x => x).Where(x => x.ProductID == (int)productListView.SelectedValue).FirstOrDefault();
-                    ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.ProductID == (int)productListView.SelectedValue)).FirstOrDefault();
-                    ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.ID == bestelingId.BestellingID));
-                    ctx.Products.RemoveRange(ctx.Products.Where(p => p.ID == (int)productListView.SelectedValue)).FirstOrDefault();
-                }
-                else
-                {
-                    ctx.Products.RemoveRange(ctx.Products.Where(p => p.ID == (int)productListView.SelectedValue)).FirstOrDefault();
-                }
+                    var bestel = ctx.BestellingProducts.Select(x => x).ToList();
+                    if (bestel.Contains(productListView.SelectedValue))
+                    {
+                        var bestelingId = ctx.BestellingProducts.Select(x => x).Where(x => x.ProductID == (int)productListView.SelectedValue).FirstOrDefault();
+                        ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.ProductID == (int)productListView.SelectedValue)).FirstOrDefault();
+                        ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.ID == bestelingId.BestellingID));
+                        ctx.Products.RemoveRange(ctx.Products.Where(p => p.ID == (int)productListView.SelectedValue)).FirstOrDefault();
+                    }
+                    else
+                    {
+                        ctx.Products.RemoveRange(ctx.Products.Where(p => p.ID == (int)productListView.SelectedValue)).FirstOrDefault();
+                    }
 
-                System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure want to delet the product?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                if (result == System.Windows.Forms.DialogResult.Yes)
-                {
-                    MessagBoxInfo.Show("Product successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
-                   ctx.SaveChanges();
+                    System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure want to delet the product?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        MessagBoxInfo.Show("Product successfully deleted", MessagBoxInfo.CmessageBoxTitle.Info);
+                        ctx.SaveChanges();
+                    }
                 }
             }
             updateListView();

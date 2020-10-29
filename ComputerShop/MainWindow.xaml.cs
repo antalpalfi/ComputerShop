@@ -25,6 +25,7 @@ namespace ComputerShop
         {
             InitializeComponent();
             btnRegister.IsEnabled = false;
+            btnRegister.Visibility = Visibility.Hidden;
             
         }
         public string loginUser = "";
