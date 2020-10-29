@@ -108,7 +108,10 @@
                 <ComboBox x:Name="cmbSupplier" Width="200" Margin="10"/>
             </StackPanel>
             <Border BorderBrush="Black" BorderThickness="1"/>
-            <materialDesign:PackIcon Kind="MicrosoftVisualStudio"  Margin="300,0,150,0" Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF6A3737"/>
+            <Button Content="Print word" Click="Button_Click">
+                
+            </Button>
+            <materialDesign:PackIcon Kind="MicrosoftVisualStudio"  Margin="200,0,150,0" Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF6A3737"/>
             <Button x:Name="btnBack" Background="Transparent" Foreground="Red" Height="Auto" BorderThickness="0" Click="btnBack_Click">
                 <materialDesign:PackIcon Kind="Backspace" Height="40" Width="40" Foreground="#FFFF08FF"/>
             </Button>

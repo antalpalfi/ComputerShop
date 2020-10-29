@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ComputerShop
 {
@@ -63,7 +54,7 @@ namespace ComputerShop
                 var name = ctx.Leveranciers.Where(x => x.ID == (int)supportList.SelectedValue);
                 foreach (var item in name)
                 {
-                    company+= item.Company.ToString();
+                    company += item.Company.ToString();
                 }
                 var selec = ctx.Leveranciers.RemoveRange(ctx.Leveranciers.Where(x => x.ID == (int)supportList.SelectedValue)).FirstOrDefault();
                 System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete" + " " + company + "\n" + "and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
@@ -93,7 +84,7 @@ namespace ComputerShop
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                if (supportList.SelectedValue!=null)
+                if (supportList.SelectedValue != null)
                 {
                     var selectSup = ctx.Leveranciers.Select(y => y).Where(x => x.ID == (int)supportList.SelectedValue).FirstOrDefault();
                     txtCompany.Text = selectSup.Company.ToString();
@@ -106,23 +97,6 @@ namespace ComputerShop
                     txtTown.Text = selectSup.Gemeente.ToString();
                     txtZipcode.Text = selectSup.Postcode.ToString();
                 }
-            }
-        }
-        private void updateSupplierEditform()
-        {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
-            {
-                var sup = ctx.Leveranciers.Select(x => x).Where(y => y.ID == (int)supportList.SelectedValue).FirstOrDefault();
-                sup.Contactpersoon = txtContactPerson.Text;
-                sup.Company = txtCompany.Text;
-                sup.Telefoonnummer = txtPhone.Text;
-                sup.Emailadres = txtEmail.Text;
-                sup.Straatnaam = txtStreet.Text;
-                sup.Huisnummer = Convert.ToInt32(txtHouseNumber.Text);
-                sup.Bus = Convert.ToInt32(txtMailbox.Text);
-                sup.Postcode = Convert.ToInt32(txtZipcode.Text);
-                sup.Gemeente = txtTown.Text;
-                ctx.SaveChanges();
             }
         }
 
@@ -141,62 +115,97 @@ namespace ComputerShop
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            updateSupplierEditform();
-            updateTheList();
-            editSup.Height = new GridLength(0, GridUnitType.Star);
-            viewList.Height = new GridLength(543, GridUnitType.Star);
-            editSupplier.Visibility = Visibility.Hidden;
-            supportList.IsEnabled = true;
+            if (chekText(true))
+            {
+                do
+                {
+                    try
+                    {
+                        using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+                        {
+                            var sup = ctx.Leveranciers.Select(x => x).Where(y => y.ID == (int)supportList.SelectedValue).FirstOrDefault();
+                            sup.Contactpersoon = txtContactPerson.Text;
+                            sup.Company = txtCompany.Text;
+                            sup.Telefoonnummer = txtPhone.Text;
+                            sup.Emailadres = txtEmail.Text;
+                            sup.Straatnaam = txtStreet.Text;
+                            sup.Huisnummer = Convert.ToInt32(txtHouseNumber.Text);
+                            sup.Bus = Convert.ToInt32(txtMailbox.Text);
+                            sup.Postcode = Convert.ToInt32(txtZipcode.Text);
+                            sup.Gemeente = txtTown.Text;
+                            System.Windows.Forms.DialogResult result = MessagBoxInfo.Show("Are you sure you want to change it?", MessagBoxInfo.CmessageBoxTitle.Info);
+                            if (result == System.Windows.Forms.DialogResult.OK)
+                            {
+                                MessagBoxInfo.Show("Succesful", MessagBoxInfo.CmessageBoxTitle.Info);
+                                ctx.SaveChanges();
+                                updateTheList();
+                                hidePanel();
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessagBoxInfo.Show("Something wrong", MessagBoxInfo.CmessageBoxTitle.Warning);
+                    }
+                } while (false);
+            }
+            else MessagBoxInfo.Show("Something missing", MessagBoxInfo.CmessageBoxTitle.Warning);
         }
 
         private void btnAddSave_Click(object sender, RoutedEventArgs e)
         {
-            if (txtCompany.Text != "" && txtContactPerson.Text != "" && txtEmail.Text != "" && txtHouseNumber.Text != "" && txtMailbox.Text != "" && txtPhone.Text != "" && txtStreet.Text != "" && txtTown.Text != "" && txtZipcode.Text != "")
+            if (chekText(true))
             {
-                using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+                do
                 {
-                    var sup = ctx.Leveranciers.Where(x => x.Company == txtCompany.Text && x.Contactpersoon == txtContactPerson.Text).Count();
-
-                    if (sup == 0)
+                    using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
                     {
-                        ctx.Leveranciers.Add(new Leverancier()
+                        try
                         {
-                            Contactpersoon = txtContactPerson.Text,
-                            Company = txtCompany.Text,
-                            Telefoonnummer = txtPhone.Text,
-                            Emailadres = txtEmail.Text,
-                            Straatnaam = txtStreet.Text,
-                            Huisnummer = Convert.ToInt32(txtHouseNumber.Text),
-                            Bus = Convert.ToInt32(txtMailbox.Text),
-                            Postcode = Convert.ToInt32(txtZipcode.Text),
-                            Gemeente = txtTown.Text
-                        });
-                        string newSuppplier = $"{txtCompany.Text}\n" +
-                            $"{txtContactPerson.Text}\n" +
-                            $"{txtPhone.Text}\n" +
-                            $"{txtEmail.Text}\n" +
-                            $"{txtStreet.Text} {txtHouseNumber.Text} {txtMailbox.Text}\n" +
-                            $"{txtZipcode.Text}\n" +
-                            $"{txtTown.Text}";
-                        System.Windows.Forms.DialogResult result = MessagBoxInfo.Show(newSuppplier, MessagBoxInfo.CmessageBoxTitle.Info);
-                        if (result == System.Windows.Forms.DialogResult.OK)
+                            var sup = ctx.Leveranciers.Where(x => x.Company == txtCompany.Text && x.Contactpersoon == txtContactPerson.Text).Count();
+
+                            if (sup == 0)
+                            {
+                                ctx.Leveranciers.Add(new Leverancier()
+                                {
+                                    Contactpersoon = txtContactPerson.Text,
+                                    Company = txtCompany.Text,
+                                    Telefoonnummer = txtPhone.Text,
+                                    Emailadres = txtEmail.Text,
+                                    Straatnaam = txtStreet.Text,
+                                    Huisnummer = Convert.ToInt32(txtHouseNumber.Text),
+                                    Bus = Convert.ToInt32(txtMailbox.Text),
+                                    Postcode = Convert.ToInt32(txtZipcode.Text),
+                                    Gemeente = txtTown.Text
+                                });
+                                string newSuppplier = $"{txtCompany.Text}\n" +
+                                    $"{txtContactPerson.Text}\n" +
+                                    $"{txtPhone.Text}\n" +
+                                    $"{txtEmail.Text}\n" +
+                                    $"{txtStreet.Text} {txtHouseNumber.Text} {txtMailbox.Text}\n" +
+                                    $"{txtZipcode.Text}\n" +
+                                    $"{txtTown.Text}";
+                                System.Windows.Forms.DialogResult result = MessagBoxInfo.Show(newSuppplier, MessagBoxInfo.CmessageBoxTitle.Info);
+                                if (result == System.Windows.Forms.DialogResult.OK)
+                                {
+                                    ctx.SaveChanges();
+                                    updateTheList();
+                                    hidePanel();
+                                }
+                            }
+                            else
+                            {
+                                MessagBoxInfo.Show("Company is already exist", MessagBoxInfo.CmessageBoxTitle.Error);
+                            }
+                        }
+                        catch (Exception)
                         {
-                            ctx.SaveChanges();
+                            MessagBoxInfo.Show("Something wrong", MessagBoxInfo.CmessageBoxTitle.Warning);
                         }
                     }
-                    else
-                    {
-                        MessagBoxInfo.Show("Company is already exist", MessagBoxInfo.CmessageBoxTitle.Error);
-                    }
-                }
+                } while (false);
             }
-            else MessagBoxInfo.Show("Lookup again", MessagBoxInfo.CmessageBoxTitle.Warning);
-
-            supportList.IsEnabled = true;
-            editSup.Height = new GridLength(0, GridUnitType.Star);
-            viewList.Height = new GridLength(543, GridUnitType.Star);
-            editSupplier.Visibility = Visibility.Hidden;
-            updateTheList();
+            else MessagBoxInfo.Show("Something missing", MessagBoxInfo.CmessageBoxTitle.Warning);
         }
         private void clearTxtfield()
         {
@@ -209,6 +218,24 @@ namespace ComputerShop
             txtStreet.Text = String.Empty;
             txtTown.Text = String.Empty;
             txtZipcode.Text = String.Empty;
+        }
+        private bool chekText(bool noerror)
+        {
+            if (txtContactPerson.Text != string.Empty && txtCompany.Text != string.Empty && txtPhone.Text != string.Empty &&
+                txtEmail.Text != string.Empty && txtStreet.Text != string.Empty && txtHouseNumber.Text != string.Empty &&
+                txtMailbox.Text != string.Empty && txtZipcode.Text != string.Empty && txtTown.Text != string.Empty)
+            {
+                noerror = true;
+            }
+            else noerror = false;
+            return noerror;
+        }
+        private void hidePanel()
+        {
+            supportList.IsEnabled = true;
+            editSup.Height = new GridLength(0, GridUnitType.Star);
+            viewList.Height = new GridLength(543, GridUnitType.Star);
+            editSupplier.Visibility = Visibility.Hidden;
         }
     }
 }

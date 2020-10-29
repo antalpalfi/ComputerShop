@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ComputerShop
 {
@@ -46,7 +35,7 @@ namespace ComputerShop
                 foreach (var item in name)
                 {
                     klantName += item.Achternaam.ToString();
-                    klantName += " "+item.Voornaam.ToString();
+                    klantName += " " + item.Voornaam.ToString();
                 }
                 var klant = ctx.Klants.RemoveRange(ctx.Klants.Where(x => x.ID == (int)listViewCustomer.SelectedValue)).FirstOrDefault();
                 System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to delete " + klantName + "\n " + "and all data with it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
@@ -103,7 +92,7 @@ namespace ComputerShop
                     txtTown.Text = selectKlant.Gemeente.ToString();
                     txtZipcode.Text = selectKlant.Postcode.ToString();
                     txtComment.Text = selectKlant.Opmerking.ToString();
-                    DateTimePicker.SelectedDate  = selectKlant.AangemaaktOp;
+                    DateTimePicker.SelectedDate = selectKlant.AangemaaktOp;
                 }
             }
         }
@@ -136,68 +125,114 @@ namespace ComputerShop
         {
             fillEditForm();
         }
-        private void addNewCustomer()
-        {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
-            {
-                ctx.Klants.Add(new Klant()
-                {
-                    Voornaam = txtFirstName.Text,
-                    Achternaam = txtLastName.Text,
-                    Straatnaam = txtStreet.Text,
-                    Huisnummer = Convert.ToInt32(txtHouseNumber.Text),
-                    Bus = Convert.ToInt32(txtMailbox.Text),
-                    Postcode = Convert.ToInt32(txtZipcode.Text),
-                    Gemeente = txtTown.Text,
-                    Telefoonnummer = txtPhone.Text,
-                    Emailadres = txtEmail.Text,
-                    AangemaaktOp = Convert.ToDateTime(DateTimePicker.Text),
-                    Opmerking = txtComment.Text
-                });
-                var klant = ctx.Klants.Select(x => x).Where(y => y.Voornaam == txtFirstName.Text && y.Achternaam == txtLastName.Text).Count();
-                if (klant==0)
-                {
-                    MessagBoxInfo.Show("New Customer", MessagBoxInfo.CmessageBoxTitle.Info);
-                    ctx.SaveChanges();
-                }
-                else
-                {
-                    MessagBoxInfo.Show("De customer alredy exist", MessagBoxInfo.CmessageBoxTitle.Error);
-                }
-            }
-        }
 
         private void btnAddSave_Click(object sender, RoutedEventArgs e)
         {
-            addNewCustomer();
-            UpdateListView();
-            listViewCustomer.IsEnabled = true;
-            editCus.Height = new GridLength(0, GridUnitType.Star);
-            viewList.Height = new GridLength(543, GridUnitType.Star);
-            editCustomer.Visibility = Visibility.Hidden;
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                if (chekErrorsText(true))
+                {
+                    do
+                    {
+                        try
+                        {
+                            ctx.Klants.Add(new Klant()
+                            {
+                                Voornaam = txtFirstName.Text,
+                                Achternaam = txtLastName.Text,
+                                Straatnaam = txtStreet.Text,
+                                Huisnummer = Convert.ToInt32(txtHouseNumber.Text),
+                                Bus = Convert.ToInt32(txtMailbox.Text),
+                                Postcode = Convert.ToInt32(txtZipcode.Text),
+                                Gemeente = txtTown.Text,
+                                Telefoonnummer = txtPhone.Text,
+                                Emailadres = txtEmail.Text,
+                                AangemaaktOp = Convert.ToDateTime(DateTimePicker.Text),
+                                Opmerking = txtComment.Text
+                            });
+                            var klant = ctx.Klants.Select(x => x).Where(y => y.Voornaam == txtFirstName.Text && y.Achternaam == txtLastName.Text).Count();
+                            if (klant == 0)
+                            {
+                                MessagBoxInfo.Show("New Customer", MessagBoxInfo.CmessageBoxTitle.Info);
+                                ctx.SaveChanges();
+                                UpdateListView();
+                                hidePanel();
+                            }
+                            else
+                            {
+                                MessagBoxInfo.Show("De customer alredy exist", MessagBoxInfo.CmessageBoxTitle.Error);
+                            }
+                        }
+                        catch
+                        {
+                            MessagBoxInfo.Show("Something wrong", MessagBoxInfo.CmessageBoxTitle.Error);
+                        }
+                    } while (false);
+                }
+                else MessagBoxInfo.Show("Something missing", MessagBoxInfo.CmessageBoxTitle.Error);
+            }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            if (chekErrorsText(true))
             {
-                var klant = ctx.Klants.Select(x => x).Where(x => x.ID == (int)listViewCustomer.SelectedValue).FirstOrDefault();    
-                
-                klant.Voornaam = txtFirstName.Text;
-                klant.Achternaam = txtLastName.Text;
-                klant.Straatnaam = txtStreet.Text;
-                klant.Huisnummer = Convert.ToInt32(txtHouseNumber.Text);
-                klant.Bus = Convert.ToInt32(txtMailbox.Text);
-                klant.Postcode = Convert.ToInt32(txtZipcode.Text);
-                klant.Gemeente = txtTown.Text;
-                klant.Telefoonnummer = txtPhone.Text;
-                klant.Emailadres = txtEmail.Text;
-                klant.AangemaaktOp = Convert.ToDateTime(DateTimePicker.Text);
-                klant.Opmerking = txtComment.Text;
-                ctx.SaveChanges();
+                do
+                {
+                    try
+                    {
+                        using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+                        {
+                            var klant = ctx.Klants.Select(x => x).Where(x => x.ID == (int)listViewCustomer.SelectedValue).FirstOrDefault();
 
+                            klant.Voornaam = txtFirstName.Text;
+                            klant.Achternaam = txtLastName.Text;
+                            klant.Straatnaam = txtStreet.Text;
+                            klant.Huisnummer = Convert.ToInt32(txtHouseNumber.Text);
+                            klant.Bus = Convert.ToInt32(txtMailbox.Text);
+                            klant.Postcode = Convert.ToInt32(txtZipcode.Text);
+                            klant.Gemeente = txtTown.Text;
+                            klant.Telefoonnummer = txtPhone.Text;
+                            klant.Emailadres = txtEmail.Text;
+                            klant.AangemaaktOp = Convert.ToDateTime(DateTimePicker.Text);
+                            klant.Opmerking = txtComment.Text;
+                            System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to change it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                            if (result == System.Windows.Forms.DialogResult.Yes)
+                            {
+                                ctx.SaveChanges();
+                                MessagBoxInfo.Show("Succesful", MessagBoxInfo.CmessageBoxTitle.Info);
+                            }
+                            UpdateListView();
+                            hidePanel();
+                        }
+                    }
+                 catch
+                    {
+                        MessagBoxInfo.Show("Something wrong", MessagBoxInfo.CmessageBoxTitle.Error);
+                    }
+                } while (false);
             }
-            UpdateListView();
+            else MessagBoxInfo.Show("Something missing", MessagBoxInfo.CmessageBoxTitle.Error);
+        }
+
+        private void listViewCustomer_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            fillEditForm();
+        }
+        private bool chekErrorsText(bool noerror)
+        {
+            if (txtFirstName.Text != string.Empty && txtLastName.Text != string.Empty && txtStreet.Text != string.Empty &&
+                txtHouseNumber.Text != string.Empty && txtMailbox.Text != string.Empty && txtZipcode.Text != string.Empty &&
+                txtTown.Text != string.Empty && txtPhone.Text != string.Empty && txtEmail.Text != string.Empty &&
+                txtComment.Text != string.Empty && DateTimePicker.Text != string.Empty)
+            {
+                noerror = true;
+            }
+            else noerror = false;
+            return noerror;
+        }
+        private void hidePanel()
+        {
             listViewCustomer.IsEnabled = true;
             editCus.Height = new GridLength(0, GridUnitType.Star);
             viewList.Height = new GridLength(543, GridUnitType.Star);

@@ -98,25 +98,38 @@ namespace ComputerShop
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                ctx.Products.Add(new Product()
+                if (chekErrors(true))
                 {
-                    Naam = txtName.Text,
-                    Inkoopprijs = Convert.ToInt32(txtPurchasePrice.Text),
-                    Marge = Convert.ToInt32(txtMargin.Text),
-                    Eenheid = txtUnit.Text,
-                    BTW = Convert.ToInt32(txtBtw.Text),
-                    InStock = Convert.ToInt32(txtInstock.Text),
-                    Foto = txtSource.Text,
-                    Specifications = txtSpecifications.Text,
-                    LeverancierID = (int)cmbSupplier.SelectedValue,
-                    CategorieID = (int)cmbCategory.SelectedValue
+                    do
+                    {
+                        try
+                        {
+                            ctx.Products.Add(new Product()
+                            {
+                                Naam = txtName.Text,
+                                Inkoopprijs = Convert.ToInt32(txtPurchasePrice.Text),
+                                Marge = Convert.ToInt32(txtMargin.Text),
+                                Eenheid = txtUnit.Text,
+                                BTW = Convert.ToInt32(txtBtw.Text),
+                                InStock = Convert.ToInt32(txtInstock.Text),
+                                Foto = txtSource.Text,
+                                Specifications = txtSpecifications.Text,
+                                LeverancierID = (int)cmbSupplier.SelectedValue,
+                                CategorieID = (int)cmbCategory.SelectedValue
+                            });
+                            ctx.SaveChanges();
+                            updateListView();
+                            MessagBoxInfo.Show("New product successfully added to the warehouse.", MessagBoxInfo.CmessageBoxTitle.Info);
+                            hideGrid();
+                        }
+                        catch
+                        {
+                            MessagBoxInfo.Show("Something wrong", MessagBoxInfo.CmessageBoxTitle.Error);
+                        }
 
-                }); ;
-                ctx.SaveChanges();
-                updateListView();
-                MessagBoxInfo.Show("New product successfully added to the warehouse.", MessagBoxInfo.CmessageBoxTitle.Info);
-                hideGrid();
-
+                    } while (false);
+                }
+                else MessagBoxInfo.Show("Something missing", MessagBoxInfo.CmessageBoxTitle.Error);
             }
         }
         private void hideGrid()
@@ -147,27 +160,43 @@ namespace ComputerShop
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            if (chekErrors(true))
             {
-                var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
-                product.Naam = txtName.Text;
-                product.Inkoopprijs = Convert.ToInt32(txtPurchasePrice.Text);
-                product.Marge = Convert.ToInt32(txtMargin.Text);
-                product.Eenheid = txtUnit.Text;
-                product.BTW = Convert.ToInt32(txtBtw.Text);
-                product.InStock = Convert.ToInt32(txtInstock.Text);
-                product.Foto = txtSource.Text;
-                product.Specifications = txtSpecifications.Text;
-                product.LeverancierID = (int)cmbSupplier.SelectedValue;
-                product.CategorieID = (int)cmbCategory.SelectedValue;
-                System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to change it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
-                if (result == System.Windows.Forms.DialogResult.Yes)
+
+
+                using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
                 {
-                    ctx.SaveChanges();
-                    MessagBoxInfo.Show("Succesful", MessagBoxInfo.CmessageBoxTitle.Info);
+                    var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)productListView.SelectedValue).FirstOrDefault();
+                    do
+                    {
+                        try
+                        {
+                            product.Naam = txtName.Text;
+                            product.Inkoopprijs = Convert.ToInt32(txtPurchasePrice.Text);
+                            product.Marge = Convert.ToInt32(txtMargin.Text);
+                            product.Eenheid = txtUnit.Text;
+                            product.BTW = Convert.ToInt32(txtBtw.Text);
+                            product.InStock = Convert.ToInt32(txtInstock.Text);
+                            product.Foto = txtSource.Text;
+                            product.Specifications = txtSpecifications.Text;
+                            product.LeverancierID = (int)cmbSupplier.SelectedValue;
+                            product.CategorieID = (int)cmbCategory.SelectedValue;
+
+                            System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure you want to change it?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
+                            if (result == System.Windows.Forms.DialogResult.Yes)
+                            {
+                                ctx.SaveChanges();
+                                MessagBoxInfo.Show("Succesful", MessagBoxInfo.CmessageBoxTitle.Info);
+                            }
+                            updateListView();
+                            hideGrid();
+                        }
+                        catch
+                        {
+                            MessagBoxInfo.Show("Something wrong", MessagBoxInfo.CmessageBoxTitle.Error);
+                        }
+                    } while (false);
                 }
-                updateListView();
-                hideGrid();
             }
         }
         private void updateEditForm()
@@ -204,22 +233,22 @@ namespace ComputerShop
             cmbSupplier.SelectedIndex = -1;
         }
 
-        private void cmbSupplier_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cmbSupplier.SelectedValue!=null)
-            {
-                MessageBox.Show(cmbSupplier.SelectedValue.ToString());
-            }
-        }
-
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                var bestelingId = ctx.BestellingProducts.Select(x => x).Where(x => x.ProductID == (int)productListView.SelectedValue).FirstOrDefault();
-                ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.ProductID == (int)productListView.SelectedValue)).FirstOrDefault();
-                ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.ID == bestelingId.BestellingID));
-                ctx.Products.RemoveRange(ctx.Products.Where(p=>p.ID == (int)productListView.SelectedValue)).FirstOrDefault();
+                var bestel = ctx.BestellingProducts.Select(x => x).ToList();
+                if ( bestel.Contains(productListView.SelectedValue))
+                {
+                    var bestelingId = ctx.BestellingProducts.Select(x => x).Where(x => x.ProductID == (int)productListView.SelectedValue).FirstOrDefault();
+                    ctx.BestellingProducts.RemoveRange(ctx.BestellingProducts.Where(x => x.ProductID == (int)productListView.SelectedValue)).FirstOrDefault();
+                    ctx.Bestellings.RemoveRange(ctx.Bestellings.Where(x => x.ID == bestelingId.BestellingID));
+                    ctx.Products.RemoveRange(ctx.Products.Where(p => p.ID == (int)productListView.SelectedValue)).FirstOrDefault();
+                }
+                else
+                {
+                    ctx.Products.RemoveRange(ctx.Products.Where(p => p.ID == (int)productListView.SelectedValue)).FirstOrDefault();
+                }
 
                 System.Windows.Forms.DialogResult result = MyMessageBox.Show("Are you sure want to delet the product?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
                 if (result == System.Windows.Forms.DialogResult.Yes)
@@ -229,6 +258,20 @@ namespace ComputerShop
                 }
             }
             updateListView();
+        }
+        private bool chekErrors( bool noerror)
+        {
+            if (txtName.Text != string.Empty && txtPurchasePrice.Text != string.Empty && txtMargin.Text != string.Empty && txtUnit.Text != string.Empty
+                && txtBtw.Text != string.Empty && txtInstock.Text != string.Empty && txtSource.Text != string.Empty && txtSpecifications.Text != string.Empty
+                && cmbSupplier.SelectedValue != null && cmbCategory.SelectedValue != null)
+            {
+                noerror = true;
+            }
+            else
+            {
+                noerror = false;
+            }
+            return noerror;
         }
     }
 }

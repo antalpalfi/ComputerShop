@@ -67,29 +67,9 @@ namespace ComputerShop
 
         private void btnOrder_Click_1(object sender, RoutedEventArgs e)
         {
-            switch (loggedInPerson.Usertype)
-            {
-                case "Seller":
-                    Shopping myshopping = new Shopping(loggedInPerson);
-                    myshopping.btnSupl.IsEnabled = false;
-                    this.Close();
-                    myshopping.ShowDialog();
-                    break;
-                case "Administrator":
-                    Shopping myshopping2 = new Shopping(loggedInPerson);
-                    this.Close();
-                    myshopping2.ShowDialog();
-                    break;
-                case "Storekeeper":
-                    Shopping myshopping3 = new Shopping(loggedInPerson);
-                    myshopping3.btnSupl.IsEnabled = false;
-                    this.Close();
-                    myshopping3.ShowDialog();
-                    break;
-                default:
-                    break;
-            }
-            
+           Shopping myshopping = new Shopping(loggedInPerson);
+           this.Close();
+           myshopping.ShowDialog();
         }
 
         private void btnOverwiew_Click(object sender, RoutedEventArgs e)

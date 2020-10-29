@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Document.NET;
+using Xceed.Words.NET;
 
 namespace ComputerShop
 {
@@ -42,7 +44,7 @@ namespace ComputerShop
                     var product = ctx.Products.Select(x => x).Where(x => x.ID == (int)lbProduct.SelectedValue).FirstOrDefault();
                     if (product.InStock >= Convert.ToInt32(txtQuantity.Text) && Convert.ToInt32(txtQuantity.Text) != 0)
                     {
-                        myProductinKars.Add(new ProductinKar(Convert.ToInt32(txtQuantity.Text), (double)product.Inkoopprijs , product.ID, product.Naam, (int)product.LeverancierID,(double)product.Marge,(double)product.BTW));
+                        myProductinKars.Add(new ProductinKar(Convert.ToInt32(txtQuantity.Text), (double)product.Inkoopprijs , product.ID, product.Naam, (int)product.LeverancierID,(double)product.Marge,(double)product.BTW, product.Eenheid));
                         product.InStock = product.InStock - Convert.ToInt32(txtQuantity.Text);
                     }
                     else
@@ -82,9 +84,10 @@ namespace ComputerShop
             public int SupplierId { get; set; }
             public double Margin1 { get; set; }
             public double Btw { get; set; }
+            public string Unit { get; set; }
 
 
-            public ProductinKar(int quantity, double price, int productinKarID, string productInKarNaam, int supplierId, double margin, double btw)
+            public ProductinKar(int quantity, double price, int productinKarID, string productInKarNaam, int supplierId, double margin, double btw, string unit)
             {
                 Quantity = quantity;
                 Price = price;
@@ -93,6 +96,7 @@ namespace ComputerShop
                 SupplierId = supplierId;
                 Margin1 = margin;
                 Btw = btw;
+                Unit = unit;
             }
             public ProductinKar()
             {
@@ -384,20 +388,6 @@ namespace ComputerShop
             }
         }
 
-        private void btnEsc_Click(object sender, RoutedEventArgs e)
-        {
-            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
-            {
-                foreach (var item in myProductinKars)
-                {
-                    var product = ctx.Products.Select(x => x).Where(x => x.ID == item.ProductinKarID).FirstOrDefault();
-                    product.InStock = product.InStock + item.Quantity;
-                    ctx.SaveChanges();
-                }
-            }
-            System.Windows.Application.Current.Shutdown();
-        }
-
        
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
@@ -430,6 +420,75 @@ namespace ComputerShop
             }
             MainMenu mainMenu = new MainMenu(loggedInUser);
             mainMenu.ShowDialog();
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                foreach (var item in myProductinKars)
+                {
+                    var product = ctx.Products.Select(x => x).Where(x => x.ID == item.ProductinKarID).FirstOrDefault();
+                    product.InStock = product.InStock + item.Quantity;
+                    ctx.SaveChanges();
+                }
+            }
+            MainWindow mainwindow = new MainWindow();
+            var myWindow = Window.GetWindow(this);
+            myWindow.Close();
+            mainwindow.ShowDialog();
+        }
+
+        private void btnEcs_Click(object sender, RoutedEventArgs e)
+        {
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                foreach (var item in myProductinKars)
+                {
+                    var product = ctx.Products.Select(x => x).Where(x => x.ID == item.ProductinKarID).FirstOrDefault();
+                    product.InStock = product.InStock + item.Quantity;
+                    ctx.SaveChanges();
+                }
+            }
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void btnMini_Click(object sender, RoutedEventArgs e)
+        {
+            var myWindow = Window.GetWindow(this);
+            myWindow.WindowState = WindowState.Minimized;
+        }
+
+        private void btnPrintWord_Click(object sender, RoutedEventArgs e)
+        {
+            int number = 0;
+            string fileName = "Test";
+            var doc = DocX.Create(fileName);
+            doc.InsertParagraph("Test");
+            for (int i = 0; i <= myProductinKars.Count(); i++)
+            {
+                number++;
+            }
+            MessageBox.Show(number.ToString());
+            Xceed.Document.NET.Table table = doc.AddTable(number, 4);
+            table.Alignment = Alignment.center;
+            table.Design = TableDesign.ColorfulList;
+
+            table.Rows[0].Cells[0].Paragraphs.First().Append("Product");
+            table.Rows[0].Cells[1].Paragraphs.First().Append("Quantity");
+            table.Rows[0].Cells[2].Paragraphs.First().Append("BTW");
+            table.Rows[0].Cells[3].Paragraphs.First().Append("Price");
+            for (int i = 0; i < myProductinKars.Count(); i++)
+            {
+                table.Rows[i + 1].Cells[0].Paragraphs.First().Append(myProductinKars[i].ProductInKarNaam);
+                table.Rows[i + 1].Cells[1].Paragraphs.First().Append(myProductinKars[i].Quantity.ToString() + " " + myProductinKars[i].Unit);
+                table.Rows[i + 1].Cells[2].Paragraphs.First().Append(myProductinKars[i].Btw.ToString() + "%");
+                table.Rows[i + 1].Cells[3].Paragraphs.First().Append((myProductinKars[i].Price * myProductinKars[i].Quantity).ToString() + "€");
+            }
+            doc.InsertTable(table);
+
+
+            doc.Save();
         }
     }
 }

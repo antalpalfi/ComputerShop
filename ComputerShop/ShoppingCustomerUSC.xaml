@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComputerShop" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-              Height="750" Width="1460"  Background="Transparent">
+              Height="705" Width="1460" Background="LightGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition x:Name="GridCategory" Height="50*"/>
-            <RowDefinition x:Name="GridDisplay" Height="600*"/>
+            <RowDefinition x:Name="GridDisplay" Height="588*"/>
+            <RowDefinition x:Name="GridOnderPanel" Height="67*"/>
         </Grid.RowDefinitions>
-      
+
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <StackPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -34,7 +35,7 @@
                 <materialDesign:PackIcon Kind="ShoppingCart" Height="40" Width="40"/>
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Background="LightGray">
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
             <StackPanel Orientation="Vertical" Width="444" Margin="0,0,0,5">
                 <TextBlock Text="Klant" FontSize="20" Margin="10,10,0,0"/>
                 <ComboBox x:Name="cmbKlant" Margin="20,0,20,0" FontSize="30"/>
@@ -43,7 +44,7 @@
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0" Height="35">
                     <TextBlock Text="Quantity" FontSize="20" HorizontalAlignment="Center" />
                     <Button x:Name="btnMinuszQuantity" Content="-" Height="23" Width="20" FontSize="10" Margin="50,3,0,0" Foreground="Black" Background="White" Padding="0" Click="btnMinuszQuantity_Click"/>
-                    <TextBox Width="74" BorderBrush="Black" BorderThickness="1" x:Name="txtQuantity" Margin="0,11,0,9" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <TextBox Width="74" BorderBrush="Black" BorderThickness="1" x:Name="txtQuantity" Height="30" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                     <Button x:Name="btnPlusQuantity" Content="+" Height="23" Width="20" FontSize="10" Padding="0"  Foreground="Black" Background="White" Margin="0,3,0,0" Click="btnPlusQuantity_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -55,7 +56,7 @@
             <StackPanel Width="581" Margin="10">
                 <TextBlock Text="Place for de images and information" FontSize="25"/>
                 <Image  Width="auto" Height="200" x:Name="images" Source="{Binding Foto}"/>
-                <Button Content="Back" x:Name="btnBack" Background="Black" FontSize="25" Height="64" Click="btnBack_Click"/>
+                
                 <ScrollViewer Height="200" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <TextBlock x:Name="txtInfo"/>
 
@@ -85,6 +86,24 @@
                 <Button x:Name="btnDelete" Content="Delet"  Background="White" Foreground="Black" Click="btnDelete_Click"/>
                 <Button x:Name="btnOrder" Content="Order"  Background="White" Foreground="Black" Click="btnOrder_Click"/>
             </StackPanel>
+
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Border BorderBrush="Black" BorderThickness="1"/>
+            <Button Content="Print Word" x:Name="btnPrintWord" Click="btnPrintWord_Click"/>
+            <materialDesign:PackIcon Kind="MicrosoftVisualStudio"  Margin="600,0,350,0" Height="80" Width="80" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFC20CCB"/>
+            <Button x:Name="btnBack" Background="Transparent" Foreground="Red" Height="Auto" BorderThickness="0" Click="btnBack_Click">
+                <materialDesign:PackIcon Kind="Backspace" Height="40" Width="40" Foreground="#FFFF08FF"/>
+            </Button>
+            <Button x:Name="btnLogout" Background="Transparent" Foreground="Red" Height="Auto" BorderThickness="0" Click="btnLogout_Click">
+                <materialDesign:PackIcon Kind="Logout" Height="40" Width="40" Foreground="#FF53B94E"/>
+            </Button>
+            <Button x:Name="btnMini" Background="Transparent" Foreground="#FFB89EDC" Height="Auto" BorderThickness="0" Click="btnMini_Click">
+                <materialDesign:PackIcon Kind="WindowMinimize" Height="40" Width="40"/>
+            </Button>
+            <Button x:Name="btnEcs" Background="Transparent" Foreground="Red" Height="Auto" BorderThickness="0" Click="btnEcs_Click">
+                <materialDesign:PackIcon Kind="Power" Height="40" Width="40" Foreground="#FF2CFFFF"/>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

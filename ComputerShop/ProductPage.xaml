@@ -22,10 +22,10 @@
                 <GridView>
                     <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Purchase price" Width="100" DisplayMemberBinding="{Binding Purchaseprice}"/>
-                    <GridViewColumn Header="Margin" Width="100" DisplayMemberBinding="{Binding Margin}"/>
+                    <GridViewColumn Header="Purchase price €" Width="110" DisplayMemberBinding="{Binding Purchaseprice}"/>
+                    <GridViewColumn Header="Margin €" Width="100" DisplayMemberBinding="{Binding Margin}"/>
                     <GridViewColumn Header="Unit" Width="100" DisplayMemberBinding="{Binding Unit}"/>
-                    <GridViewColumn Header="BTW" Width="100" DisplayMemberBinding="{Binding Btw}"/>
+                    <GridViewColumn Header="BTW  %" Width="100" DisplayMemberBinding="{Binding Btw}"/>
                     <GridViewColumn Header="Supplier" Width="100" DisplayMemberBinding="{Binding Leverancie}"/>
                     <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding Category}"/>
                     <GridViewColumn Header="Instock" Width="100" DisplayMemberBinding="{Binding Instock}"/>
@@ -53,7 +53,7 @@
                     <TextBlock Text="Btw" FontSize="20" Margin="65,5,0,5"/>
                     <TextBox x:Name="txtBtw" BorderThickness="0,0,0,3" Width="200" Height="40" Margin="142,5,0,5" FontSize="15" Background="White" BorderBrush="black"/>
                     <TextBlock Text="Supplier" FontSize="20" Margin="88,15,5,5"/>
-                    <ComboBox x:Name="cmbSupplier" Width="200" SelectionChanged="cmbSupplier_SelectionChanged"/>
+                    <ComboBox x:Name="cmbSupplier" Width="200"/>
 
                     <Button Content="Save" x:Name="btnSave" Margin="40,0,0,0" Width="100" Foreground="Black" Background="#FFF1F1E6" Click="btnSave_Click"/>
                 </StackPanel>

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using MaterialDesignColors.Recommended;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Document.NET;
+using Xceed.Words.NET;
 
 namespace ComputerShop
 {
@@ -40,10 +45,11 @@ namespace ComputerShop
             public string ProductInKarNaam { get; set; }
             public double Margin1 { get; set; }
             public double Btw { get; set; }
+            public string Unit { get; set; }
 
             public int SupplierId { get; set; }
 
-            public ProductinKar(int quantity, double price, int productinKarID, string productInKarNaam, int supplierId, double margin, double btw)
+            public ProductinKar(int quantity, double price, int productinKarID, string productInKarNaam, int supplierId, double margin, double btw, string unit)
             {
                 Quantity = quantity;
                 Price = price;
@@ -52,6 +58,7 @@ namespace ComputerShop
                 SupplierId = supplierId;
                 Margin1 = margin;
                 Btw = btw;
+                Unit = unit;
             }
             public ProductinKar()
             {
@@ -91,7 +98,7 @@ namespace ComputerShop
                         MessagBoxInfo.Show("The product is already in the shopping car", MessagBoxInfo.CmessageBoxTitle.Info);
                     }
                     else
-                        myProductinKars.Add(new ProductinKar(Convert.ToInt32(txtQuantity.Text), (double)product.Inkoopprijs, product.ID, product.Naam, (int)product.LeverancierID, (double)product.Marge, (double)product.BTW));
+                        myProductinKars.Add(new ProductinKar(Convert.ToInt32(txtQuantity.Text), (double)product.Inkoopprijs, product.ID, product.Naam, (int)product.LeverancierID, (double)product.Marge, (double)product.BTW, product.Eenheid));
                     
                 }
                 ctx.SaveChanges();
@@ -413,6 +420,86 @@ namespace ComputerShop
             var myWindow = Window.GetWindow(this);
             myWindow.Close();
             mainmenu.ShowDialog();
+        }
+        //Word Document
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int number = 0;
+            int quantity = 0;
+            double totalPrice = 0;
+            using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
+            {
+                if (cmbSupplier.SelectedValue != null)
+                {
+
+
+                    var sup = ctx.Leveranciers.Select(x => x).Where(x => x.ID == (int)cmbSupplier.SelectedValue).FirstOrDefault();
+                    string fileName = sup.Company + "_" + loggedInUser.Username + "_" + DateTime.Now.ToString("dd_MMMM_yyyy");
+                    var doc = DocX.Create(fileName);
+                    string title = "Palfi Computer Warehouse";
+                    Formatting titleFormat = new Formatting();
+                    titleFormat.FontFamily = new Xceed.Document.NET.Font("Times new roman");
+                    titleFormat.Size = 20D;
+                    titleFormat.Position = 40;
+                    titleFormat.FontColor = System.Drawing.Color.Blue;
+                    titleFormat.UnderlineColor = System.Drawing.Color.Black;
+
+                    string suplierData = $"{sup.Company}" + Environment.NewLine +
+                        sup.Gemeente + " " + sup.Postcode + Environment.NewLine +
+                        sup.Straatnaam + " " + sup.Huisnummer + "/" + sup.Bus + Environment.NewLine +
+                        sup.Emailadres + Environment.NewLine +
+                        sup.Telefoonnummer + Environment.NewLine +
+                        Environment.NewLine;
+
+                    Formatting suplierDataFormat = new Formatting();
+                    suplierDataFormat.FontFamily = new Xceed.Document.NET.Font("Century Gothic");
+                    suplierDataFormat.Size = 12D;
+
+                    Xceed.Document.NET.Paragraph paragraphTitel = doc.InsertParagraph(title, false, titleFormat);
+                    paragraphTitel.Alignment = Alignment.center;
+
+                    doc.InsertParagraph(suplierData, false, suplierDataFormat);
+
+
+
+                    for (int i = 0; i <= myProductinKars.Count(); i++)
+                    {
+                        number++;
+                    }
+                    Xceed.Document.NET.Table table = doc.AddTable(number, 4);
+                    table.Alignment = Alignment.center;
+                    table.Design = TableDesign.ColorfulList;
+
+                    table.Rows[0].Cells[0].Paragraphs.First().Append("Product");
+                    table.Rows[0].Cells[1].Paragraphs.First().Append("Quantity");
+                    table.Rows[0].Cells[2].Paragraphs.First().Append("TAX");
+                    table.Rows[0].Cells[3].Paragraphs.First().Append("Price");
+                    for (int i = 0; i < myProductinKars.Count(); i++)
+                    {
+                        table.Rows[i + 1].Cells[0].Paragraphs.First().Append(myProductinKars[i].ProductInKarNaam);
+                        table.Rows[i + 1].Cells[1].Paragraphs.First().Append(myProductinKars[i].Quantity.ToString() + " " + myProductinKars[i].Unit);
+                        table.Rows[i + 1].Cells[2].Paragraphs.First().Append(myProductinKars[i].Btw.ToString() + "%");
+                        table.Rows[i + 1].Cells[3].Paragraphs.First().Append((myProductinKars[i].Price * myProductinKars[i].Quantity).ToString() + "€");
+                    }
+                    doc.InsertTable(table);
+
+                    Xceed.Document.NET.Table sum = doc.AddTable(1, 4);
+                    sum.Alignment = Alignment.center;
+                    sum.Design = (TableDesign)TableBorderType.Bottom;
+
+
+                    foreach (var item in myProductinKars)
+                    {
+                        quantity += item.Quantity;
+                        totalPrice += item.Price * item.Quantity;
+                    }
+                    sum.Rows[0].Cells[1].Paragraphs.First().Append("Total" + quantity.ToString());
+                    sum.Rows[0].Cells[2].Paragraphs.First().Append("With TAX");
+                    sum.Rows[0].Cells[3].Paragraphs.First().Append("Total price" + totalPrice.ToString());
+                    doc.InsertTable(sum);
+                    doc.Save();
+                }
+            }
         }
     }
 }
