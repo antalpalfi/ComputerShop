@@ -362,7 +362,7 @@ namespace ComputerShop
 
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                if (cmbCustomer.SelectedValue != null && lbShoppingCart.Items != null)
+                if (cmbCustomer.SelectedValue != null && myProductinKars.Count()!= 0)
                 {
                     System.Windows.Forms.DialogResult result = MyMessageBox.Show("Do you confirm the order?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
                     if (result == System.Windows.Forms.DialogResult.Yes)

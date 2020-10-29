@@ -334,7 +334,7 @@ namespace ComputerShop
            
             using (IndividueelProjectEntities2 ctx = new IndividueelProjectEntities2())
             {
-                if (cmbSupplier.SelectedValue != null && lbShoppingCart.Items != null)
+                if (cmbSupplier.SelectedValue != null && myProductinKars.Count() != 0)
                 {
                     System.Windows.Forms.DialogResult result = MyMessageBox.Show("Do you confirm the order?", MyMessageBox.CMessageBoxButton.Yes, MyMessageBox.CMessageBoxButton.No);
                     ctx.Bestellings.Add(new Bestelling()
